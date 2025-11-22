@@ -1,22 +1,26 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * DTO class for login response
+ * Author: Amanda / PSDku Lumajang Project
  */
 package com.psdku.lmj.university_backend.dto;
 
-import com.psdku.lmj.university_backend.model.Student;
+import com.psdku.lmj.university_backend.model.Admin;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- *
- * @author LENOVO
+ * Digunakan untuk mengirimkan hasil login ke client.
+ * Berisi status sukses/gagal, pesan, dan data admin jika berhasil login.
+ * 
+ * @author kelompok2
  */
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class LoginResponse {
+    
     private boolean success;
     private String message;
-    private Student student;
+    private Admin admin;
 }

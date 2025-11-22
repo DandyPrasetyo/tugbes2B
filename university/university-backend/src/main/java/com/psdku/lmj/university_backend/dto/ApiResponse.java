@@ -10,7 +10,7 @@ import lombok.Data;
 
 /**
  *
- * @author LENOVO
+ * @author kelompok2
  */
 @Data
 @AllArgsConstructor

@@ -1,0 +1,122 @@
+/* ============================= */
+/* GLOBAL FIX */
+/* ============================= */
+
+.fasilitas-slider {
+  scrollbar-width: none; /* Firefox */
+}
+
+.fasilitas-slider::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+
+
+/* ============================= */
+/* FASILITAS KAMPUS SLIDER */
+/* ============================= */
+
+#fasilitasSlider {
+  display: flex;
+  align-items: center;
+}
+
+#fasilitasSlider .snap-center {
+  transition: transform 0.2s ease;
+}
+
+#fasilitasSlider .snap-center:hover {
+  transform: scale(1.05);
+}
+
+
+
+/* ============================= */
+/* BERITA */
+/* ============================= */
+
+.news-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 20px;
+  flex-wrap: wrap;
+}
+
+.news-card {
+  width: 280px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.news-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+}
+
+
+
+/* ============================= */
+/* ANGKA / STATISTIK */
+/* ============================= */
+
+.angka-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.angka-box {
+  width: 160px;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.angka-box h3 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #24395e;
+}
+
+.angka-box p {
+  font-size: 15px;
+}
+
+.angka-box:hover {
+  transform: translateY(-5px);
+}
+
+
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 900px) {
+  .news-container {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 650px) {
+  .angka-container {
+    gap: 20px;
+  }
+}

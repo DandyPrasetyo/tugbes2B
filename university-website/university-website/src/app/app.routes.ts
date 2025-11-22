@@ -1,14 +1,10 @@
-//import { Routes } from '@angular/router';
-
-//export const routes: Routes = [];
-
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { CareerComponent }from  './components/career/career.component';
-
+import { CareerComponent } from './components/career/career.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'career', component: CareerComponent },
-  { path: '**', redirectTo: '' }
+  // tambahkan route lain jika perlu
 ];
