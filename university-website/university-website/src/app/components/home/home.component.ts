@@ -14,9 +14,9 @@ export class HomeComponent {
         HERO SLIDER
   ========================== */
   images = [
-    'assets/hero/kampus4.jpg',
-    'assets/hero/slide2.jpg',
-    'assets/hero/slide3.jpg'
+    'assets/img/kampus4.jpg',
+    'assets/img/kampus3.jpg',
+    'assets/img/kampus.2.jpg',
   ];
 
   currentIndex = 0;
