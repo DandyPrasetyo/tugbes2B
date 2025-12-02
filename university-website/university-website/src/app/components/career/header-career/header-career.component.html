@@ -1,52 +1,52 @@
-<!-- WRAPPER NAVY -->
-<div class="career-header-wrapper">
-
+<header class="career-header-wrapper">
   <!-- TOP RIGHT ICONS -->
   <div class="top-icons">
-    <div class="icon-btn" (click)="toggleSearch()">
-      <img src="assets/icons/search.svg" alt="search" />
-    </div>
+    <button class="icon-btn" (click)="openSearch()">
+      <img src="assets/img/icons/search.svg" alt="Search" />
+    </button>
 
-    <div class="lang-selector" (click)="toggleLang()">
-      <img src="assets/flags/id.png" class="flag-icon" />
+    <div class="lang-selector" (click)="toggleLanguage()">
+      <img src="assets/img/icons/bender.svg" class="flag-icon" alt="Language" />
       <span class="arrow">▼</span>
 
-      <div class="lang-dropdown" *ngIf="langOpen">
-        <div (click)="setLang('id')">Indonesia</div>
-        <div (click)="setLang('en')">English</div>
+      <!-- DROPDOWN MENU -->
+      <div class="lang-dropdown" *ngIf="showLanguageMenu">
+        <div (click)="selectLanguage('id')">🇮🇩 Indonesia</div>
+        <div (click)="selectLanguage('en')">🇺🇸 English</div>
       </div>
     </div>
   </div>
 
-  <!-- HEADER MAIN BOX -->
+  <!-- HEADER TRANSPARAN -->
   <div class="career-header-container">
-
-    <!-- LOGO -->
+    <!-- Logo -->
     <div class="career-logo">
-      <img src="assets/logo/polinema.png" class="logo-img" />
+      <img src="assets/img/logo.jpg" class="logo-img" />
       <div class="logo-text">
         <h2>POLINEMA</h2>
         <p>CAREER CENTER</p>
       </div>
     </div>
 
-    <!-- NAVIGATION -->
+    <!-- Menu -->
     <nav class="career-nav">
-      <a routerLink="/brand">BRANDA</a>
-      <a routerLink="/event">EVENT</a>
-      <a routerLink="/magang">MAGANG</a>
-      <a routerLink="/loker">LOKER</a>
+      <a routerLink="/career" routerLinkActive="active">BRANDA</a>
+      <a routerLink="/career/event" routerLinkActive="active">EVENT</a>
+      <a routerLink="/career/magang" routerLinkActive="active">MAGANG</a>
+      <a routerLink="/career/loker" routerLinkActive="active">LOKER</a>
     </nav>
 
-    <!-- LOGIN BUTTON -->
-    <a routerLink="/login" class="login-btn">LOGIN</a>
+    <!-- Login -->
+    <div class="career-login">
+      <a routerLink="/career/loginadmin" class="login-btn">LOGIN</a>
+    </div>
   </div>
-</div>
+</header>
 
-<!-- SEARCH POPUP -->
-<div class="search-overlay" *ngIf="searchOpen">
-  <div class="search-box">
-    <input type="text" placeholder="Search..." />
-    <button class="close-btn" (click)="toggleSearch()">Close</button>
+<!-- SEARCH POPUP OVERLAY -->
+<div class="search-overlay" *ngIf="showSearch" (click)="closeSearch()">
+  <div class="search-box" (click)="$event.stopPropagation()">
+    <input type="text" placeholder="Cari lowongan, magang, event..." />
+    <button class="close-btn" (click)="closeSearch()">✕</button>
   </div>
 </div>

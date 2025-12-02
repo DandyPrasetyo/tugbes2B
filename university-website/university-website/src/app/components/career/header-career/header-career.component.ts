@@ -3,26 +3,35 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-career',
+  selector: 'app-header-career',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './career.component.html',
-  styleUrls: ['./career.component.css'],
+  templateUrl: './header-career.component.html',
+  styleUrls: ['./header-career.component.css'],
 })
-export class CareerComponent {
-  searchOpen = false;
-  langOpen = false;
+export class HeaderCareerComponent {
+  mobileMenuOpen = false;
+  showSearch = false;
+  showLanguageMenu = false;
 
-  toggleSearch() {
-    this.searchOpen = !this.searchOpen;
+  toggleMobileMenu() {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
   }
 
-  toggleLang() {
-    this.langOpen = !this.langOpen;
+  openSearch() {
+    this.showSearch = true;
   }
 
-  setLang(lang: string) {
-    console.log('Language changed:', lang);
-    this.langOpen = false;
+  closeSearch() {
+    this.showSearch = false;
+  }
+
+  toggleLanguage() {
+    this.showLanguageMenu = !this.showLanguageMenu;
+  }
+
+  selectLanguage(lang: string) {
+    console.log('Language selected:', lang);
+    this.showLanguageMenu = false;
   }
 }
