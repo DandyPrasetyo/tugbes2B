@@ -1,0 +1,52 @@
+<!-- WRAPPER NAVY -->
+<div class="career-header-wrapper">
+
+  <!-- TOP RIGHT ICONS -->
+  <div class="top-icons">
+    <div class="icon-btn" (click)="toggleSearch()">
+      <img src="assets/icons/search.svg" alt="search" />
+    </div>
+
+    <div class="lang-selector" (click)="toggleLang()">
+      <img src="assets/flags/id.png" class="flag-icon" />
+      <span class="arrow">▼</span>
+
+      <div class="lang-dropdown" *ngIf="langOpen">
+        <div (click)="setLang('id')">Indonesia</div>
+        <div (click)="setLang('en')">English</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER MAIN BOX -->
+  <div class="career-header-container">
+
+    <!-- LOGO -->
+    <div class="career-logo">
+      <img src="assets/logo/polinema.png" class="logo-img" />
+      <div class="logo-text">
+        <h2>POLINEMA</h2>
+        <p>CAREER CENTER</p>
+      </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="career-nav">
+      <a routerLink="/brand">BRANDA</a>
+      <a routerLink="/event">EVENT</a>
+      <a routerLink="/magang">MAGANG</a>
+      <a routerLink="/loker">LOKER</a>
+    </nav>
+
+    <!-- LOGIN BUTTON -->
+    <a routerLink="/login" class="login-btn">LOGIN</a>
+  </div>
+</div>
+
+<!-- SEARCH POPUP -->
+<div class="search-overlay" *ngIf="searchOpen">
+  <div class="search-box">
+    <input type="text" placeholder="Search..." />
+    <button class="close-btn" (click)="toggleSearch()">Close</button>
+  </div>
+</div>

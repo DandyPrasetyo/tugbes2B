@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';   // <-- DITAMBAH ROUTER
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NgClass],
+  imports: [CommonModule, NgClass, RouterModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
+
+  constructor(private router: Router) {}  // <-- DITAMBAHKAN
 
   /* ==========================
         HERO SLIDER
@@ -16,7 +19,7 @@ export class HomeComponent {
   images = [
     'assets/img/kampus4.jpg',
     'assets/img/kampus3.jpg',
-    'assets/img/kampus.2.jpg',
+    'assets/img/kampus0.jpg',
   ];
 
   currentIndex = 0;
@@ -43,16 +46,13 @@ export class HomeComponent {
         FASILITAS KAMPUS
   ========================== */
   fasilitasList = [
-    { nama: 'Ruang Kelas Modern', img: 'assets/fasilitas/kelas.jpg', icon: '🏫', title: 'Ruang Kelas' },
-    { nama: 'Laboratorium Komputer', img: 'assets/fasilitas/lab.jpg', icon: '💻', title: 'Lab Komputer' },
-    { nama: 'Perpustakaan', img: 'assets/fasilitas/perpus.jpg', icon: '📚', title: 'Perpustakaan' },
-    { nama: 'Aula Serbaguna', img: 'assets/fasilitas/aula.jpg', icon: '🏟️', title: 'Aula Besar' },
-    { nama: 'Kantin Kampus', img: 'assets/fasilitas/kantin.jpg', icon: '🍽️', title: 'Kantin' },
-    { nama: 'Lapangan Olahraga', img: 'assets/fasilitas/lapangan.jpg', icon: '⚽', title: 'Lapangan' },
-    { nama: 'Ruang UKS', img: 'assets/fasilitas/uks.jpg', icon: '🏥', title: 'UKS' },
-    { nama: 'Parkiran Luas', img: 'assets/fasilitas/parkir.jpg', icon: '🅿️', title: 'Parkir' },
-    { nama: 'Ruang Himpunan', img: 'assets/fasilitas/hima.jpg', icon: '👥', title: 'Ruang HMJ' },
-    { nama: 'WiFi Kecepatan Tinggi', img: 'assets/fasilitas/wifi.jpg', icon: '📶', title: 'WiFi' }
+    { nama: 'Ruang Kelas', img: 'assets/img/kelas.jpg', icon: '🏫', title: 'Ruang Kelas' },
+    { nama: 'Laboratorium Komputer', img: 'assets/img/lab.jpg', icon: '💻', title: 'Lab Komputer' },
+    { nama: 'Perpustakaan', img: 'assets/img/perpus.jpeg', icon: '📚', title: 'Perpustakaan' },
+    { nama: 'Kantin Kamppas', img: 'assets/img/kantin.jpg', icon: '🍽️', title: 'Kantin' },
+    { nama: 'Lapangan Voli', img: 'assets/img/voli.jpg', icon: '🏐', title: 'Lapangan' },
+    { nama: 'Parkiran', img: 'assets/img/parkir.jpg', icon: '🅿️', title: 'Parkir' },
+    { nama: 'WiFi Kecepatan Tinggi', img: 'assets/img/s1.jpg', icon: '📶', title: 'WiFi' }
   ];
 
   scrollFasilitas(direction: 'next' | 'prev') {
@@ -73,11 +73,32 @@ export class HomeComponent {
         BERITA UTAMA
   ========================== */
   beritaList = [
-    { img: 'assets/berita/b1.jpg', judul: 'Polinema Lumajang Gelar Seminar Digital Marketing' },
-    { img: 'assets/berita/b2.jpg', judul: 'Mahasiswa Berprestasi Raih Juara 1 BIMBA 2025' },
-    { img: 'assets/berita/b3.jpg', judul: 'Kegiatan Pengabdian Masyarakat di Desa Sumberwangi' }
+    { 
+      id: 1,
+      img: 'assets/img/berita/berita1.jpg',
+      judul: 'Politeknik Negeri Malang dan Universitas Negeri Surabaya Tandatangani Nota Kesepahaman untuk Perkuat Kolaborasi Tridharma'
+    },
+    { 
+      id: 2,
+      img: 'assets/img/berita/Bisnis.jpg',
+      judul: ' Politeknik Negeri Malang (Polinema) mencetak prestasi gemilang di KMIPN. Ada lima tim Polinema yang menyabet juara.'
+    },
+    { 
+      id: 3,
+      img: 'assets/img/berita/berita3.jpg',
+      judul: 'Polinema Sukses Gelar Closing Ceremony dan Awarding NTVSC 2025'
+    }
   ];
 
+  selectedBerita: any = null;
+
+  openBerita(b: any) {
+    this.selectedBerita = b;
+  }
+
+  goToBerita(id: number) {      // <-- FUNGSI KLIK BERITA DITAMBAHKAN
+    this.router.navigate(['/berita', id]);
+  }
 
   /* ==========================
         POLINEMA DALAM ANGKA
@@ -88,5 +109,4 @@ export class HomeComponent {
     { angka: '12', label: 'Laboratorium' },
     { angka: '10+', label: 'Kerja Sama Industri' }
   ];
-
 }

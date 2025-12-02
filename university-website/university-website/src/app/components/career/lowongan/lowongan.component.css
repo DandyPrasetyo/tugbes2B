@@ -1,0 +1,7 @@
+.job-card {
+  @apply bg-white shadow-md rounded-xl p-6 border transition hover:shadow-xl;
+}
+
+.btn-detail {
+  @apply bg-[#24455e] text-white px-4 py-2 rounded-lg hover:opacity-80;
+}
