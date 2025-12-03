@@ -1,0 +1,42 @@
+<div class="card">
+  <h2>Daftar Perusahaan</h2>
+
+  <a routerLink="../form" class="btn-add">+ Tambah Perusahaan</a>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nama</th>
+        <th>Alamat</th>
+        <th>Email</th>
+        <th>No. Telp</th>
+        <th>Website</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let p of perusahaanList">
+        <td>{{ p.nama_perusahaan }}</td>
+        <td>{{ p.alamat }}</td>
+        <td>{{ p.email }}</td>
+        <td>{{ p.no_telp || "-" }}</td>
+        <td>
+          <a *ngIf="p.website" [href]="p.website" target="_blank">
+            {{ p.website }}
+          </a>
+          <span *ngIf="!p.website">-</span>
+        </td>
+
+        <td>
+          <a [routerLink]="['../form', p.perusahaan_id]" class="btn-edit"
+            >Edit</a
+          >
+          <button (click)="delete(p.perusahaan_id)" class="btn-delete">
+            Hapus
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

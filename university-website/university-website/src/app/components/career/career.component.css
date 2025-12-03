@@ -1,23 +1,101 @@
-/* HERO SECTION */
-.career-hero {
-  background: linear-gradient(to right, #1e3a8a, #3b82f6);
-  color: white;
+/* ========================= */
+/* HERO SLIDER */
+/* ========================= */
+.hero-slider .slider-bg {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  background-size: cover;
+  background-position: center;
 }
 
-/* CARD */
+.opacity-100 {
+  opacity: 1;
+}
+
+/* ========================= */
+/* CARD LOWONGAN */
+/* ========================= */
 .career-card {
-  @apply bg-white border rounded-xl shadow-md p-6 text-center 
-         hover:shadow-xl transition cursor-pointer;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px 2px 6px #00000020;
+  transition: 0.3s;
 }
 
-.icon-box {
-  @apply w-16 h-16 mx-auto rounded-full flex items-center justify-center text-3xl mb-4 transition;
+.career-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 4px 12px #00000030;
 }
 
 .career-title {
-  @apply text-xl font-semibold text-gray-800 mb-2;
+  font-size: 18px;
+  font-weight: bold;
+  color: #1f2937;
 }
 
 .career-desc {
-  @apply text-gray-600 text-sm;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.btn-detail {
+  background: #24455e;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+/* tombol lainnya */
+.btn-more {
+  background: #24455e;
+  color: white;
+  padding: 10px 22px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+/* ========================= */
+/* MAGANG CARD */
+/* ========================= */
+.magang-card {
+  background: white;
+  color: #111827;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 2px 8px #00000030;
+}
+
+.magang-btn {
+  background: #24455e;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.btn-magang-more {
+  background: white;
+  color: #1e3a8a;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+/* ========================= */
+/* MITRA AUTO SCROLL */
+/* ========================= */
+@keyframes scroll-slow {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-slow {
+  animation: scroll-slow 10s linear infinite;
 }

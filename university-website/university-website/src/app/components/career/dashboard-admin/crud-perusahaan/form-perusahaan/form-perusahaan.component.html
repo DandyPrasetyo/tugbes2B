@@ -1,0 +1,92 @@
+<div class="p-8 max-w-3xl mx-auto">
+  <h2 class="text-2xl font-bold text-blue-900 mb-6">
+    {{ isEdit ? "Edit Perusahaan" : "Tambah Perusahaan" }}
+  </h2>
+
+  <form (ngSubmit)="save()" class="space-y-6">
+    <!-- NAMA PERUSAHAAN -->
+    <div>
+      <label class="form-label">Nama Perusahaan</label>
+      <input
+        type="text"
+        class="form-input"
+        [(ngModel)]="perusahaan.nama_perusahaan"
+        name="nama_perusahaan"
+        required
+      />
+    </div>
+
+    <!-- ALAMAT -->
+    <div>
+      <label class="form-label">Alamat</label>
+      <textarea
+        class="form-input h-24"
+        [(ngModel)]="perusahaan.alamat"
+        name="alamat"
+        required
+      ></textarea>
+    </div>
+
+    <!-- EMAIL -->
+    <div>
+      <label class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-input"
+        [(ngModel)]="perusahaan.email"
+        name="email"
+        required
+      />
+    </div>
+
+    <!-- NOMOR TELEPON -->
+    <div>
+      <label class="form-label">Nomor Telepon</label>
+      <input
+        type="text"
+        class="form-input"
+        [(ngModel)]="perusahaan.no_telp"
+        name="no_telp"
+      />
+    </div>
+
+    <!-- WEBSITE -->
+    <div>
+      <label class="form-label">Website</label>
+      <input
+        type="text"
+        class="form-input"
+        [(ngModel)]="perusahaan.website"
+        name="website"
+        placeholder="https://example.com"
+      />
+    </div>
+
+    <!-- DESKRIPSI -->
+    <div>
+      <label class="form-label">Deskripsi</label>
+      <textarea
+        class="form-input h-32"
+        [(ngModel)]="perusahaan.deskripsi"
+        name="deskripsi"
+      ></textarea>
+    </div>
+
+    <!-- BUTTON -->
+    <div class="flex justify-end gap-4 mt-8">
+      <a
+        routerLink="/career/admin/perusahaan"
+        class="px-6 py-2 rounded-lg bg-gray-300 text-gray-800"
+      >
+        Batal
+      </a>
+
+      <button
+        type="submit"
+        class="px-6 py-2 rounded-lg bg-blue-700 text-white hover:bg-blue-800"
+      >
+        {{ isEdit ? "Update" : "Simpan" }}
+      </button>
+    </div>
+  </form>
+</div>

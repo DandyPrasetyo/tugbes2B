@@ -1,0 +1,96 @@
+<div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 mt-8">
+  <h2 class="text-2xl font-bold mb-6 text-[#24455e]">
+    {{ isEdit ? "Edit Lowongan" : "Tambah Lowongan" }}
+  </h2>
+
+  <form (ngSubmit)="save()" class="grid grid-cols-1 gap-4">
+    <!-- Judul -->
+    <div>
+      <label class="font-semibold">Judul Lowongan</label>
+      <input
+        type="text"
+        [(ngModel)]="lowongan.judul_lowongan"
+        name="judul_lowongan"
+        class="form-input"
+        required
+      />
+    </div>
+
+    <!-- Posisi -->
+    <div>
+      <label class="font-semibold">Posisi</label>
+      <input
+        type="text"
+        [(ngModel)]="lowongan.posisi"
+        name="posisi"
+        class="form-input"
+        required
+      />
+    </div>
+
+    <!-- Deskripsi -->
+    <div>
+      <label class="font-semibold">Deskripsi</label>
+      <textarea
+        [(ngModel)]="lowongan.deskripsi"
+        name="deskripsi"
+        rows="4"
+        class="form-input"
+      ></textarea>
+    </div>
+
+    <!-- Tipe pekerjaan -->
+    <div>
+      <label class="font-semibold">Tipe Pekerjaan</label>
+      <select
+        [(ngModel)]="lowongan.tipe_pekerjaan"
+        name="tipe_pekerjaan"
+        class="form-input"
+      >
+        <option value="Full-time">Full-time</option>
+        <option value="Part-time">Part-time</option>
+        <option value="Magang">Magang</option>
+      </select>
+    </div>
+
+    <!-- Gaji -->
+    <div>
+      <label class="font-semibold">Gaji</label>
+      <input
+        type="number"
+        [(ngModel)]="lowongan.gaji"
+        name="gaji"
+        class="form-input"
+      />
+    </div>
+
+    <!-- Deadline -->
+    <div>
+      <label class="font-semibold">Deadline</label>
+      <input
+        type="date"
+        [(ngModel)]="lowongan.batas_tanggal"
+        name="batas_tanggal"
+        class="form-input"
+        required
+      />
+    </div>
+
+    <!-- Status -->
+    <div>
+      <label class="font-semibold">Status</label>
+      <select [(ngModel)]="lowongan.status" name="status" class="form-input">
+        <option value="Aktif">Aktif</option>
+        <option value="Tutup">Tutup</option>
+      </select>
+    </div>
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      class="bg-[#24455e] text-white py-2 px-4 rounded-lg mt-4 hover:opacity-80"
+    >
+      {{ isEdit ? "Update" : "Simpan" }}
+    </button>
+  </form>
+</div>

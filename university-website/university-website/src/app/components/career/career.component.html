@@ -1,229 +1,182 @@
-<section
-  class="career-hero relative bg-cover bg-center"
-  style="background-image: url('assets/img/kampus5.jpg')"
->
-  <!-- Overlay gelap -->
+<!-- ========================== -->
+<!-- HERO SLIDER -->
+<!-- ========================== -->
+<section class="hero-slider relative h-[80vh] overflow-hidden">
+  <!-- Slide Images -->
+  <div
+    *ngFor="let slide of slides; let i = index"
+    class="absolute inset-0 bg-cover bg-center slider-bg"
+    [class.opacity-100]="currentSlide === i"
+    [class.opacity-0]="currentSlide !== i"
+    [style.backgroundImage]="'url(assets/img/' + slide + ')'"
+  ></div>
+
+  <!-- Overlay -->
   <div class="absolute inset-0 bg-black/50"></div>
 
-  <div class="relative max-w-7xl mx-auto px-6 py-32 md:py-40">
-    <div class="max-w-xl">
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
-        Bangun Kariermu Bersama Polinema Career Center
-      </h1>
+  <!-- Hero Content -->
+  <div class="relative max-w-6xl mx-auto px-6 py-40">
+    <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 max-w-xl">
+      Bangun Kariermu Bersama Polinema Career Center
+    </h1>
 
-      <p class="text-blue-100 text-lg mb-6">
-        Dapatkan informasi magang, lowongan kerja, dan pelatihan karier terkini
-        yang dirancang untuk membantu mempersiapkan masa depan profesional yang
-        sukses.
-      </p>
+    <p class="text-white-100 text-lg max-w-xl mb-6">
+      Dapatkan informasi magang, lowongan kerja, dan pelatihan karier terkini
+      untuk mempersiapkan masa depan profesional yang sukses.
+    </p>
 
-      <a
-        routerLink="/career/loker"
-        class="inline-block text-white px-6 py-3 rounded-lg font-semibold hover:opacity-70 transition"
-        style="background-color: #24455e"
-      >
-        Lihat Lowongan
-      </a>
-    </div>
+    <a
+      routerLink="/career/loker"
+      class="inline-block text-white px-6 py-3 rounded-lg font-semibold hover:opacity-70 transition"
+      style="background-color: #24455e"
+    >
+      Lihat Lowongan
+    </a>
   </div>
 </section>
 
-<!-- ===================== -->
-<!-- SECTION LOWONGAN TERBARU -->
-<!-- ===================== -->
+<!-- ========================== -->
+<!-- LOWONGAN TERBARU -->
+<!-- ========================== -->
 <section class="mt-20 text-center">
   <h3 class="text-blue-600 font-semibold tracking-wide">LOWONGAN KERJA</h3>
   <h2 class="text-3xl font-bold text-gray-800 mb-10">TERBARU</h2>
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
     <!-- CARD 1 -->
-    <div class="shadow-md rounded-xl p-4 border">
+    <div class="career-card">
       <img src="assets/img/loker1.jpg" class="rounded-lg mb-4" />
+      <h4 class="career-title">PT Astra Otoparts</h4>
+      <p class="career-desc">Mechanical Engineering, IT, Production Staff</p>
 
-      <h4 class="font-bold text-lg">PT Astra Otoparts</h4>
-      <p class="text-sm text-gray-700 mb-3">
-        Mechanical Engineering, IT, Production Staff
-      </p>
-
-      <!-- Tambahan Info -->
       <div class="text-sm text-gray-600 mb-2">
         <p>📅 Diposting: <span class="font-medium">12 Nov 2025</span></p>
         <p>⏳ Deadline: <span class="font-medium">25 Nov 2025</span></p>
         <p>
-          🔵 Status:
-          <span class="font-semibold text-green-600">Tersedia</span>
+          🔵 Status: <span class="font-semibold text-green-600">Tersedia</span>
         </p>
       </div>
 
-      <button class="bg-blue-600 text-white px-4 py-2 rounded-lg mt-2">
-        Detail
-      </button>
+      <button class="btn-detail">Detail</button>
     </div>
 
     <!-- CARD 2 -->
-    <div class="shadow-md rounded-xl p-4 border">
+    <div class="career-card">
       <img src="assets/img/loker2.jpg" class="rounded-lg mb-4" />
-
-      <h4 class="font-bold text-lg">PT Surya Multi Indopack</h4>
-      <p class="text-sm text-gray-700 mb-3">
-        Quality Assurance, Production, Engineering
-      </p>
+      <h4 class="career-title">PT Surya Multi Indopack</h4>
+      <p class="career-desc">Quality Assurance, Production, Engineering</p>
 
       <div class="text-sm text-gray-600 mb-2">
         <p>📅 Diposting: <span class="font-medium">10 Nov 2025</span></p>
         <p>⏳ Deadline: <span class="font-medium">30 Nov 2025</span></p>
         <p>
-          🔵 Status:
-          <span class="font-semibold text-green-600">Tersedia</span>
+          🔵 Status: <span class="font-semibold text-green-600">Tersedia</span>
         </p>
       </div>
 
-      <button class="bg-blue-600 text-white px-4 py-2 rounded-lg mt-2">
-        Detail
-      </button>
+      <button class="btn-detail">Detail</button>
     </div>
 
     <!-- CARD 3 -->
-    <div class="shadow-md rounded-xl p-4 border">
+    <div class="career-card">
       <img src="assets/img/loker3.jpg" class="rounded-lg mb-4" />
-
-      <h4 class="font-bold text-lg">PT Kelantan Peti Kemas</h4>
-      <p class="text-sm text-gray-700 mb-3">
-        Operator Forklift, Staff Logistik
-      </p>
+      <h4 class="career-title">PT Kelantan Kemas</h4>
+      <p class="career-desc">Operator Forklift, Staff Logistik</p>
 
       <div class="text-sm text-gray-600 mb-2">
         <p>📅 Diposting: <span class="font-medium">05 Nov 2025</span></p>
         <p>⏳ Deadline: <span class="font-medium">20 Nov 2025</span></p>
         <p>
-          🔴 Status:
-          <span class="font-semibold text-red-600">Ditutup</span>
+          🔴 Status: <span class="font-semibold text-red-600">Ditutup</span>
         </p>
       </div>
 
-      <button class="bg-blue-600 text-white px-4 py-2 rounded-lg mt-2">
-        Detail
-      </button>
+      <button class="btn-detail">Detail</button>
     </div>
   </div>
 
-  <a
-    routerLink="/career/loker"
-    class="mt-6 inline-block bg-blue-600 text-white px-6 py-2 rounded-lg"
-  >
-    Lainnya →
-  </a>
+  <a routerLink="/career/loker" class="btn-more mt-6">Lainnya →</a>
+</section>
 
-  <!-- ===================== -->
-  <!-- SECTION MAGANG TERBARU -->
-  <!-- ===================== -->
-  <section class="mt-20 bg-blue-900 text-white py-14 text-center">
-    <h3 class="text-blue-200 font-semibold tracking-wide">Informasi Magang</h3>
-    <h2 class="text-3xl font-bold mb-10">TERBARU</h2>
+<!-- ========================== -->
+<!-- MAGANG TERBARU -->
+<!-- ========================== -->
+<section class="mt-20 bg-blue-900 text-white py-14 text-center">
+  <h3 class="text-blue-200 font-semibold">Informasi Magang</h3>
+  <h2 class="text-3xl font-bold mb-10">TERBARU</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
-      <div class="bg-white text-gray-900 shadow-md rounded-xl p-4">
-        <img src="assets/img/magang/magang1.jpg" class="rounded-lg mb-3" />
-        <h4 class="font-bold">Magang</h4>
-        <p class="text-sm mb-3">Program Magang di Bidang Engineering & IT</p>
-        <div class="text-sm text-gray-600 mb-2">
-          <p>📅 Diposting: <span class="font-medium">12 Nov 2025</span></p>
-          <p>⏳ Deadline: <span class="font-medium">25 Nov 2025</span></p>
-          <p>
-            🔵 Status:
-            <span class="font-semibold text-green-600">Tersedia</span>
-          </p>
-        </div>
-        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-          Detail
-        </button>
-      </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
+    <!-- CARD 1 -->
+    <div class="magang-card">
+      <img src="assets/img/magang/magang1.jpg" class="rounded-lg mb-3" />
+      <h4 class="font-bold text-lg mb-2">Magang Engineering & IT</h4>
 
-      <div class="bg-white text-gray-900 shadow-md rounded-xl p-4">
-        <img src="assets/img/magang/magang2.jpg" class="rounded-lg mb-3" />
-        <h4 class="font-bold">Magang</h4>
-        <p class="text-sm mb-3">Open Recruitment Program Magang Karyawan</p>
-        <div class="text-sm text-gray-600 mb-2">
-          <p>📅 Diposting: <span class="font-medium">12 Nov 2025</span></p>
-          <p>⏳ Deadline: <span class="font-medium">25 Nov 2025</span></p>
-          <p>
-            🔵 Status:
-            <span class="font-semibold text-green-600">Tersedia</span>
-          </p>
-        </div>
-        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-          Detail
-        </button>
-      </div>
-
-      <div class="bg-white text-gray-900 shadow-md rounded-xl p-4">
-        <img src="assets/img/magang/magang3.jpg" class="rounded-lg mb-3" />
-        <h4 class="font-bold">Magang</h4>
-        <p class="text-sm mb-3">
-          Program magang selama 3 bulan di perusahaan BUMN
+      <div class="text-sm text-gray-700 mb-3">
+        <p>📅 Diposting: <span class="font-medium">12 Nov 2025</span></p>
+        <p>⏳ Deadline: <span class="font-medium">25 Nov 2025</span></p>
+        <p>
+          🔵 Status: <span class="font-semibold text-green-600">Tersedia</span>
         </p>
-        <div class="text-sm text-gray-600 mb-2">
-          <p>📅 Diposting: <span class="font-medium">12 Nov 2025</span></p>
-          <p>⏳ Deadline: <span class="font-medium">25 Nov 2025</span></p>
-          <p>
-            🔵 Status:
-            <span class="font-semibold text-green-600">Tersedia</span>
-          </p>
-        </div>
-        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-          Detail
-        </button>
       </div>
+
+      <button class="magang-btn">Detail</button>
     </div>
 
-    <a
-      routerLink="/career/magang"
-      class="mt-6 inline-block bg-white text-blue-700 px-6 py-2 rounded-lg font-semibold"
-    >
-      Menuju Magang →
-    </a>
-    <!-- ===================== -->
-    <!-- SECTION MITRA (AUTO SCROLL) -->
-    <!-- ===================== -->
-    <section class="py-14 bg-white">
-      <h2 class="text-center text-2xl font-bold text-gray-800 mb-8">
-        Mitra Perusahaan
-      </h2>
+    <!-- CARD 2 -->
+    <div class="magang-card">
+      <img src="assets/img/magang/magang2.jpg" class="rounded-lg mb-3" />
+      <h4 class="font-bold text-lg mb-2">Open Recruitment Program</h4>
 
-      <div class="overflow-hidden whitespace-nowrap relative py-4">
-        <div class="inline-flex gap-20 animate-scroll-slow items-center px-10">
-          <img src="assets/img/mitra/google.png" class="h-12" />
-          <img src="assets/img/mitra/bni.png" class="h-12" />
-          <img src="assets/img/mitra/pln.png" class="h-12" />
-          <img src="assets/img/mitra/garuda.png" class="h-12" />
-          <img src="assets/img/mitra/im3.png" class="h-12" />
-          <img src="assets/img/mitra/goto.png" class="h-12" />
-          <img src="assets/img/mitra/pertamina.png" class="h-12" />
-
-          <!-- DUPLIKAT untuk efek infinite scroll -->
-          <img src="assets/img/mitra/google.png" class="h-12" />
-          <img src="assets/img/mitra/bni.png" class="h-12" />
-          <img src="assets/img/mitra/pln.png" class="h-12" />
-          <img src="assets/img/mitra/garuda.png" class="h-12" />
-          <img src="assets/img/mitra/im3.png" class="h-12" />
-          <img src="assets/img/mitra/goto.png" class="h-12" />
-          <img src="assets/img/mitra/pertamina.png" class="h-12" />
-        </div>
+      <div class="text-sm text-gray-700 mb-3">
+        <p>📅 Diposting: <span class="font-medium">12 Nov 2025</span></p>
+        <p>⏳ Deadline: <span class="font-medium">25 Nov 2025</span></p>
+        <p>
+          🔵 Status: <span class="font-semibold text-green-600">Tersedia</span>
+        </p>
       </div>
-    </section>
 
-    <style>
-      @keyframes scroll-slow {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-50%);
-        }
-      }
-      .animate-scroll-slow {
-        animation: scroll-slow 10s linear infinite;
-      }
-    </style>
-  </section>
+      <button class="magang-btn">Detail</button>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="magang-card">
+      <img src="assets/img/magang/magang3.jpg" class="rounded-lg mb-3" />
+      <h4 class="font-bold text-lg mb-2">Magang Perusahaan BUMN</h4>
+
+      <div class="text-sm text-gray-700 mb-3">
+        <p>📅 Diposting: <span class="font-medium">12 Nov 2025</span></p>
+        <p>⏳ Deadline: <span class="font-medium">25 Nov 2025</span></p>
+        <p>
+          🔵 Status: <span class="font-semibold text-green-600">Tersedia</span>
+        </p>
+      </div>
+
+      <button class="magang-btn">Detail</button>
+    </div>
+  </div>
+
+  <a routerLink="/career/magang" class="btn-magang-more mt-8 inline-block">
+    Menuju Magang →
+  </a>
+</section>
+
+<!-- ========================== -->
+<!-- MITRA PERUSAHAAN -->
+<!-- ========================== -->
+<section class="py-14 bg-white">
+  <h2 class="text-center text-2xl font-bold text-gray-800 mb-8">
+    Mitra Perusahaan
+  </h2>
+
+  <div class="overflow-hidden whitespace-nowrap relative py-4">
+    <div class="inline-flex gap-20 animate-scroll-slow items-center px-10">
+      <img src="assets/img/mitra/google.png" class="h-12" />
+      <img src="assets/img/mitra/bni.png" class="h-12" />
+      <img src="assets/img/mitra/pln.png" class="h-12" />
+      <img src="assets/img/mitra/garuda.png" class="h-12" />
+      <img src="assets/img/mitra/im3.png" class="h-12" />
+      <img src="assets/img/mitra/goto.png" class="h-12" />
+      <img src="assets/img/mitra/pertamina.png" class="h-12" />
+    </div>
+  </div>
 </section>

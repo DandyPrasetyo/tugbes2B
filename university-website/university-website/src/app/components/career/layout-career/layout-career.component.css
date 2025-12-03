@@ -1,0 +1,12 @@
+.career-card {
+  @apply bg-white/20 backdrop-blur-md rounded-xl px-10 py-5 
+         flex items-center justify-between shadow-lg w-[80%];
+}
+
+.menu-link {
+  @apply hover:text-blue-300 transition cursor-pointer;
+}
+
+.login-btn {
+  @apply bg-[#24455e] px-5 py-2 rounded-lg hover:bg-[#1b3448] transition;
+}

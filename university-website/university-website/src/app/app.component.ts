@@ -1,39 +1,32 @@
-/*
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
-})
-export class AppComponent {
-  title = 'university-website';
-}
-  */
-
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NgIf } from '@angular/common';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
-  template: `
-    <div class="min-h-screen bg-white">
-      <app-header></app-header>
-      <main>
-        <router-outlet></router-outlet>
-      </main>
-      <app-footer></app-footer>
-    </div>
-  `,
-  styles: []
+  imports: [NgIf, RouterModule, HeaderComponent, FooterComponent],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'university-website';
+  showHeaderFooter: boolean = true;
+
+  constructor(private router: Router) {
+    // cek route, hide header/footer jika halaman tertentu
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        // contoh: sembunyikan header/footer di halaman login
+        this.showHeaderFooter = !event.url.includes('/login');
+      });
+  }
+
+  // alternatif jika mau pakai di template
+  isCareerPage(): boolean {
+    return !this.showHeaderFooter;
+  }
 }

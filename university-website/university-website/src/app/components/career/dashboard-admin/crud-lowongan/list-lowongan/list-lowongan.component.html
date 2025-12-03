@@ -1,0 +1,55 @@
+<div class="card">
+  <div class="header">
+    <h2>Data Lowongan</h2>
+    <a routerLink="/career/admin/lowongan/add" class="btn-add"
+      >+ Tambah Lowongan</a
+    >
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Judul</th>
+        <th>Posisi</th>
+        <th>Tipe</th>
+        <th>Deadline</th>
+        <th>Status</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngIf="loading">
+        <td colspan="7" class="loading">Memuat data...</td>
+      </tr>
+
+      <tr *ngFor="let row of lowonganList; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ row.judul_lowongan }}</td>
+        <td>{{ row.posisi }}</td>
+        <td>{{ row.tipe_pekerjaan }}</td>
+        <td>{{ row.batas_tanggal | date }}</td>
+        <td>
+          <span
+            class="badge"
+            [class.active]="row.status === 'Aktif'"
+            [class.closed]="row.status === 'Tutup'"
+          >
+            {{ row.status }}
+          </span>
+        </td>
+        <td>
+          <a
+            class="btn-edit"
+            [routerLink]="['/career/admin/lowongan/edit', row.lowongan_id]"
+            >Edit</a
+          >
+          <button class="btn-delete" (click)="deleteLowongan(row.lowongan_id)">
+            Hapus
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

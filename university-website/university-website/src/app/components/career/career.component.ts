@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -9,4 +9,14 @@ import { RouterModule } from '@angular/router';
   templateUrl: './career.component.html',
   styleUrls: ['./career.component.css'],
 })
-export class CareerComponent {}
+export class CareerComponent implements OnInit {
+  currentSlide = 0;
+
+  slides = ['kampus5.jpg', 'kampus2.jpg', 'kampus3.jpg'];
+
+  ngOnInit(): void {
+    setInterval(() => {
+      this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+    }, 4000); // 4 detik
+  }
+}
