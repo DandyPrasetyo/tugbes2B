@@ -23,7 +23,7 @@ export class MagangComponent {
       posted: '12 Nov 2025',
       deadline: '25 Nov 2025',
       status: 'Tersedia',
-      image: 'assets/img/magang1.jpg',
+      image: 'assets/img/magang/magang1.jpg',
     },
     {
       posisi: 'Magang Karyawan',
@@ -33,7 +33,7 @@ export class MagangComponent {
       posted: '11 Nov 2025',
       deadline: '28 Nov 2025',
       status: 'Tersedia',
-      image: 'assets/img/magang2.jpg',
+      image: 'assets/img/magang/magang2.jpg',
     },
     {
       posisi: 'Magang BUMN',
@@ -43,7 +43,7 @@ export class MagangComponent {
       posted: '05 Nov 2025',
       deadline: '20 Nov 2025',
       status: 'Ditutup',
-      image: 'assets/img/magang3.jpg',
+      image: 'assets/img/magang/magang3.jpg',
     },
   ];
 

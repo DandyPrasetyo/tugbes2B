@@ -26,7 +26,7 @@ export class LowonganComponent {
       posted: '10 Nov 2025',
       deadline: '25 Nov 2025',
       status: 'Tersedia',
-      logo: 'assets/img/company1.png',
+      logo: 'assets/img/loker1.jpg',
     },
     {
       posisi: 'Admin & Marketing Support',
@@ -36,7 +36,7 @@ export class LowonganComponent {
       posted: '12 Nov 2025',
       deadline: '30 Nov 2025',
       status: 'Tersedia',
-      logo: 'assets/img/company2.png',
+      logo: 'assets/img/loker2.jpg',
     },
     {
       posisi: 'UI/UX Internship',
@@ -46,7 +46,7 @@ export class LowonganComponent {
       posted: '05 Nov 2025',
       deadline: '20 Nov 2025',
       status: 'Ditutup',
-      logo: 'assets/img/company3.png',
+      logo: 'assets/img/loker3.jpg',
     },
     {
       posisi: 'Freelance Content Creator',
@@ -56,7 +56,7 @@ export class LowonganComponent {
       posted: '08 Nov 2025',
       deadline: '22 Nov 2025',
       status: 'Tersedia',
-      logo: 'assets/img/company4.png',
+      logo: 'assets/img/loker3.jpg',
     },
   ];
 
@@ -73,7 +73,10 @@ export class LowonganComponent {
         }
       },
       error: (err) => {
-        console.error('Gagal load data lowongan dari API, pakai dummy saja', err);
+        console.error(
+          'Gagal load data lowongan dari API, pakai dummy saja',
+          err
+        );
       },
     });
   }

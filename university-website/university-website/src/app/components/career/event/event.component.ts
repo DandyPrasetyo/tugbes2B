@@ -42,14 +42,14 @@ export class EventComponent {
       kategori: 'Career Coaching',
       tanggal: '2025-11-22',
       lokasi: 'Surabaya',
-      banner: 'assets/img/event4.jpg',
+      banner: 'assets/img/event2.jpg',
     },
     {
       judul: 'Seminar Soft Skill Mahasiswa',
       kategori: 'Seminar',
       tanggal: '2025-12-01',
       lokasi: 'Jakarta',
-      banner: 'assets/img/event5.jpg',
+      banner: 'assets/img/event1.jpg',
     },
   ];
 
