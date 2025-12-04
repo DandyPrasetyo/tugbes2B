@@ -4,6 +4,7 @@
  */
 package com.psdku.lmj.university_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +24,9 @@ public class Perusahaan {
     @Column(name = "perusahaan_id")
     private Long perusahaanId;
 
+    // nama_perusahaan (JSON) -> namaPerusahaan (Java) -> kolom nama_perusahaan
     @Column(name = "nama_perusahaan", nullable = false, length = 150)
+    @JsonProperty("nama_perusahaan")
     private String namaPerusahaan;
 
     @Column(name = "alamat", nullable = false, columnDefinition = "TEXT")
@@ -32,7 +35,9 @@ public class Perusahaan {
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
+    // no_telp (JSON) -> noTelp (Java) -> kolom no_telp
     @Column(name = "no_telp", length = 20)
+    @JsonProperty("no_telp")
     private String noTelp;
 
     @Column(columnDefinition = "TEXT")

@@ -24,7 +24,9 @@
         👤 Data Admin
       </a>
 
-      <a routerLink="/career/login" class="logout"> 🚪 Logout </a>
+      <a routerLink="/career/login" class="logout">
+        🚪 Logout
+      </a>
     </nav>
   </aside>
 
@@ -32,6 +34,27 @@
   <main class="content">
     <h1 class="text-2xl font-bold mb-4">Dashboard Admin</h1>
 
-    <router-outlet></router-outlet>
+    <!-- CARD STATISTIK -->
+    <div class="cards">
+      <div class="card card-lowongan">
+        <div class="card-title">Total Lowongan</div>
+        <div class="card-value">{{ stats.totalLowongan }}</div>
+      </div>
+
+      <div class="card card-perusahaan">
+        <div class="card-title">Total Perusahaan</div>
+        <div class="card-value">{{ stats.totalPerusahaan }}</div>
+      </div>
+
+      <div class="card card-admin">
+        <div class="card-title">Total Admin</div>
+        <div class="card-value">{{ stats.totalAdmin }}</div>
+      </div>
+    </div>
+
+    <!-- AREA KONTEN LANJUTAN (LIST, DETAIL, DLL) -->
+    <section class="dashboard-extra">
+      <router-outlet></router-outlet>
+    </section>
   </main>
 </div>

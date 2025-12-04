@@ -24,7 +24,7 @@ export class FormPerusahaanComponent implements OnInit {
   };
 
   isEdit = false;
-  id!: number;
+  id: number = 0;
 
   constructor(
     private perusahaanService: PerusahaanService,
@@ -33,7 +33,8 @@ export class FormPerusahaanComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    const param = this.route.snapshot.paramMap.get('id');
+    this.id = param ? Number(param) : 0;
 
     if (this.id) {
       this.isEdit = true;
@@ -41,22 +42,41 @@ export class FormPerusahaanComponent implements OnInit {
     }
   }
 
-  loadDetail() {
-    this.perusahaanService.getById(this.id).subscribe((res) => {
-      this.perusahaan = res;
+  loadDetail(): void {
+    this.perusahaanService.getById(this.id).subscribe({
+      next: (res) => {
+        this.perusahaan = res;
+      },
+      error: (err) => {
+        console.error('Gagal memuat detail perusahaan:', err);
+        alert('Gagal memuat data perusahaan');
+        this.router.navigate(['/career/admin/perusahaan']);
+      },
     });
   }
 
-  save() {
+  save(): void {
     if (this.isEdit) {
-      this.perusahaanService.update(this.id, this.perusahaan).subscribe(() => {
-        alert('Perusahaan berhasil diperbarui');
-        this.router.navigate(['/career/admin/perusahaan']);
+      this.perusahaanService.update(this.id, this.perusahaan).subscribe({
+        next: () => {
+          alert('Perusahaan berhasil diperbarui');
+          this.router.navigate(['/career/admin/perusahaan']);
+        },
+        error: (err) => {
+          console.error('Gagal update perusahaan:', err);
+          alert('Gagal update perusahaan');
+        },
       });
     } else {
-      this.perusahaanService.create(this.perusahaan).subscribe(() => {
-        alert('Perusahaan berhasil ditambahkan');
-        this.router.navigate(['/career/admin/perusahaan']);
+      this.perusahaanService.create(this.perusahaan).subscribe({
+        next: () => {
+          alert('Perusahaan berhasil ditambahkan');
+          this.router.navigate(['/career/admin/perusahaan']);
+        },
+        error: (err) => {
+          console.error('Gagal tambah perusahaan:', err);
+          alert('Gagal tambah perusahaan');
+        },
       });
     }
   }

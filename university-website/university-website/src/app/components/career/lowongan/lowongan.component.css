@@ -1,7 +1,17 @@
 .job-card {
   @apply bg-white shadow-md rounded-xl p-6 border transition hover:shadow-xl;
+  @apply flex flex-col justify-between;
+  min-height: 180px;
 }
 
 .btn-detail {
   @apply bg-[#24455e] text-white px-4 py-2 rounded-lg hover:opacity-80;
+  @apply text-sm font-medium;
+}
+
+/* Responsif: sedikit rapat di mobile */
+@media (max-width: 768px) {
+  .job-card {
+    @apply p-4;
+  }
 }

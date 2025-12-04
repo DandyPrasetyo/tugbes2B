@@ -64,6 +64,9 @@ export class LoginadminComponent {
         } else {
           this.loading = false;
           this.errorMessage = 'Respon server tidak valid.';
+          localStorage.setItem('adminId', res.adminId);
+          
+
         }
       },
       error: (err) => {
@@ -75,6 +78,7 @@ export class LoginadminComponent {
       },
     });
   }
+  
 
   ngOnInit() {
     // apabila tersimpan rememberEmail, isi form
@@ -82,6 +86,7 @@ export class LoginadminComponent {
     if (remembered) {
       this.email = remembered;
       this.remember = true;
+      
     }
   }
 }

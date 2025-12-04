@@ -1,5 +1,5 @@
 export interface Perusahaan {
-  perusahaan_id?: number;
+  perusahaanId?: number;      // ← ganti nama field
   nama_perusahaan: string;
   alamat: string;
   email: string;

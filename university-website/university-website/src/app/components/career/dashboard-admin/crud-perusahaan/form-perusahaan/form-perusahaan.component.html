@@ -3,7 +3,7 @@
     {{ isEdit ? "Edit Perusahaan" : "Tambah Perusahaan" }}
   </h2>
 
-  <form (ngSubmit)="save()" class="space-y-6">
+  <form #f="ngForm" (ngSubmit)="save()" class="space-y-6">
     <!-- NAMA PERUSAHAAN -->
     <div>
       <label class="form-label">Nama Perusahaan</label>

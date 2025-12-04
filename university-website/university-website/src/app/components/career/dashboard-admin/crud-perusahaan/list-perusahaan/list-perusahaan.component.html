@@ -1,42 +1,70 @@
 <div class="card">
-  <h2>Daftar Perusahaan</h2>
+  <div class="card-header">
+    <h2>Daftar Perusahaan</h2>
 
-  <a routerLink="../form" class="btn-add">+ Tambah Perusahaan</a>
+    <!-- Tambah -->
+    <a routerLink="/career/admin/perusahaan/tambah" class="btn-add">
+      + Tambah Perusahaan
+    </a>
+  </div>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Nama</th>
-        <th>Alamat</th>
-        <th>Email</th>
-        <th>No. Telp</th>
-        <th>Website</th>
-        <th>Aksi</th>
-      </tr>
-    </thead>
+  <div class="table-wrapper">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Alamat</th>
+          <th>Email</th>
+          <th>No. Telp</th>
+          <th>Website</th>
+          <th class="text-center">Aksi</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr *ngFor="let p of perusahaanList">
-        <td>{{ p.nama_perusahaan }}</td>
-        <td>{{ p.alamat }}</td>
-        <td>{{ p.email }}</td>
-        <td>{{ p.no_telp || "-" }}</td>
-        <td>
-          <a *ngIf="p.website" [href]="p.website" target="_blank">
-            {{ p.website }}
-          </a>
-          <span *ngIf="!p.website">-</span>
-        </td>
+      <tbody *ngIf="perusahaanList.length; else emptyState">
+        <tr *ngFor="let p of perusahaanList">
+          <td>{{ p.nama_perusahaan }}</td>
+          <td>{{ p.alamat }}</td>
+          <td>{{ p.email }}</td>
+          <td>{{ p.no_telp || '-' }}</td>
+          <td>
+            <a
+              *ngIf="p.website"
+              [href]="p.website"
+              target="_blank"
+              class="link-website"
+            >
+              {{ p.website }}
+            </a>
+            <span *ngIf="!p.website">-</span>
+          </td>
 
-        <td>
-          <a [routerLink]="['../form', p.perusahaan_id]" class="btn-edit"
-            >Edit</a
-          >
-          <button (click)="delete(p.perusahaan_id)" class="btn-delete">
-            Hapus
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <td class="text-center aksi">
+            <!-- Edit -->
+            <a
+              [routerLink]="['/career/admin/perusahaan/edit', p.perusahaanId]"
+              class="btn btn-edit"
+            >
+              Edit
+            </a>
+
+            <!-- Hapus -->
+            <button
+              type="button"
+              (click)="delete(p.perusahaanId)"
+              class="btn btn-delete"
+            >
+              Hapus
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #emptyState>
+      <div class="empty-state">
+        Belum ada data perusahaan.
+      </div>
+    </ng-template>
+  </div>
 </div>

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { LowonganService } from '@services/lowongan.service';
-import { Lowongan } from '@models/lowongan.model';
 
 import { PerusahaanService } from '@services/perusahaan.service';
 import { Perusahaan } from '@models/perusahaan.model';
+
 
 @Component({
   selector: 'app-list-perusahaan',
@@ -24,7 +23,7 @@ export class ListPerusahaanComponent implements OnInit {
     this.loadData();
   }
 
-  loadData() {
+  loadData(): void {
     this.perusahaanService.getAll().subscribe({
       next: (res) => {
         this.perusahaanList = res;
@@ -37,15 +36,19 @@ export class ListPerusahaanComponent implements OnInit {
     });
   }
 
-  delete(id?: number) {
+  delete(id?: number): void {
     if (!id) return;
-
     if (!confirm('Yakin ingin menghapus perusahaan ini?')) return;
 
-    this.perusahaanService.delete(id).subscribe(() => {
-      this.perusahaanList = this.perusahaanList.filter(
-        (item) => item.perusahaan_id !== id
-      );
+    this.perusahaanService.delete(id).subscribe({
+      next: () => {
+        this.perusahaanList = this.perusahaanList.filter(
+          (item) => item.perusahaanId !== id
+        );
+      },
+      error: (err) => {
+        console.error('Gagal menghapus perusahaan:', err);
+      },
     });
   }
 }

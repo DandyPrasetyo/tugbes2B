@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { LowonganService } from '@services/lowongan.service';
-import { Lowongan } from '@models/lowongan.model';
 
 @Component({
   selector: 'app-list-lowongan',
@@ -12,7 +11,7 @@ import { Lowongan } from '@models/lowongan.model';
   styleUrls: ['./list-lowongan.component.css'],
 })
 export class ListLowonganComponent implements OnInit {
-  lowonganList: Lowongan[] = [];
+  lowonganList: any[] = [];
   loading = true;
 
   constructor(private lowonganService: LowonganService) {}
@@ -34,14 +33,16 @@ export class ListLowonganComponent implements OnInit {
     });
   }
 
-  deleteLowongan(id: number | undefined) {
-    if (!id) return;
+  deleteLowongan(id: number) {
     if (!confirm('Yakin ingin menghapus lowongan ini?')) return;
 
-    this.lowonganService.delete(id).subscribe(() => {
-      this.lowonganList = this.lowonganList.filter(
-        (item) => item.lowongan_id !== id
-      );
+    this.lowonganService.delete(id).subscribe({
+      next: () => {
+        this.lowonganList = this.lowonganList.filter(item => item.lowonganId !== id);
+      },
+      error: (err) => {
+        console.error('Gagal menghapus lowongan:', err);
+      },
     });
   }
 }

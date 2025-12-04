@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Lowongan } from '../models/lowongan.model';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -15,14 +16,18 @@ export class LowonganService {
   // GET Semua Lowongan
   // ===============================
   getAll(): Observable<Lowongan[]> {
-    return this.http.get<Lowongan[]>(`${this.apiUrl}/lowongan`);
+    return this.http
+      .get<any>(`${this.apiUrl}/lowongan`)
+      .pipe(map(res => res.data as Lowongan[]));
   }
 
   // ===============================
   // GET Lowongan by ID
   // ===============================
   getById(id: number): Observable<Lowongan> {
-    return this.http.get<Lowongan>(`${this.apiUrl}/lowongan/${id}`);
+    return this.http
+      .get<any>(`${this.apiUrl}/lowongan/${id}`)
+      .pipe(map(res => res.data as Lowongan));
   }
 
   // ===============================

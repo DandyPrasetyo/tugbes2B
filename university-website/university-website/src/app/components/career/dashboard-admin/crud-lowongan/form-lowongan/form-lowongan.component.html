@@ -3,14 +3,14 @@
     {{ isEdit ? "Edit Lowongan" : "Tambah Lowongan" }}
   </h2>
 
-  <form (ngSubmit)="save()" class="grid grid-cols-1 gap-4">
+  <form (ngSubmit)="save()" #f="ngForm" class="grid grid-cols-1 gap-4">
     <!-- Judul -->
     <div>
       <label class="font-semibold">Judul Lowongan</label>
       <input
         type="text"
-        [(ngModel)]="lowongan.judul_lowongan"
-        name="judul_lowongan"
+        [(ngModel)]="lowongan.judulLowongan"
+        name="judulLowongan"
         class="form-input"
         required
       />
@@ -43,12 +43,12 @@
     <div>
       <label class="font-semibold">Tipe Pekerjaan</label>
       <select
-        [(ngModel)]="lowongan.tipe_pekerjaan"
-        name="tipe_pekerjaan"
+        [(ngModel)]="lowongan.tipePekerjaan"
+        name="tipePekerjaan"
         class="form-input"
       >
-        <option value="Full-time">Full-time</option>
-        <option value="Part-time">Part-time</option>
+        <option value="Full_time">Full-time</option>
+        <option value="Part_time">Part-time</option>
         <option value="Magang">Magang</option>
       </select>
     </div>
@@ -69,8 +69,8 @@
       <label class="font-semibold">Deadline</label>
       <input
         type="date"
-        [(ngModel)]="lowongan.batas_tanggal"
-        name="batas_tanggal"
+        [(ngModel)]="lowongan.batasTanggal"
+        name="batasTanggal"
         class="form-input"
         required
       />
@@ -87,10 +87,11 @@
 
     <!-- Submit -->
     <button
-      type="submit"
-      class="bg-[#24455e] text-white py-2 px-4 rounded-lg mt-4 hover:opacity-80"
-    >
-      {{ isEdit ? "Update" : "Simpan" }}
-    </button>
+  type="submit"
+  class="bg-[#24455e] text-white py-2 px-4 rounded-lg mt-4 hover:opacity-80"
+>
+  {{ isEdit ? "Update" : "Simpan" }}
+</button>
+
   </form>
 </div>

@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Perusahaan } from '../models/perusahaan.model';
+
+interface ApiResponse<T> {
+  success: boolean;
+  message: string;
+  data: T;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -11,23 +18,35 @@ export class PerusahaanService {
 
   constructor(private http: HttpClient) {}
 
+  // AMBIL SEMUA PERUSAHAAN
   getAll(): Observable<Perusahaan[]> {
-    return this.http.get<Perusahaan[]>(this.baseUrl);
+    return this.http
+      .get<ApiResponse<Perusahaan[]>>(this.baseUrl)
+      .pipe(map((res) => res.data));
   }
 
+  // AMBIL SATU PERUSAHAAN
   getById(id: number): Observable<Perusahaan> {
-    return this.http.get<Perusahaan>(`${this.baseUrl}/${id}`);
+    return this.http
+      .get<ApiResponse<Perusahaan>>(`${this.baseUrl}/${id}`)
+      .pipe(map((res) => res.data));
   }
 
-  create(data: Perusahaan): Observable<any> {
-    return this.http.post(this.baseUrl, data);
+  // TAMBAH PERUSAHAAN
+  create(data: Perusahaan): Observable<ApiResponse<Perusahaan>> {
+    return this.http.post<ApiResponse<Perusahaan>>(this.baseUrl, data);
   }
 
-  update(id: number, data: Perusahaan): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, data);
+  // UPDATE PERUSAHAAN
+  update(id: number, data: Perusahaan): Observable<ApiResponse<Perusahaan>> {
+    return this.http.put<ApiResponse<Perusahaan>>(
+      `${this.baseUrl}/${id}`,
+      data
+    );
   }
 
-  delete(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+  // HAPUS PERUSAHAAN
+  delete(id: number): Observable<ApiResponse<null>> {
+    return this.http.delete<ApiResponse<null>>(`${this.baseUrl}/${id}`);
   }
 }

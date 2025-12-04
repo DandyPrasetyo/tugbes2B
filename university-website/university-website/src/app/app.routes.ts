@@ -34,15 +34,9 @@ import { ListAdminComponent } from './components/career/dashboard-admin/crud-adm
 import { FormAdminComponent } from './components/career/dashboard-admin/crud-admin/form-admin/form-admin.component';
 
 export const routes: Routes = [
-  /* ===============================
-       WEBSITE KAMPUS
-    =============================== */
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
 
-  /* ===============================
-       CAREER CENTER
-    =============================== */
   {
     path: 'career',
     component: CareerLayoutComponent,
@@ -53,14 +47,11 @@ export const routes: Routes = [
       { path: 'event', component: EventComponent },
       { path: 'login-admin', component: LoginadminComponent },
 
-      /* ===============================
-           DASHBOARD ADMIN
-        =============================== */
       { path: 'admin', component: DashboardAdminComponent },
 
       /* ========== LOWONGAN CRUD ========== */
       { path: 'admin/lowongan', component: ListLowonganComponent },
-      { path: 'admin/lowongan/tambah', component: FormLowonganComponent },
+      { path: 'admin/lowongan/add', component: FormLowonganComponent },
       { path: 'admin/lowongan/edit/:id', component: FormLowonganComponent },
 
       /* ========== PERUSAHAAN CRUD ========== */
@@ -75,6 +66,5 @@ export const routes: Routes = [
     ],
   },
 
-  /* Redirect jika route tidak ditemukan */
   { path: '**', redirectTo: '' },
 ];

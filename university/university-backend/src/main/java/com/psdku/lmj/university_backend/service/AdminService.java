@@ -1,66 +1,40 @@
-/*
- * Service class for handling Admin data
- * Author: Amanda / PSDku Lumajang Project
- */
 package com.psdku.lmj.university_backend.service;
 
 import com.psdku.lmj.university_backend.model.Admin;
 import com.psdku.lmj.university_backend.repository.AdminRepository;
-import java.util.List;
-import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author kelompok2
- */
+import java.util.*;
+
 @Service
 public class AdminService {
-    
+
     @Autowired
-    private AdminRepository adminRepository;
-    
-    /**
-     * Get all admins
-     */
+    private AdminRepository adminRepo;
+
     public List<Admin> getAllAdmins() {
-        return adminRepository.findAll();
+        return adminRepo.findAll();
     }
-    
-    /**
-     * Get admin by ID
-     */
+
     public Optional<Admin> getAdminById(Long id) {
-        return adminRepository.findById(id);
+        return adminRepo.findById(id);
     }
-    
-    /**
-     * Create new admin
-     */
-    public Admin createAdmin(Admin admin) {
-        return adminRepository.save(admin);
+
+    public Optional<Admin> findByEmail(String email) {
+        return adminRepo.findByEmailAdmin(email);
     }
-    
-    /**
-     * Update existing admin
-     */
-    public Admin updateAdmin(Long id, Admin updatedAdmin) {
-        Admin admin = adminRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Admin not found"));
-        
-        admin.setNamaAdmin(updatedAdmin.getNamaAdmin());
-        admin.setEmailAdmin(updatedAdmin.getEmailAdmin());
-        admin.setPasswordAdmin(updatedAdmin.getPasswordAdmin());
-        admin.setUpdatedAt(updatedAdmin.getUpdatedAt());
-        
-        return adminRepository.save(admin);
-    }
-    
-    /**
-     * Delete admin by ID
-     */
-    public void deleteAdmin(Long id) {
-        adminRepository.deleteById(id);
+
+    public boolean updatePassword(Long id, String newPassword) {
+        Optional<Admin> adminOpt = adminRepo.findById(id);
+
+        if (adminOpt.isEmpty()) return false;
+
+        Admin admin = adminOpt.get();
+        admin.setPasswordAdmin(newPassword);
+        adminRepo.save(admin);
+
+        return true;
     }
 }

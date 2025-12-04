@@ -1,7 +1,3 @@
-/*
- * Entity class for table admin
- * Author: Amanda / PSDku Lumajang Project
- */
 package com.psdku.lmj.university_backend.model;
 
 import jakarta.persistence.*;

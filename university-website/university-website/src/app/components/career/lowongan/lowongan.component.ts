@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http'; // <-- TAMBAHAN
 
 @Component({
   selector: 'app-loker',
@@ -15,6 +16,7 @@ export class LowonganComponent {
   filterTipe = '';
   filterStatus = '';
 
+  // DATA DUMMY LAMA (tetap dipakai sebagai default)
   lowongan = [
     {
       posisi: 'Frontend Developer',
@@ -57,6 +59,24 @@ export class LowonganComponent {
       logo: 'assets/img/company4.png',
     },
   ];
+
+  private apiUrl = 'http://localhost:8080/api/lowongan'; // <-- URL backend
+
+  constructor(private http: HttpClient) {} // <-- INJEK HttpClient
+
+  ngOnInit() {
+    // Coba ambil data dari backend, kalau gagal tetap pakai data dummy di atas
+    this.http.get<any[]>(this.apiUrl).subscribe({
+      next: (data) => {
+        if (data && data.length) {
+          this.lowongan = data;
+        }
+      },
+      error: (err) => {
+        console.error('Gagal load data lowongan dari API, pakai dummy saja', err);
+      },
+    });
+  }
 
   get filteredLowongan() {
     return this.lowongan.filter((job) => {

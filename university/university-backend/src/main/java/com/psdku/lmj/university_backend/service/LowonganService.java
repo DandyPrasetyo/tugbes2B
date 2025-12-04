@@ -1,13 +1,17 @@
 package com.psdku.lmj.university_backend.service;
 
+import com.psdku.lmj.university_backend.dto.LowonganRequest;
+import com.psdku.lmj.university_backend.model.Admin;
 import com.psdku.lmj.university_backend.model.Lowongan;
 import com.psdku.lmj.university_backend.model.Perusahaan;
+import com.psdku.lmj.university_backend.repository.AdminRepository;
 import com.psdku.lmj.university_backend.repository.LowonganRepository;
 import com.psdku.lmj.university_backend.repository.PerusahaanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +23,9 @@ public class LowonganService {
 
     @Autowired
     private PerusahaanRepository perusahaanRepository;
+
+    @Autowired
+    private AdminRepository adminRepository;
 
     // ===== GET search lowongan =====
     public List<Lowongan> searchLowongan(String query, String tipe_pekerjaan, String status) {
@@ -63,7 +70,6 @@ public class LowonganService {
             case "part_time":
             case "parttime":
                 return Lowongan.TipePekerjaan.Part_time;
-
             case "magang":
                 return Lowongan.TipePekerjaan.Magang;
             default:
@@ -84,10 +90,37 @@ public class LowonganService {
     }
 
     // ========================
-    // ===== CREATE =====
+    // ===== CREATE (lama, jika masih perlu) =====
     // ========================
     public Lowongan createLowongan(Lowongan lowongan) {
         return lowonganRepository.save(lowongan);
+    }
+
+    // ========================
+    // ===== CREATE dari DTO (dipakai controller baru) =====
+    // ========================
+    public Lowongan createLowonganFromRequest(LowonganRequest req) {
+        Admin admin = adminRepository.findById(req.getAdminId())
+                .orElseThrow(() -> new RuntimeException("Admin tidak ditemukan dengan id " + req.getAdminId()));
+
+        Perusahaan perusahaan = perusahaanRepository.findById(req.getPerusahaanId())
+                .orElseThrow(() -> new RuntimeException("Perusahaan tidak ditemukan dengan id " + req.getPerusahaanId()));
+
+        Lowongan low = new Lowongan();
+        low.setAdmin(admin);
+        low.setPerusahaan(perusahaan);
+        low.setJudulLowongan(req.getJudulLowongan());
+        low.setPosisi(req.getPosisi());
+        low.setDeskripsi(req.getDeskripsi());
+        low.setFlayer(req.getFlayer());
+        low.setTipePekerjaan(req.getTipePekerjaan());
+        low.setGaji(req.getGaji());
+        low.setBatasTanggal(req.getBatasTanggal());
+        low.setStatus(req.getStatus() != null ? req.getStatus() : Lowongan.StatusLowongan.Aktif);
+        low.setCreatedAt(LocalDateTime.now());
+        low.setUpdatedAt(LocalDateTime.now());
+
+        return lowonganRepository.save(low);
     }
 
     // ========================

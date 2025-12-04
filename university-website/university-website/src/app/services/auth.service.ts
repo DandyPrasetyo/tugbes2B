@@ -4,49 +4,56 @@ import { Observable } from 'rxjs';
 import { Admin } from '../models/admin.model';
 
 export interface AdminLoginResponse {
-  token: string;
-  adminId?: number;
-  nama?: string;
+  success: boolean;
+  message: string;
+  admin: {
+    adminId: number;
+    namaAdmin: string;
+    emailAdmin: string;
+  };
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/api/admin'; // sesuaikan backend kamu
+  // URL LOGIN (SAMA DENGAN YANG BERHASIL DI POSTMAN)
+  private authUrl = 'http://localhost:8080/api/auth';
+
+  // URL CRUD ADMIN
+  private adminUrl = 'http://localhost:8080/api/admin';
 
   constructor(private http: HttpClient) {}
 
-  // ➤ Login admin
-  login(payload: {
-    email: string;
-    password: string;
-  }): Observable<AdminLoginResponse> {
-    return this.http.post<AdminLoginResponse>(`${this.apiUrl}/login`, payload);
+  /* LOGIN ADMIN */
+  login(payload: { email: string; password: string }): Observable<AdminLoginResponse> {
+    return this.http.post<AdminLoginResponse>(`${this.authUrl}/login`, payload);
   }
 
-  // ➤ Ambil semua admin
+  /* CRUD ADMIN */
   getAll(): Observable<Admin[]> {
-    return this.http.get<Admin[]>(this.apiUrl);
+    return this.http.get<Admin[]>(`${this.adminUrl}`);
   }
 
-  // ➤ Ambil admin berdasarkan ID
   getById(id: number): Observable<Admin> {
-    return this.http.get<Admin>(`${this.apiUrl}/${id}`);
+    return this.http.get<Admin>(`${this.adminUrl}/${id}`);
   }
 
-  // ➤ Tambah admin
   create(data: Admin): Observable<any> {
-    return this.http.post(this.apiUrl, data);
+    return this.http.post(`${this.adminUrl}`, data);
   }
 
-  // ➤ Update admin
   update(id: number, data: Admin): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, data);
+    return this.http.put(`${this.adminUrl}/${id}`, data);
   }
 
-  // ➤ Hapus admin
   delete(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.adminUrl}/${id}`);
+  }
+
+  updatePassword(id: number, newPassword: string): Observable<any> {
+    return this.http.put(`${this.adminUrl}/password/${id}`, {
+      password: newPassword,
+    });
   }
 }
