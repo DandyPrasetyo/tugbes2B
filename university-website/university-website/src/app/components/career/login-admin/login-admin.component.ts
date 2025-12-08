@@ -20,11 +20,9 @@ export class LoginadminComponent {
   errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) {
-    // jika tersimpan token & remember, bisa auto-redirect (opsional)
     const token = localStorage.getItem('token');
     if (token) {
-      // tidak otomatis redirect kalau mau cek session di backend,
-      // tapi untuk UX sederhana:
+      // optional auto-redirect
       // this.router.navigate(['/career/admin']);
     }
   }
@@ -47,46 +45,45 @@ export class LoginadminComponent {
     const payload = { email: this.email, password: this.password };
 
     this.authService.login(payload).subscribe({
-      next: (res: any) => {
-        // contoh respon: { token: '...', adminId: 1, nama: 'Admin' }
-        if (res && res.token) {
-          localStorage.setItem('token', res.token);
+      next: (res) => {
+        // backend: { success, message, data: { token, adminId, nama } }
+        const data = res.data;
+
+        if (res.success && data && data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('adminId', String(data.adminId));
+
           if (this.remember) {
             localStorage.setItem('rememberEmail', this.email);
           } else {
             localStorage.removeItem('rememberEmail');
           }
-          // simpan data admin tambahan opsional
-          if (res.nama) localStorage.setItem('adminName', res.nama);
+
+          if (data.nama) {
+            localStorage.setItem('adminName', data.nama);
+          }
 
           this.loading = false;
           this.router.navigate(['/career/admin']);
         } else {
           this.loading = false;
-          this.errorMessage = 'Respon server tidak valid.';
-          localStorage.setItem('adminId', res.adminId);
-          
-
+          this.errorMessage = res.message || 'Respon server tidak valid.';
         }
       },
       error: (err) => {
         this.loading = false;
-        // ambil pesan error kalau ada
         if (err?.error?.message) this.errorMessage = err.error.message;
         else if (err?.message) this.errorMessage = err.message;
         else this.errorMessage = 'Login gagal — cek kembali kredensial.';
       },
     });
   }
-  
 
   ngOnInit() {
-    // apabila tersimpan rememberEmail, isi form
     const remembered = localStorage.getItem('rememberEmail');
     if (remembered) {
       this.email = remembered;
       this.remember = true;
-      
     }
   }
 }

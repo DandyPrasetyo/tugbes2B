@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard-admin',
@@ -10,26 +11,33 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./dashboard-admin.component.css'],
 })
 export class DashboardAdminComponent {
-  // objek untuk menampung statistik dari backend
+  // objek statistik dari backend
   stats = {
     totalLowongan: 0,
     totalPerusahaan: 0,
     totalAdmin: 0,
   };
 
-  // SESUAIKAN dengan endpoint statistik di Spring Boot kamu
+  // endpoint statistik di Spring Boot
   private apiUrl = 'http://localhost:8080/api/statistik';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.http.get<any>(this.apiUrl).subscribe({
       next: (data) => {
-        this.stats = data; // misal { totalLowongan: 5, totalPerusahaan: 3, totalAdmin: 1 }
+        this.stats = data; // { totalLowongan, totalPerusahaan, totalAdmin }
       },
       error: (err) => {
         console.error('Gagal load statistik dashboard', err);
       },
     });
+  }
+
+  onLogout(): void {
+    this.authService.logout(); // hapus token & redirect ke /career/login
   }
 }

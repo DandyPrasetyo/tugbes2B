@@ -13,20 +13,22 @@ import { LowonganService } from '@services/lowongan.service';
   styleUrls: ['./form-lowongan.component.css'],
 })
 export class FormLowonganComponent implements OnInit {
-  // pakai struktur sesuai LowonganRequest + response backend
-lowongan: any = {
-  adminId: 1,
-  perusahaanId: 2,   // ini default perusahaanId yang valid
-  judulLowongan: '',
-  posisi: '',
-  deskripsi: '',
-  flayer: null,
-  tipePekerjaan: 'Full_time',
-  gaji: null,
-  batasTanggal: '',
-  status: 'Aktif',
-};
+  // struktur sesuai LowonganRequest + response backend
+  lowongan: any = {
+    adminId: 1,
+    perusahaanId: 2, // default perusahaanId yang valid
+    judulLowongan: '',
+    posisi: '',
+    deskripsi: '',
+    flayer: null, // path/URL poster dari backend
+    tipePekerjaan: 'Full_time',
+    gaji: null,
+    batasTanggal: '',
+    status: 'Aktif',
+  };
 
+  // file poster yang dipilih user
+  posterFile?: File;
 
   isEdit = false;
   id!: number;
@@ -46,39 +48,73 @@ lowongan: any = {
     }
   }
 
-  loadDetail() {
+  loadDetail(): void {
     this.lowonganService.getById(this.id).subscribe((res) => {
       this.lowongan = res;
       // tambahkan adminId / perusahaanId default jika perlu
-      if (!this.lowongan.adminId) this.lowongan.adminId = 1;
+      if (!this.lowongan.adminId) {
+        this.lowongan.adminId = 1;
+      }
+      if (!this.lowongan.perusahaanId) {
+        this.lowongan.perusahaanId = 2;
+      }
     });
   }
 
-  save() {
+  // dipanggil saat input file berubah
+  onPosterChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.posterFile = input.files[0];
+    }
+  }
+
+  save(): void {
     console.log('SAVE DIPANGGIL', this.lowongan);
 
     if (this.isEdit) {
-      this.lowonganService.update(this.id, this.lowongan).subscribe({
-        next: () => {
-          alert('Lowongan berhasil diperbarui');
-          this.router.navigate(['/career/admin/lowongan']);
-        },
-        error: (err) => {
-          alert('Gagal update lowongan');
-          console.error('Error update lowongan:', err);
-        },
-      });
+      // MODE EDIT
+      if (this.posterFile) {
+        // ada poster baru → pakai endpoint multipart
+        this.lowonganService
+          .updateWithPoster(this.id, this.lowongan, this.posterFile)
+          .subscribe({
+            next: () => {
+              alert('Lowongan berhasil diperbarui (dengan poster baru)');
+              this.router.navigate(['/career/admin/lowongan']);
+            },
+            error: (err: any) => {
+              alert('Gagal update lowongan');
+              console.error('Error update lowongan (with poster):', err);
+            },
+          });
+      } else {
+        // tanpa poster baru → JSON biasa
+        this.lowonganService.update(this.id, this.lowongan).subscribe({
+          next: () => {
+            alert('Lowongan berhasil diperbarui');
+            this.router.navigate(['/career/admin/lowongan']);
+          },
+          error: (err: any) => {
+            alert('Gagal update lowongan');
+            console.error('Error update lowongan:', err);
+          },
+        });
+      }
     } else {
-      this.lowonganService.create(this.lowongan).subscribe({
-        next: () => {
-          alert('Lowongan berhasil ditambahkan');
-          this.router.navigate(['/career/admin/lowongan']);
-        },
-        error: (err) => {
-          alert('Gagal tambah lowongan');
-          console.error('Error create lowongan:', err);
-        },
-      });
+      // MODE CREATE (boleh dengan/ tanpa poster)
+      this.lowonganService
+        .create(this.lowongan, this.posterFile)
+        .subscribe({
+          next: () => {
+            alert('Lowongan berhasil ditambahkan');
+            this.router.navigate(['/career/admin/lowongan']);
+          },
+          error: (err: any) => {
+            alert('Gagal tambah lowongan');
+            console.error('Error create lowongan:', err);
+          },
+        });
     }
   }
 }

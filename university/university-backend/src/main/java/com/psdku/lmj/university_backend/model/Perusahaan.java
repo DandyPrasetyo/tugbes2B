@@ -24,7 +24,6 @@ public class Perusahaan {
     @Column(name = "perusahaan_id")
     private Long perusahaanId;
 
-    // nama_perusahaan (JSON) -> namaPerusahaan (Java) -> kolom nama_perusahaan
     @Column(name = "nama_perusahaan", nullable = false, length = 150)
     @JsonProperty("nama_perusahaan")
     private String namaPerusahaan;
@@ -35,16 +34,24 @@ public class Perusahaan {
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    // no_telp (JSON) -> noTelp (Java) -> kolom no_telp
-    @Column(name = "no_telp", length = 20)
+    // NO TELP: kolom BIGINT di DB -> Long di Java
+    @Column(name = "no_telp")
     @JsonProperty("no_telp")
-    private String noTelp;
+    private Long noTelp;
 
     @Column(columnDefinition = "TEXT")
     private String deskripsi;
 
     @Column(length = 100)
     private String website;
+
+    @Column(name = "logo", length = 255)
+    @JsonProperty("logo")
+    private String logo;
+
+    // dipakai di semua method findByActiveTrue...
+    @Column(name = "active")
+    private Boolean active = true;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

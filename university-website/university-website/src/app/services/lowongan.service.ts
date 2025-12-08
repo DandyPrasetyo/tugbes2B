@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class LowonganService {
-  private apiUrl = 'http://localhost:8080/api'; // ganti sesuai backend kamu
+  private apiUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {}
 
@@ -18,7 +18,7 @@ export class LowonganService {
   getAll(): Observable<Lowongan[]> {
     return this.http
       .get<any>(`${this.apiUrl}/lowongan`)
-      .pipe(map(res => res.data as Lowongan[]));
+      .pipe(map((res) => res.data as Lowongan[]));
   }
 
   // ===============================
@@ -27,21 +27,51 @@ export class LowonganService {
   getById(id: number): Observable<Lowongan> {
     return this.http
       .get<any>(`${this.apiUrl}/lowongan/${id}`)
-      .pipe(map(res => res.data as Lowongan));
+      .pipe(map((res) => res.data as Lowongan));
   }
 
   // ===============================
-  // CREATE Lowongan
+  // Helper FormData (JSON + File)
   // ===============================
-  create(data: Lowongan): Observable<any> {
-    return this.http.post(`${this.apiUrl}/lowongan`, data);
+  private buildFormData(lowongan: any, file?: File): FormData {
+    const formData = new FormData();
+
+    formData.append(
+      'lowongan',
+      new Blob([JSON.stringify(lowongan)], { type: 'application/json' })
+    );
+
+    if (file) {
+      formData.append('poster', file);
+    }
+
+    return formData;
   }
 
   // ===============================
-  // UPDATE Lowongan
+  // CREATE Lowongan (POST Multipart)
   // ===============================
-  update(id: number, data: Lowongan): Observable<any> {
-    return this.http.put(`${this.apiUrl}/lowongan/${id}`, data);
+  create(lowongan: any, file?: File): Observable<any> {
+    const formData = this.buildFormData(lowongan, file);
+    return this.http.post(`${this.apiUrl}/lowongan`, formData);
+  }
+
+  // ===============================
+  // UPDATE tanpa ganti poster (JSON)
+  // ===============================
+  update(id: number, lowongan: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/lowongan/${id}`, lowongan);
+  }
+
+  // ===============================
+  // UPDATE dengan ganti poster (Multipart)
+  // ===============================
+  updateWithPoster(id: number, lowongan: any, file: File): Observable<any> {
+    const formData = this.buildFormData(lowongan, file);
+    return this.http.put(
+      `${this.apiUrl}/lowongan/${id}/with-poster`,
+      formData
+    );
   }
 
   // ===============================

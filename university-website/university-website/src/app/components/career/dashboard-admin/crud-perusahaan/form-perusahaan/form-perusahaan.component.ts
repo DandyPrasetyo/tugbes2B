@@ -18,13 +18,13 @@ export class FormPerusahaanComponent implements OnInit {
     nama_perusahaan: '',
     alamat: '',
     email: '',
-    no_telp: '',
+    no_telp: undefined,   // angka atau kosong
     deskripsi: '',
     website: '',
   };
 
   isEdit = false;
-  id: number = 0;
+  id = 0;
 
   constructor(
     private perusahaanService: PerusahaanService,

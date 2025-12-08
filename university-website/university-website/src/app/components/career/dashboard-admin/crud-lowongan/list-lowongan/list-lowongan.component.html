@@ -9,9 +9,13 @@
     <thead>
       <tr>
         <th scope="col">No</th>
-        <th scope="col">Judul</th>
+        <th scope="col">Judul Lowongan</th>
         <th scope="col">Posisi</th>
-        <th scope="col">Tipe</th>
+        <th scope="col">Deskripsi</th>
+        <th scope="col">Poster</th>
+        <th scope="col">Tipe Pekerjaan</th>
+        <th scope="col">Gaji</th>
+        <th scope="col">Tgl Post</th>
         <th scope="col">Deadline</th>
         <th scope="col">Status</th>
         <th scope="col">Aksi</th>
@@ -20,15 +24,37 @@
 
     <tbody>
       <tr *ngIf="loading">
-        <td colspan="7" class="loading">Memuat data...</td>
+        <td colspan="11" class="loading">Memuat data...</td>
       </tr>
 
       <tr *ngFor="let row of lowonganList; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ row.judulLowongan }}</td>
         <td>{{ row.posisi }}</td>
+        <td class="max-w-xs truncate">
+          {{ row.deskripsi }}
+        </td>
+
+        <!-- Poster / flayer -->
+        <td>
+          <ng-container *ngIf="row.flayer; else noFlayer">
+            <img [src]="row.flayer"
+                 alt="Poster Lowongan"
+                 class="w-16 h-16 object-cover rounded" />
+          </ng-container>
+          <ng-template #noFlayer>
+            <span class="text-gray-400 text-xs">Belum ada poster</span>
+          </ng-template>
+        </td>
+
         <td>{{ row.tipePekerjaan }}</td>
+        <td>{{ row.gaji | currency:'IDR':'symbol':'1.0-0' }}</td>
+
+        <!-- createdAt dari backend -->
+        <td>{{ row.createdAt | date:'dd/MM/yyyy' }}</td>
+
         <td>{{ row.batasTanggal | date:'dd/MM/yyyy' }}</td>
+
         <td>
           <span class="badge"
                 [class.active]="row.status === 'Aktif'"
@@ -36,20 +62,24 @@
             {{ row.status }}
           </span>
         </td>
+
+        <!-- Aksi: HANYA dibungkus div -->
         <td>
-          <a class="btn-edit"
-             [routerLink]="['/career/admin/lowongan/edit', row.lowonganId]">
-            Edit
-          </a>
-          <button class="btn-delete"
-                  (click)="deleteLowongan(row.lowonganId)">
-            Hapus
-          </button>
+          <div class="action-buttons">
+            <a class="btn-edit"
+               [routerLink]="['/career/admin/lowongan/edit', row.lowonganId]">
+              Edit
+            </a>
+            <button class="btn-delete"
+                    (click)="deleteLowongan(row.lowonganId)">
+              Hapus
+            </button>
+          </div>
         </td>
       </tr>
 
       <tr *ngIf="!loading && lowonganList.length === 0">
-        <td colspan="7" class="no-data">Belum ada data lowongan.</td>
+        <td colspan="11" class="no-data">Belum ada data lowongan.</td>
       </tr>
     </tbody>
   </table>

@@ -1,11 +1,12 @@
 export interface Perusahaan {
-  perusahaanId?: number;      // ← ganti nama field
+  perusahaanId?: number;
   nama_perusahaan: string;
   alamat: string;
   email: string;
-  no_telp?: string;
+  no_telp?: number;
   deskripsi?: string;
   website?: string;
-  created_at?: string;
-  updated_at?: string;
+  logo?: string | null;   // path / URL logo
+  createdAt?: string;
+  updatedAt?: string;
 }

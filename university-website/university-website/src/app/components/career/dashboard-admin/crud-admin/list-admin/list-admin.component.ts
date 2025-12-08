@@ -15,6 +15,7 @@ import { Admin } from '@models/admin.model';
 export class ListAdminComponent implements OnInit {
   adminList: Admin[] = [];
   loading = true;
+  errorMsg = '';
 
   constructor(private authService: AuthService) {}
 
@@ -23,13 +24,17 @@ export class ListAdminComponent implements OnInit {
   }
 
   loadAdmin() {
+    this.loading = true;
     this.authService.getAll().subscribe({
       next: (res) => {
-        this.adminList = res;
+        console.log('adminList dari server:', res);
+        this.adminList = res;        // res: Admin[]
         this.loading = false;
       },
       error: (err) => {
         console.error('Gagal memuat admin:', err);
+        this.errorMsg =
+          err?.error?.message || 'Gagal memuat data admin.';
         this.loading = false;
       },
     });
@@ -41,7 +46,11 @@ export class ListAdminComponent implements OnInit {
 
     this.authService.delete(id).subscribe({
       next: () => {
-        this.adminList = this.adminList.filter((a) => a.admin_id !== id);
+        // gunakan adminId (camelCase) sesuai model & JSON
+        this.adminList = this.adminList.filter((a) => a.adminId !== id);
+      },
+      error: (err) => {
+        console.error('Gagal menghapus admin:', err);
       },
     });
   }

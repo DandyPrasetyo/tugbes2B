@@ -17,6 +17,7 @@
           <th>Email</th>
           <th>No. Telp</th>
           <th>Website</th>
+          <th>Logo</th>
           <th class="text-center">Aksi</th>
         </tr>
       </thead>
@@ -37,6 +38,20 @@
               {{ p.website }}
             </a>
             <span *ngIf="!p.website">-</span>
+          </td>
+
+          <!-- Logo -->
+          <td>
+            <ng-container *ngIf="p.logo; else noLogo">
+              <img
+                [src]="p.logo"
+                alt="Logo {{ p.nama_perusahaan }}"
+                class="logo-img"
+              />
+            </ng-container>
+            <ng-template #noLogo>
+              <span class="text-gray-400 text-xs">Tidak ada logo</span>
+            </ng-template>
           </td>
 
           <td class="text-center aksi">

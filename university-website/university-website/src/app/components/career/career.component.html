@@ -6,13 +6,12 @@
   <div
     *ngFor="let slide of slides; let i = index"
     class="absolute inset-0 bg-cover bg-center slider-bg"
-    [class.opacity-100]="currentSlide === i"
-    [class.opacity-0]="currentSlide !== i"
+    [ngClass]="{ 'opacity-100': currentSlide === i, 'opacity-0': currentSlide !== i }"
     [style.backgroundImage]="'url(assets/img/' + slide + ')'"
   ></div>
 
-  <!-- Overlay -->
-  <div class="absolute inset-0 bg-black/50"></div>
+  <!-- Overlay gelap TANPA blur -->
+  <div class="hero-overlay"></div>
 
   <!-- Hero Content -->
   <div class="relative max-w-6xl mx-auto px-6 py-40">
@@ -20,7 +19,7 @@
       Bangun Kariermu Bersama Polinema Career Center
     </h1>
 
-    <p class="text-white-100 text-lg max-w-xl mb-6">
+    <p class="text-white text-lg max-w-xl mb-6">
       Dapatkan informasi magang, lowongan kerja, dan pelatihan karier terkini
       untuk mempersiapkan masa depan profesional yang sukses.
     </p>
@@ -111,11 +110,11 @@
       <img src="assets/img/magang/magang1.jpg" class="rounded-lg mb-3" />
       <h4 class="font-bold text-lg mb-2">Magang Engineering & IT</h4>
 
-      <div class="text-sm text-gray-700 mb-3">
+      <div class="text-sm text-gray-200 mb-3">
         <p>📅 Diposting: <span class="font-medium">12 Nov 2025</span></p>
         <p>⏳ Deadline: <span class="font-medium">25 Nov 2025</span></p>
         <p>
-          🔵 Status: <span class="font-semibold text-green-600">Tersedia</span>
+          🔵 Status: <span class="font-semibold text-green-300">Tersedia</span>
         </p>
       </div>
 
@@ -127,11 +126,11 @@
       <img src="assets/img/magang/magang2.jpg" class="rounded-lg mb-3" />
       <h4 class="font-bold text-lg mb-2">Open Recruitment Program</h4>
 
-      <div class="text-sm text-gray-700 mb-3">
+      <div class="text-sm text-gray-200 mb-3">
         <p>📅 Diposting: <span class="font-medium">12 Nov 2025</span></p>
         <p>⏳ Deadline: <span class="font-medium">25 Nov 2025</span></p>
         <p>
-          🔵 Status: <span class="font-semibold text-green-600">Tersedia</span>
+          🔵 Status: <span class="font-semibold text-green-300">Tersedia</span>
         </p>
       </div>
 
@@ -143,11 +142,11 @@
       <img src="assets/img/magang/magang3.jpg" class="rounded-lg mb-3" />
       <h4 class="font-bold text-lg mb-2">Magang Perusahaan BUMN</h4>
 
-      <div class="text-sm text-gray-700 mb-3">
+      <div class="text-sm text-gray-200 mb-3">
         <p>📅 Diposting: <span class="font-medium">12 Nov 2025</span></p>
         <p>⏳ Deadline: <span class="font-medium">25 Nov 2025</span></p>
         <p>
-          🔵 Status: <span class="font-semibold text-green-600">Tersedia</span>
+          🔵 Status: <span class="font-semibold text-green-300">Tersedia</span>
         </p>
       </div>
 

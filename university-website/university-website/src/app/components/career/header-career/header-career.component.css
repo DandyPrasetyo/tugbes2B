@@ -1,9 +1,13 @@
 /* ===== NAVY WRAPPER ===== */
 .career-header-wrapper {
   width: 100%;
-  background-color: #17354b;
   padding: 20px 0 40px 0;
-  position: relative;
+  position: sticky;        /* boleh diganti relative kalau tidak mau nempel */
+  top: 0;
+  z-index: 50;
+
+  /* biru solid seperti contoh desain */
+  background-color: #17354b;
 }
 
 /* ===== TOP ICONS ===== */
@@ -65,18 +69,20 @@
   background: #f5f5f5;
 }
 
-/* ===== HEADER BOX ===== */
+/* ===== HEADER BOX (GLASS) ===== */
 .career-header-container {
   width: 90%;
   max-width: 1300px;
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.18); /* abu-putih transparan */
   border-radius: 16px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);           /* efek frosted glass */
+  -webkit-backdrop-filter: blur(10px);
   margin: 0 auto;
   padding: 25px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 /* LOGO */
@@ -95,6 +101,7 @@
   margin: 0;
   color: white;
   font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 /* MENU */
@@ -107,10 +114,14 @@
   color: white;
   font-weight: 600;
   text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
   transition: 0.2s;
 }
 
-.career-nav a:hover {
+.career-nav a:hover,
+.career-nav a.active {
   opacity: 0.6;
 }
 
@@ -121,6 +132,8 @@
   color: white;
   border-radius: 10px;
   font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
   transition: 0.2s;
 }
 
@@ -159,7 +172,7 @@
 
 .close-btn {
   background: #24455e;
-  color: white;
+  color: white;              /* diperbaiki: teks putih, bukan biru terang */
   font-size: 16px;
   border-radius: 8px;
   padding: 0 15px;

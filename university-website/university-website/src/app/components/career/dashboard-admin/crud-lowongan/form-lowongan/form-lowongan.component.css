@@ -1,3 +1,14 @@
 .form-input {
   @apply w-full border border-gray-300 rounded-lg px-3 py-2 mt-1;
 }
+
+/* Opsional: khusus input file biar kelihatan rapi */
+input[type="file"].form-input {
+  @apply py-1 cursor-pointer;
+}
+.button-group {
+  @apply mt-6 flex justify-end gap-4;
+} 
+.button {
+  @apply px-5 py-2 rounded-lg text-white font-semibold;
+}

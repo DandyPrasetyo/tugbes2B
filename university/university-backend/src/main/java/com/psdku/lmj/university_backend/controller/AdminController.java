@@ -18,33 +18,35 @@ public class AdminController {
     
     @Autowired
     private AdminService adminService;
+/* =============================
+          LOGIN ADMIN
+   ============================== */
+@PostMapping("/login")
+public ResponseEntity<ApiResponse> login(@RequestBody LoginRequest request) {
 
-    /* =============================
-              LOGIN ADMIN
-    ============================== */
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    Optional<Admin> adminOpt = adminService.findByEmail(request.getEmail());
 
-        Optional<Admin> adminOpt = adminService.findByEmail(request.getEmail());
-
-        if (adminOpt.isEmpty()) {
-            return ResponseEntity.status(401)
-                .body(Map.of("message", "Email tidak ditemukan"));
-        }
-
-        Admin admin = adminOpt.get();
-
-        if (!admin.getPasswordAdmin().equals(request.getPassword())) {
-            return ResponseEntity.status(401)
-                .body(Map.of("message", "Password salah"));
-        }
-
-        return ResponseEntity.ok(Map.of(
-                "token", UUID.randomUUID().toString(),
-                "adminId", admin.getAdminId(),
-                "nama", admin.getNamaAdmin()
-        ));
+    if (adminOpt.isEmpty()) {
+        return ResponseEntity.status(401)
+                .body(new ApiResponse(false, "Email tidak ditemukan", null));
     }
+
+    Admin admin = adminOpt.get();
+
+    if (!admin.getPasswordAdmin().equals(request.getPassword())) {
+        return ResponseEntity.status(401)
+                .body(new ApiResponse(false, "Password salah", null));
+    }
+
+    Map<String, Object> loginData = new HashMap<>();
+    loginData.put("token", UUID.randomUUID().toString());
+    loginData.put("adminId", admin.getAdminId());
+    loginData.put("nama", admin.getNamaAdmin());
+
+    return ResponseEntity.ok(
+            new ApiResponse(true, "Login berhasil", loginData)
+    );
+}
 
     /* =============================
              GET SEMUA ADMIN

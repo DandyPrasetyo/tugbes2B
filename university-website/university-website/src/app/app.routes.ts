@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 
 /* ===============================
-   WEBSITE KAMPUS (HEADER & FOOTER BIASA)
+   WEBSITE KAMPUS
 ================================ */
 import { HomeComponent } from './components/home/home.component';
 import { ContactComponent } from './components/contact/contact.component';
 
 /* ===============================
-   CAREER CENTER (LAYOUT SENDIRI)
+   CAREER CENTER (LAYOUT)
 ================================ */
 import { CareerLayoutComponent } from './components/career/layout-career/layout-career.component';
 import { CareerComponent } from './components/career/career.component';
@@ -21,15 +21,15 @@ import { LoginadminComponent } from './components/career/login-admin/login-admin
 ================================ */
 import { DashboardAdminComponent } from './components/career/dashboard-admin/dashboard-admin.component';
 
-/* ===== CRUD Lowongan ===== */
+/* CRUD Lowongan */
 import { ListLowonganComponent } from './components/career/dashboard-admin/crud-lowongan/list-lowongan/list-lowongan.component';
 import { FormLowonganComponent } from './components/career/dashboard-admin/crud-lowongan/form-lowongan/form-lowongan.component';
 
-/* ===== CRUD Perusahaan ===== */
+/* CRUD Perusahaan */
 import { ListPerusahaanComponent } from './components/career/dashboard-admin/crud-perusahaan/list-perusahaan/list-perusahaan.component';
 import { FormPerusahaanComponent } from './components/career/dashboard-admin/crud-perusahaan/form-perusahaan/form-perusahaan.component';
 
-/* ===== CRUD Admin ===== */
+/* CRUD Admin */
 import { ListAdminComponent } from './components/career/dashboard-admin/crud-admin/list-admin/list-admin.component';
 import { FormAdminComponent } from './components/career/dashboard-admin/crud-admin/form-admin/form-admin.component';
 
@@ -47,22 +47,29 @@ export const routes: Routes = [
       { path: 'event', component: EventComponent },
       { path: 'login-admin', component: LoginadminComponent },
 
-      { path: 'admin', component: DashboardAdminComponent },
+      // ========== ADMIN DASHBOARD ==========
+      {
+        path: 'admin',
+        component: DashboardAdminComponent,   // layout: sidebar + cards + <router-outlet>
+        children: [
+          // TIDAK ADA lagi { path: '', component: DashboardAdminComponent }
 
-      /* ========== LOWONGAN CRUD ========== */
-      { path: 'admin/lowongan', component: ListLowonganComponent },
-      { path: 'admin/lowongan/add', component: FormLowonganComponent },
-      { path: 'admin/lowongan/edit/:id', component: FormLowonganComponent },
+          // LOWONGAN CRUD
+          { path: 'lowongan', component: ListLowonganComponent },
+          { path: 'lowongan/add', component: FormLowonganComponent },
+          { path: 'lowongan/edit/:id', component: FormLowonganComponent },
 
-      /* ========== PERUSAHAAN CRUD ========== */
-      { path: 'admin/perusahaan', component: ListPerusahaanComponent },
-      { path: 'admin/perusahaan/tambah', component: FormPerusahaanComponent },
-      { path: 'admin/perusahaan/edit/:id', component: FormPerusahaanComponent },
+          // PERUSAHAAN CRUD
+          { path: 'perusahaan', component: ListPerusahaanComponent },
+          { path: 'perusahaan/tambah', component: FormPerusahaanComponent },
+          { path: 'perusahaan/edit/:id', component: FormPerusahaanComponent },
 
-      /* ========== ADMIN CRUD ========== */
-      { path: 'admin/admin', component: ListAdminComponent },
-      { path: 'admin/admin/tambah', component: FormAdminComponent },
-      { path: 'admin/admin/edit/:id', component: FormAdminComponent },
+          // ADMIN CRUD
+          { path: 'admin', component: ListAdminComponent },
+          { path: 'admin/tambah', component: FormAdminComponent },
+          { path: 'admin/edit/:id', component: FormAdminComponent },
+        ],
+      },
     ],
   },
 

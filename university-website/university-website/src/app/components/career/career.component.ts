@@ -11,12 +11,9 @@ import { RouterModule } from '@angular/router';
 })
 export class CareerComponent implements OnInit {
   currentSlide = 0;
-
   slides = ['kampus5.jpg', 'kampus2.jpg', 'kampus3.jpg'];
 
   ngOnInit(): void {
-    setInterval(() => {
-      this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-    }, 4000); // 4 detik
+    // sementara KOSONG, tidak ada setInterval
   }
 }

@@ -39,6 +39,26 @@
       ></textarea>
     </div>
 
+    <!-- Poster / Flayer -->
+    <div>
+      <label class="font-semibold">Poster Lowongan</label>
+      <input
+        type="file"
+        accept="image/*"
+        class="form-input"
+        (change)="onPosterChange($event)"
+      />
+
+      <!-- preview poster saat edit / sudah ada -->
+      <div *ngIf="lowongan.flayer" class="mt-2">
+        <img
+          [src]="lowongan.flayer"
+          alt="Poster {{ lowongan.judulLowongan }}"
+          class="w-32 h-32 object-cover rounded"
+        />
+      </div>
+    </div>
+
     <!-- Tipe pekerjaan -->
     <div>
       <label class="font-semibold">Tipe Pekerjaan</label>
@@ -87,11 +107,10 @@
 
     <!-- Submit -->
     <button
-  type="submit"
-  class="bg-[#24455e] text-white py-2 px-4 rounded-lg mt-4 hover:opacity-80"
->
-  {{ isEdit ? "Update" : "Simpan" }}
-</button>
-
+      type="submit"
+      class="bg-[#24455e] text-white py-2 px-4 rounded-lg mt-4 hover:opacity-80"
+    >
+      {{ isEdit ? "Update" : "Simpan" }}
+    </button>
   </form>
 </div>

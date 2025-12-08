@@ -28,6 +28,6 @@ public interface LowonganRepository extends JpaRepository<Lowongan, Long> {
            "AND (:tipe_pekerjaan IS NULL OR l.tipePekerjaan = :tipe_pekerjaan) " +
            "AND (:status IS NULL OR l.status = :status)")
     List<Lowongan> search(@Param("query") String query,
-                           @Param("tipe_pekerjaan") Lowongan.TipePekerjaan tipe_pekerjaan,
-                           @Param("status") Lowongan.StatusLowongan status);
+                          @Param("tipe_pekerjaan") Lowongan.TipePekerjaan tipe_pekerjaan,
+                          @Param("status") Lowongan.StatusLowongan status);
 }

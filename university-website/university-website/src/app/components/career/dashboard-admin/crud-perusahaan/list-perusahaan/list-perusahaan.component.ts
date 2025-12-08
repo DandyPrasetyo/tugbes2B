@@ -5,7 +5,6 @@ import { RouterLink } from '@angular/router';
 import { PerusahaanService } from '@services/perusahaan.service';
 import { Perusahaan } from '@models/perusahaan.model';
 
-
 @Component({
   selector: 'app-list-perusahaan',
   standalone: true,
@@ -25,8 +24,8 @@ export class ListPerusahaanComponent implements OnInit {
 
   loadData(): void {
     this.perusahaanService.getAll().subscribe({
-      next: (res) => {
-        this.perusahaanList = res;
+      next: (data) => {
+        this.perusahaanList = data;   // data: Perusahaan[]
         this.loading = false;
       },
       error: (err) => {
