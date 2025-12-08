@@ -169,19 +169,6 @@
   }
 }
 
-/* MITRA SCROLL */
-.animate-scroll-slow {
-  animation: scroll 18s linear infinite;
-}
-
-@keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
 /* ========================================= */
 /*        LOGO PERUSAHAAN DI CARD            */
 /* ========================================= */
@@ -202,4 +189,20 @@
   height: 36px;
   object-fit: contain;
   border-radius: 50%;
+}
+/* ========================================= */
+/*       ANIMASI AUTO SCROLL MITRA           */
+/* ========================================= */
+
+@keyframes scroll-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-slow {
+  animation: scroll-horizontal 18s linear infinite;
 }
