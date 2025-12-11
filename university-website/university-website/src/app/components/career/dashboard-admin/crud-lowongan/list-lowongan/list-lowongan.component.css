@@ -5,10 +5,19 @@
   box-shadow: 0 2px 8px #00000020;
 }
 
+/* header sekarang 2 baris: judul+button, lalu filter */
 .header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 8px;
   margin-bottom: 16px;
+}
+
+/* baris 1: judul kiri, tombol kanan */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .btn-add {
@@ -71,4 +80,83 @@ td {
 
 .badge.closed {
   background: #dc2626;
+}
+
+/* ========== SEARCH / FILTER BAR ========== */
+
+/* baris 2: filter tepat di bawah judul */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* kapsul input / select */
+.search-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #dbeafe;           /* biru muda */
+  border-radius: 999px;
+  padding: 6px 12px;
+  border: 1px solid #bfdbfe;
+}
+
+/* input text filter */
+.filter-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 4px 8px;
+  font-size: 14px;
+  min-width: 180px;
+}
+
+/* dropdown tipe pekerjaan */
+.filter-select {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 4px 8px;
+  font-size: 14px;
+}
+
+/* tombol Search */
+.btn-search {
+  background: #1e3a8a;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* tombol Reset */
+.btn-reset {
+  background: #e5e7eb;
+  color: #111827;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+}
+
+/* counter hasil */
+.search-count {
+  font-size: 13px;
+  color: #4b5563;
+}
+
+/* highlight hasil pencarian */
+mark {
+  background-color: #fef08a;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* jarak antar kapsul kalau perlu */
+.search-pill + .search-pill {
+  margin-left: 9px;
 }

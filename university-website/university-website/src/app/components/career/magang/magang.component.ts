@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LowonganService } from '../../../services/lowongan.service';
+import { Lowongan } from '../../../models/lowongan.model';
 
 @Component({
   selector: 'app-magang',
@@ -9,12 +11,15 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './magang.component.html',
   styleUrls: ['./magang.component.css'],
 })
-export class MagangComponent {
+export class MagangComponent implements OnInit {
   search = '';
   filterLokasi = '';
   filterDurasi = '';
 
-  magang = [
+  posterBaseUrl = 'http://localhost:8080/';
+
+  // default dummy, dipakai kalau API gagal
+  magang: any[] = [
     {
       posisi: 'Magang Engineering & IT',
       perusahaan: 'PT Astra Otoparts',
@@ -46,6 +51,34 @@ export class MagangComponent {
       image: 'assets/img/magang/magang3.jpg',
     },
   ];
+
+  constructor(private lowonganService: LowonganService) {}
+
+  ngOnInit(): void {
+    this.lowonganService.getAll().subscribe({
+      next: (data: Lowongan[]) => {
+        if (data && data.length) {
+          // mapping hanya lowongan dengan tipe Magang
+          this.magang = data
+            .filter((job) => job.tipePekerjaan === 'Magang')
+            .map((job) => ({
+              posisi: job.judulLowongan || job.posisi,
+              perusahaan:
+                (job as any).perusahaan?.nama_perusahaan || 'Perusahaan',
+              lokasi: (job as any).perusahaan?.alamat || 'Lokasi tidak ada',
+              durasi: 'Magang', // bisa diganti jika ada field durasi di backend
+              posted: job.createdAt || '-',
+              deadline: job.batasTanggal || '-',
+              status: job.status === 'Aktif' ? 'Tersedia' : 'Ditutup',
+              image: job.flayer ? this.posterBaseUrl + job.flayer : null,
+            }));
+        }
+      },
+      error: (err) => {
+        console.error('Gagal load magang dari API, pakai data dummy', err);
+      },
+    });
+  }
 
   get filteredMagang() {
     return this.magang.filter((item) => {

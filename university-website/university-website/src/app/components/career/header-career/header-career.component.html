@@ -1,49 +1,42 @@
 <header class="career-header-wrapper">
-  <!-- TOP RIGHT ICONS -->
   <div class="top-icons">
     <button class="icon-btn" (click)="openSearch()">
       <img src="assets/img/icons/search.svg" alt="Search" />
     </button>
 
     <div class="lang-selector" (click)="toggleLanguage()">
-      <img src="assets/img/icons/bender.svg" class="flag-icon" alt="Language" />
+      <img src="assets/img/icons/bender.svg" class="flag-icon" />
       <span class="arrow">▼</span>
 
-      <!-- DROPDOWN MENU -->
       <div class="lang-dropdown" *ngIf="showLanguageMenu">
         <div (click)="selectLanguage('id')">🇮🇩 Indonesia</div>
         <div (click)="selectLanguage('en')">🇺🇸 English</div>
       </div>
     </div>
   </div>
-
-  <!-- HEADER TRANSPARAN -->
-  <div class="career-header-container">
-    <!-- Logo -->
-    <div class="career-logo">
-      <img src="assets/img/logo.jpg" class="logo-img" />
-      <div class="logo-text">
-        <h2>POLINEMA</h2>
-        <p>CAREER CENTER</p>
-      </div>
-    </div>
-
-    <!-- Menu -->
-    <nav class="career-nav">
-      <a routerLink="/career" routerLinkActive="active">BRANDA</a>
-      <a routerLink="/career/event" routerLinkActive="active">EVENT</a>
-      <a routerLink="/career/magang" routerLinkActive="active">MAGANG</a>
-      <a routerLink="/career/loker" routerLinkActive="active">LOKER</a>
-    </nav>
-
-    <!-- Login -->
-    <div class="career-login">
-      <a routerLink="/career/login-admin" class="login-btn">LOGIN</a>
-    </div>
-  </div>
 </header>
 
-<!-- SEARCH POPUP OVERLAY -->
+<div class="career-header-container">
+  <div class="career-logo">
+    <img src="assets/img/logo.jpg" class="logo-img" />
+    <div class="logo-text">
+      <h2>POLINEMA</h2>
+      <p>CAREER CENTER</p>
+    </div>
+  </div>
+
+  <nav class="career-nav">
+    <a routerLink="/career/home" routerLinkActive="active">BRANDA</a>
+    <a routerLink="/career/event" routerLinkActive="active">EVENT</a>
+    <a routerLink="/career/magang" routerLinkActive="active">MAGANG</a>
+    <a routerLink="/career/loker" routerLinkActive="active">LOKER</a>
+  </nav>
+
+  <div class="career-login">
+    <a routerLink="/career/login-admin" class="login-btn">LOGIN</a>
+  </div>
+</div>
+
 <div class="search-overlay" *ngIf="showSearch" (click)="closeSearch()">
   <div class="search-box" (click)="$event.stopPropagation()">
     <input type="text" placeholder="Cari lowongan, magang, event..." />

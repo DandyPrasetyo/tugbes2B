@@ -2,22 +2,27 @@ package com.psdku.lmj.university_backend.dto;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class LowonganRequest {
 
     private String judulLowongan;
     private String posisi;
     private String deskripsi;
-    private String tipePekerjaan; // STRING, nanti di-convert di Service
-    private Integer gaji;
+    private String tipePekerjaan;
+    private Long gaji; // <- FIX INT → LONG
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate batasTanggal;
-    private String status; // STRING, nanti di-convert ke ENUM
+
+    private String status;
     private Long adminId;
     private Long perusahaanId;
 
     public LowonganRequest() {}
 
     public LowonganRequest(String judulLowongan, String posisi, String deskripsi, String tipePekerjaan,
-                           Integer gaji, LocalDate batasTanggal, String status,
+                           Long gaji, LocalDate batasTanggal, String status,
                            Long adminId, Long perusahaanId) {
 
         this.judulLowongan = judulLowongan;
@@ -31,7 +36,6 @@ public class LowonganRequest {
         this.perusahaanId = perusahaanId;
     }
 
-    // GETTERS & SETTERS
     public String getJudulLowongan() { return judulLowongan; }
     public void setJudulLowongan(String judulLowongan) { this.judulLowongan = judulLowongan; }
 
@@ -44,8 +48,8 @@ public class LowonganRequest {
     public String getTipePekerjaan() { return tipePekerjaan; }
     public void setTipePekerjaan(String tipePekerjaan) { this.tipePekerjaan = tipePekerjaan; }
 
-    public Integer getGaji() { return gaji; }
-    public void setGaji(Integer gaji) { this.gaji = gaji; }
+    public Long getGaji() { return gaji; }
+    public void setGaji(Long gaji) { this.gaji = gaji; }
 
     public LocalDate getBatasTanggal() { return batasTanggal; }
     public void setBatasTanggal(LocalDate batasTanggal) { this.batasTanggal = batasTanggal; }

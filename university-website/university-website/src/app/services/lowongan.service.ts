@@ -42,8 +42,10 @@ export class LowonganService {
     );
 
     if (file) {
-      formData.append('poster', file);
-    }
+  formData.append('flayer', file); // tadinya 'poster'
+}
+
+
 
     return formData;
   }

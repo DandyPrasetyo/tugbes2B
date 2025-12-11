@@ -17,6 +17,8 @@ export class LowonganComponent implements OnInit {
   filterTipe = '';
   filterStatus = '';
 
+  posterBaseUrl = 'http://localhost:8080/';
+
   // DATA DUMMY LAMA (dipakai jika API gagal)
   lowongan: any[] = [
     {
@@ -63,12 +65,14 @@ export class LowonganComponent implements OnInit {
 
   constructor(private lowonganService: LowonganService) {}
 
-ngOnInit(): void {
+  ngOnInit(): void {
   this.lowonganService.getAll().subscribe({
     next: (data: any[]) => {
       if (data && data.length) {
-        // langsung pakai data dari backend tanpa mapping ribet
-        this.lowongan = data;
+        // hanya lowongan NON-MAGANG yang tampil di menu Loker
+        this.lowongan = data.filter(
+          (job) => job.tipePekerjaan !== 'Magang'
+        );
       }
     },
     error: (err) => {
@@ -79,6 +83,7 @@ ngOnInit(): void {
     },
   });
 }
+
 
   get filteredLowongan() {
     return this.lowongan.filter((job) => {

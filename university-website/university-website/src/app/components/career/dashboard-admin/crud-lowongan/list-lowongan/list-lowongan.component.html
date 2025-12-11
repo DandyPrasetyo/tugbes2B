@@ -1,8 +1,59 @@
 <!-- html-validate-disable -->
 <div class="card">
   <div class="header">
-    <h2>Data Lowongan</h2>
-    <a routerLink="/career/admin/lowongan/add" class="btn-add">+ Tambah Lowongan</a>
+    <!-- baris 1: judul kiri, tombol kanan -->
+    <div class="header-top">
+      <h2>Data Lowongan</h2>
+
+      <a routerLink="/career/admin/lowongan/add" class="btn-add">
+        + Tambah Lowongan
+      </a>
+    </div>
+
+    <!-- baris 2: filter tepat di bawah "Data Lowongan" -->
+    <div class="toolbar">
+      <!-- kapsul 1: Judul -->
+      <div class="search-pill">
+        <input
+          type="text"
+          class="filter-input"
+          [(ngModel)]="judulFilter"
+          placeholder="Masukkan judul lowongan..." />
+      </div>
+
+      <!-- kapsul 2: Posisi -->
+      <div class="search-pill">
+        <input
+          type="text"
+          class="filter-input"
+          [(ngModel)]="posisiFilter"
+          placeholder="Masukkan posisi..." />
+      </div>
+
+      <!-- kapsul 3: Tipe Pekerjaan -->
+      <div class="search-pill">
+        <select
+          class="filter-select"
+          [(ngModel)]="tipeFilter">
+          <option value="">-- Pilih Tipe Pekerjaan --</option>
+          <option value="Part_time">Part Time</option>
+          <option value="Full_time">Full Time</option>
+          <option value="Magang">Magang</option>
+        </select>
+      </div>
+
+      <button class="btn-search" (click)="doSearch()">
+        Search 🔍
+      </button>
+
+      <button class="btn-reset" (click)="resetFilter()">
+        Reset
+      </button>
+
+      <span class="search-count">
+        Menampilkan {{ hasilCount }} hasil dari {{ totalLowongan }} lowongan
+      </span>
+    </div>
   </div>
 
   <table>
@@ -27,59 +78,70 @@
         <td colspan="11" class="loading">Memuat data...</td>
       </tr>
 
-      <tr *ngFor="let row of lowonganList; let i = index">
+      <tr *ngFor="let row of filteredList ?? []; let i = index">
         <td>{{ i + 1 }}</td>
-        <td>{{ row.judulLowongan }}</td>
-        <td>{{ row.posisi }}</td>
-        <td class="max-w-xs truncate">
-          {{ row.deskripsi }}
-        </td>
 
-        <!-- Poster / flayer (SUDAH DIPERBAIKI) -->
+        <!-- highlight judul, posisi, deskripsi, tipe -->
+        <td [innerHTML]="highlight(row?.judulLowongan || '')"></td>
+        <td [innerHTML]="highlight(row?.posisi || '')"></td>
+        <td
+          class="max-w-xs truncate"
+          [innerHTML]="highlight(row?.deskripsi || '')"
+        ></td>
+
+        <!-- Poster / flayer -->
         <td>
-          <ng-container *ngIf="row.flayer; else noFlayer">
-            <img [src]="'http://localhost:8080/' + row.flayer"
-                 alt="Poster Lowongan"
-                 class="w-16 h-16 object-cover rounded" />
+          <ng-container *ngIf="row?.flayer; else noPoster">
+            <img
+              [src]="'http://localhost:8080/' + row.flayer"
+              alt="Poster"
+              style="height: 60px; object-fit: cover"
+            >
           </ng-container>
-          <ng-template #noFlayer>
-            <span class="text-gray-400 text-xs">Belum ada poster</span>
-          </ng-template>
+          <ng-template #noPoster>Belum ada poster</ng-template>
         </td>
 
-        <td>{{ row.tipePekerjaan }}</td>
-        <td>{{ row.gaji | currency:'IDR':'symbol':'1.0-0' }}</td>
+        <td [innerHTML]="highlight(row?.tipePekerjaan || '')"></td>
+        <td>{{ row?.gaji | currency:'IDR':'symbol':'1.0-0' }}</td>
 
         <!-- createdAt dari backend -->
-        <td>{{ row.createdAt | date:'dd/MM/yyyy' }}</td>
+        <td>{{ row?.createdAt | date:'dd/MM/yyyy' }}</td>
 
-        <td>{{ row.batasTanggal | date:'dd/MM/yyyy' }}</td>
+        <td>{{ row?.batasTanggal | date:'dd/MM/yyyy' }}</td>
 
         <td>
-          <span class="badge"
-                [class.active]="row.status === 'Aktif'"
-                [class.closed]="row.status === 'Tutup'">
-            {{ row.status }}
+          <span
+            class="badge"
+            [class.active]="row?.status === 'Aktif'"
+            [class.closed]="row?.status === 'Tutup'"
+          >
+            {{ row?.status }}
           </span>
         </td>
 
         <!-- Aksi -->
         <td>
           <div class="action-buttons">
-            <a class="btn-edit"
-               [routerLink]="['/career/admin/lowongan/edit', row.lowonganId]">
+            <a
+              class="btn-edit"
+              [routerLink]="['/career/admin/lowongan/edit', row?.lowonganId]"
+            >
               Edit
             </a>
-            <button class="btn-delete"
-                    (click)="deleteLowongan(row.lowonganId)">
+            <button
+              class="btn-delete"
+              (click)="deleteLowongan(row?.lowonganId)"
+            >
               Hapus
             </button>
           </div>
         </td>
       </tr>
 
-      <tr *ngIf="!loading && lowonganList.length === 0">
-        <td colspan="11" class="no-data">Belum ada data lowongan.</td>
+      <tr *ngIf="!loading && (filteredList?.length ?? 0) === 0">
+        <td colspan="11" class="no-data">
+          Tidak ada lowongan yang ditemukan.
+        </td>
       </tr>
     </tbody>
   </table>

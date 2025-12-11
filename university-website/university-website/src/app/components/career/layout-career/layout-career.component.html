@@ -1,42 +1,7 @@
-<!-- TOP BLUE BAR -->
-<div class="w-full bg-[#103654] py-6 px-6 flex justify-end items-center gap-6">
-  <!-- Search -->
-  <div class="text-white text-xl cursor-pointer">🔍</div>
+<app-header-career></app-header-career>
 
-  <!-- Language Switch -->
-  <div class="flex items-center gap-2 cursor-pointer text-white">
-    <img src="assets/img/flag-id.png" class="w-6 h-6" />
-    <span class="text-sm">ID</span>
-  </div>
-</div>
-
-<!-- CAREER MENU BAR (CARD) -->
-<div class="w-full flex justify-center mt-[-20px] px-4">
-  <div class="career-card mb-6">
-    <div class="flex items-center gap-4">
-      <!-- Logo -->
-      <img src="assets/img/logo.jpg" class="w-14 h-14" />
-
-      <div>
-        <h2 class="text-lg font-bold text-white tracking-wide">POLINEMA</h2>
-        <p class="text-sm text-white opacity-90">CAREER CENTER</p>
-      </div>
-    </div>
-
-    <!-- MENU -->
-    <nav
-      class="flex items-center gap-10 ml-20 text-white text-sm font-semibold"
-    >
-      <a routerLink="/career/home" class="menu-link">BRANDA</a>
-      <a routerLink="/career/event" class="menu-link">EVENT</a>
-      <a routerLink="/career/magang" class="menu-link">MAGANG</a>
-      <a routerLink="/career/loker" class="menu-link">LOKER</a>
-      <a routerLink="/career/login-admin" class="login-btn">LOGIN</a>
-    </nav>
-  </div>
-</div>
-
-<!-- CONTENT SLOT -->
 <div class="mt-6">
   <router-outlet></router-outlet>
 </div>
+
+<app-footer-career></app-footer-career>

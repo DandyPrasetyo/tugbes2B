@@ -1,26 +1,22 @@
-<!-- LIST LOWONGAN -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
   <div *ngFor="let job of filteredLowongan" class="job-card">
-    <!-- HEADER -->
     <div class="flex items-center gap-4 mb-4">
-      <!-- untuk dummy pakai job.logo, untuk backend bisa pakai job.flayer -->
-      <img
-        [src]="job.flayer || job.logo || 'assets/img/loker1.jpg'"
-        class="h-14 w-14 rounded-lg object-cover border"
-      />
+   <img
+  *ngIf="job.flayer"
+  [src]="posterBaseUrl + job.flayer"
+  class="h-14 w-14 rounded-lg object-cover border"
+/>
+
       <div>
-        <!-- judul lowongan -->
         <h2 class="text-xl font-bold text-blue-800">
           {{ job.judulLowongan || job.posisi }}
         </h2>
-        <!-- nama perusahaan -->
         <p class="text-gray-700 font-medium">
           {{ job.perusahaan?.nama_perusahaan || job.perusahaan }}
         </p>
       </div>
     </div>
 
-    <!-- INFO -->
     <div class="text-gray-600 text-sm space-y-1">
       <p>
         📍 Lokasi:
@@ -40,12 +36,15 @@
       </p>
 
       <p class="mt-2">
+        <!-- STATUS TERSEDIA -->
         <span
           *ngIf="job.status === 'Aktif' || job.status === 'Tersedia'"
           class="text-green-600 font-semibold"
         >
           🟢 {{ job.status === 'Aktif' ? 'Tersedia' : job.status }}
         </span>
+
+        <!-- STATUS DITUTUP -->
         <span
           *ngIf="job.status === 'Tutup' || job.status === 'Ditutup'"
           class="text-red-600 font-semibold"
@@ -58,7 +57,6 @@
     <button class="btn-detail mt-4">Lihat Detail →</button>
   </div>
 
-  <!-- PESAN SAAT TIDAK ADA DATA -->
   <div
     *ngIf="filteredLowongan.length === 0"
     class="col-span-full text-center text-gray-500 py-8"

@@ -1,15 +1,15 @@
 export interface Lowongan {
-  lowongan_id?: number;
-  admin_id: number;
-  perusahaan_id: number;
-  judul_lowongan: string;
+  lowonganId?: number;
+  adminId: number;
+  perusahaanId: number;
+  judulLowongan: string;
   posisi: string;
   deskripsi?: string;
   flayer?: string;
-  tipe_pekerjaan: 'Full-time' | 'Part-time' | 'Magang';
+  tipePekerjaan: 'Full_time' | 'Part_time' | 'Magang';
   gaji?: number;
-  batas_tanggal: string;
+  batasTanggal: string;
   status: 'Aktif' | 'Tutup';
-  created_at?: string;
-  updated_at?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
