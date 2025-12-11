@@ -1,20 +1,20 @@
-<!-- SEMUA HEADER & FOOTER DISSEMBUNYIKAN DI LOGIN -->
+<!-- SEMUA HEADER & FOOTER DISEMBUNYIKAN DI LOGIN -->
 <div *ngIf="!hideAllHeaderFooter">
-  <!-- HEADER UTAMA = tampil di NON-career -->
+  <!-- HEADER WEBSITE -->
   <app-header *ngIf="!isCareerPage"></app-header>
 
-  <!-- HEADER CAREER = tampil khusus career -->
+  <!-- HEADER CAREER -->
   <app-header-career *ngIf="isCareerPage"></app-header-career>
 </div>
 
-<!-- AREA KONTEN HALAMAN -->
+<!-- AREA KONTEN -->
 <router-outlet></router-outlet>
 
 <!-- FOOTER -->
 <div *ngIf="!hideAllHeaderFooter">
-  <!-- FOOTER UTAMA untuk non-career -->
+  <!-- FOOTER WEBSITE -->
   <app-footer *ngIf="!isCareerPage"></app-footer>
 
-  <!-- FOOTER CAREER khusus career -->
+  <!-- FOOTER CAREER -->
   <app-footer-career *ngIf="isCareerPage"></app-footer-career>
 </div>

@@ -1,62 +1,75 @@
-/* =========================================================
-   TOP NAVY HEADER WRAPPER
-   ========================================================= */
-.career-header-wrapper {
+/* ============================================== */
+/* TOP NAVBAR BIRU                                */
+/* ============================================== */
+.career-topbar {
   width: 100%;
-  padding: 20px 0;
-  background-color: #17354b;
+  background: #103f5b;
+  padding: 16px 20px;
+  z-index: 9999 !important; /* FIX dropdown tertutup slider */
   position: relative;
-  z-index: 20;
 }
 
-/* =========================================================
-   TOP RIGHT ICONS
-   ========================================================= */
-.top-icons {
-  position: absolute;
-  right: 40px;
-  top: 20px;
+.topbar-inner {
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 4px;
+  position: relative;
+  z-index: 9999 !important;
+}
+
+.top-actions {
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 18px;
+  margin-top: 4px;
+  position: relative;
+  z-index: 9999 !important;
 }
 
 .icon-btn img {
-  width: 24px;
+  width: 22px;
   filter: brightness(0) invert(1);
   cursor: pointer;
 }
 
+/* ============================================== */
+/* LANGUAGE SELECTOR + DROPDOWN                   */
+/* ============================================== */
 .lang-selector {
   display: flex;
   align-items: center;
   gap: 6px;
   cursor: pointer;
+  background: #24455e;
   position: relative;
+  z-index: 9999 !important;
 }
 
 .flag-icon {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
 }
 
 .arrow {
-  color: white;
-  font-size: 13px;
+  font-size: 12px;
   opacity: 0.9;
 }
 
+/* FIX: dropdown tidak tertutup slider */
 .lang-dropdown {
   position: absolute;
   top: 35px;
   right: 0;
   background: white;
-  border-radius: 10px;
   padding: 10px 0;
   width: 130px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+  z-index: 999999 !important;
 }
 
 .lang-dropdown div {
@@ -66,155 +79,158 @@
 }
 
 .lang-dropdown div:hover {
-  background: #f5f5f5;
+  background: #efefef;
 }
 
-/* =========================================================
-   GLASS NAVIGATION CARD (IN FRONT OF SLIDER)
-   ========================================================= */
+/* ============================================== */
+/* MAIN GLASS NAVBAR (SMALLER VERSION)            */
+/* ============================================== */
 .career-header-container {
-  width: 90%;
-  max-width: 1300px;
+  width: 92%;
+  max-width: 1280px;
 
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(14px);
   border-radius: 16px;
+
+  padding: 24px 40px; /* diperkecil */
+  margin: auto;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  padding: 25px 40px;
-  margin: 0 auto;
-
-  /* POSISI MELAYANG DI DEPAN SLIDER */
   position: absolute;
-  top: 100px; /* TURUNKAN KE DALAM SLIDER */
+  top: 110px; /* dinaikkan sedikit */
   left: 50%;
   transform: translateX(-50%);
 
-  z-index: 50;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 50; /* cukup tinggi, tapi tidak melebihi dropdown */
+  box-shadow: 0 3px 16px rgba(0, 0, 0, 0.25);
+
+  color: #24455e;
 }
 
-/* =========================================================
-   LOGO TEXT
-   ========================================================= */
+/* ============================================== */
+/* LOGO + TEXT                                    */
+/* ============================================== */
 .career-logo {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
 }
 
 .logo-img {
-  width: 65px;
+  width: 70px; /* Diperkecil */
 }
 
-.logo-text h2,
+.logo-text h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
 .logo-text p {
   margin: 0;
-  color: white;
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 13px;
+  color: #d8e9f6;
+  letter-spacing: 0.4px;
 }
 
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
+/* ============================================== */
+/* NAVIGATION MENU                                */
+/* ============================================== */
 .career-nav {
   display: flex;
-  gap: 50px;
+  gap: 35px; /* lebih kecil */
 }
 
 .career-nav a {
-  color: white;
-  font-weight: 600;
+  color: #24455e;
   text-transform: uppercase;
+  font-weight: 700;
   text-decoration: none;
-  letter-spacing: 0.08em;
-  transition: 0.2s;
+  letter-spacing: 0.05em;
+  transition: 0.25s ease;
+  font-size: 14px;
 }
 
-.career-nav a:hover,
+/* Hover premium */
+.career-nav a:hover {
+  color: #1a3247;
+  transform: translateY(-2px);
+}
+
+/* Active */
 .career-nav a.active {
-  opacity: 0.6;
+  color: #12202e;
+  border-bottom: 3px solid #24455e;
+  padding-bottom: 3px;
 }
 
-/* =========================================================
-   LOGIN BUTTON
-   ========================================================= */
+/* ============================================== */
+/* LOGIN BUTTON                                   */
+/* ============================================== */
 .login-btn {
-  padding: 10px 25px;
+  padding: 10px 24px;
   background: #24455e;
   color: white;
   border-radius: 10px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: 0.2s;
+  font-weight: 700;
+  font-size: 14px;
+  transition: 0.25s ease;
 }
 
 .login-btn:hover {
-  opacity: 0.7;
+  opacity: 0.75;
+  transform: translateY(-2px);
 }
 
-/* =========================================================
-   SEARCH OVERLAY
-   ========================================================= */
+/* ============================================== */
+/* SEARCH OVERLAY                                 */
+/* ============================================== */
 .search-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.65);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 2000;
 }
 
 .search-box {
   background: white;
-  padding: 25px;
+  padding: 22px;
   border-radius: 12px;
   display: flex;
   gap: 10px;
   width: 90%;
-  max-width: 500px;
+  max-width: 480px;
 }
 
 .search-box input {
   flex: 1;
   padding: 12px;
-  font-size: 16px;
   border-radius: 8px;
   border: 1px solid #ccc;
 }
 
 .close-btn {
+  padding: 0 15px;
   background: #24455e;
   color: white;
-  font-size: 16px;
   border-radius: 8px;
-  padding: 0 15px;
   cursor: pointer;
 }
 
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
+/* ============================================== */
+/* RESPONSIVE                                     */
+/* ============================================== */
 @media (max-width: 900px) {
   .career-nav {
     display: none;
-  }
-
-  .career-header-container {
-    padding: 20px;
-    gap: 20px;
-  }
-}
-
-@media (max-width: 600px) {
-  .career-header-container {
-    flex-direction: column;
-    text-align: center;
-    gap: 15px;
   }
 }

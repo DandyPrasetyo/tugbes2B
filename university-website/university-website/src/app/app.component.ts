@@ -28,14 +28,15 @@ export class AppComponent {
   constructor(private router: Router) {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event: any) => {
+      .subscribe((event: NavigationEnd) => {
         const url = event.urlAfterRedirects.toLowerCase();
 
-        // halaman yang hide semuanya
-        this.hideAllHeaderFooter = url.includes('/login');
+        // SEMUA HALAMAN LOGIN -> sembunyikan header & footer
+        this.hideAllHeaderFooter =
+          url.includes('/login') || url.includes('/login-admin');
 
-        // semua halaman career
-        this.isCareerPage = url.includes('/career');
+        // DETEKSI HALAMAN CAREER
+        this.isCareerPage = url.startsWith('/career');
       });
   }
 }

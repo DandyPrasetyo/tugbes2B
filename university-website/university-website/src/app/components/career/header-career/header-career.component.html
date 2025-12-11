@@ -1,24 +1,36 @@
-<header class="career-header-wrapper">
-  <div class="top-icons">
-    <button class="icon-btn" (click)="openSearch()">
-      <img src="assets/img/icons/search.svg" alt="Search" />
-    </button>
+<!-- ============================ -->
+<!-- TOP NAVBAR BIRU (Bar Atas)   -->
+<!-- ============================ -->
+<header class="career-topbar">
+  <div class="topbar-inner">
+    <!-- LEFT AREA (kosong untuk posisi rata kanan) -->
+    <div></div>
 
-    <div class="lang-selector" (click)="toggleLanguage()">
-      <img src="assets/img/icons/bender.svg" class="flag-icon" />
-      <span class="arrow">▼</span>
+    <!-- RIGHT: SEARCH + LANGUAGE -->
+    <div class="top-actions">
+      <button class="icon-btn" (click)="openSearch()">
+        <img src="assets/img/icons/search.svg" alt="Search" />
+      </button>
 
-      <div class="lang-dropdown" *ngIf="showLanguageMenu">
-        <div (click)="selectLanguage('id')">🇮🇩 Indonesia</div>
-        <div (click)="selectLanguage('en')">🇺🇸 English</div>
+      <div class="lang-selector" (click)="toggleLanguage()">
+        <img src="assets/img/icons/flag.svg" class="flag-icon" />
+        <span class="arrow">▼</span>
+
+        <div class="lang-dropdown" *ngIf="showLanguageMenu">
+          <div (click)="selectLanguage('id')">🇮🇩 Indonesia</div>
+          <div (click)="selectLanguage('en')">🇺🇸 English</div>
+        </div>
       </div>
     </div>
   </div>
 </header>
 
+<!-- ================================== -->
+<!-- GLASS CARD NAVIGATION (MAIN NAVBAR) -->
+<!-- ================================== -->
 <div class="career-header-container">
   <div class="career-logo">
-    <img src="assets/img/logo.jpg" class="logo-img" />
+    <img src="assets/img/logo.png" class="logo-img" />
     <div class="logo-text">
       <h2>POLINEMA</h2>
       <p>CAREER CENTER</p>
@@ -30,6 +42,7 @@
     <a routerLink="/career/event" routerLinkActive="active">EVENT</a>
     <a routerLink="/career/magang" routerLinkActive="active">MAGANG</a>
     <a routerLink="/career/loker" routerLinkActive="active">LOKER</a>
+    <a routerLink="/career/mitra" routerLinkActive="active">MITRA</a>
   </nav>
 
   <div class="career-login">
@@ -37,6 +50,9 @@
   </div>
 </div>
 
+<!-- ===================== -->
+<!-- SEARCH OVERLAY POPUP  -->
+<!-- ===================== -->
 <div class="search-overlay" *ngIf="showSearch" (click)="closeSearch()">
   <div class="search-box" (click)="$event.stopPropagation()">
     <input type="text" placeholder="Cari lowongan, magang, event..." />
