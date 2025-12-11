@@ -1,13 +1,15 @@
 /* ========================================= */
-/*                HERO SLIDER                */
+/* HERO SLIDER */
 /* ========================================= */
 
 .slides-container {
   display: flex;
   height: 100%;
   width: 300%;
-  transition: transform 1.6s ease;
+  transition: transform 1.5s ease;
   position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .slide-item {
@@ -17,16 +19,47 @@
   background-position: center;
 }
 
-/* TEXT ANIMATION */
+/* FADE TEXT ANIMATION */
 .slide-text-wrapper {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition: 0.7s ease;
 }
 
 .slide-text-wrapper.active {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* HERO TEXT LEFT SIDE */
+.hero-text-box {
+  max-width: 650px;
+  margin-left: 170px; /* <<< geser lebih kanan */
+  margin-top: 30px; /* <<< turun sedikit */
+  color: white;
+  text-align: left;
+  z-index: 50;
+}
+
+.hero-text-box h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.hero-text-box p {
+  font-size: 1.2rem;
+  margin-bottom: 22px;
+  opacity: 0.9;
+}
+
+.cta-btn {
+  background: #24455e;
+  padding: 12px 26px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  display: inline-block;
 }
 
 /* OVERLAY GRADIENT */
@@ -41,13 +74,67 @@
     rgba(0, 0, 0, 0.2) 100%
   );
   z-index: 10;
-  pointer-events: none;
 }
 
 /* ========================================= */
-/*               NAV BOX ELEGAN              */
+/* SLIDER BUTTONS */
 /* ========================================= */
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 50px;
+  color: white;
+  opacity: 0.75;
+  z-index: 30;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
 
+.slider-prev {
+  left: 40px; /* geser lebih jauh ke dalam */
+}
+
+.slider-next {
+  right: 40px;
+}
+
+.slider-btn:hover {
+  opacity: 1;
+}
+
+/* ========================================= */
+/* BULLETS */
+/* ========================================= */
+.bullets {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 30;
+}
+
+.bullet {
+  width: 12px;
+  height: 12px;
+  background: white;
+  opacity: 0.4;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.bullet.active {
+  opacity: 1;
+  transform: scale(1.25);
+}
+
+/* ========================================= */
+/* NAV ELEGANT */
+/* ========================================= */
 .nav-elegant {
   display: flex;
   align-items: center;
@@ -62,26 +149,16 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
-.nav-elegant:hover {
+.nav-elegant:hover,
+.nav-elegant.active {
   background: #24455e;
   color: white;
   transform: translateY(-2px);
 }
 
-.nav-elegant.active {
-  background: #24455e;
-  color: white;
-  border-color: #24455e;
-}
-
-.nav-icon {
-  font-size: 20px;
-}
-
 /* ========================================= */
-/*                PREMIUM BOX                */
+/* PREMIUM BOX */
 /* ========================================= */
-
 .premium-box {
   background: white;
   padding: 40px;
@@ -92,21 +169,19 @@
 }
 
 /* ========================================= */
-/*         SUPER PREMIUM CAREER CARD         */
+/* CAREER CARDS */
 /* ========================================= */
-
-.career-card,
-.magang-card {
+.career-card {
   background: white;
-  border: 1px solid rgba(36, 69, 94, 0.1);
   border-radius: 18px;
   padding: 22px;
-  transition: all 0.3s ease;
+  border: 1px solid rgba(36, 69, 94, 0.1);
   box-shadow: 0 4px 12px rgba(36, 69, 94, 0.06);
+  transition: 0.3s;
+  position: relative;
 }
 
-.career-card:hover,
-.magang-card:hover {
+.career-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 26px rgba(36, 69, 94, 0.18);
 }
@@ -119,65 +194,10 @@
   margin-bottom: 14px;
 }
 
-.career-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #24455e;
-}
-
-.career-desc {
-  font-size: 0.9rem;
-  color: #4b5563;
-  margin-bottom: 10px;
-}
-
-.card-info {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  padding: 12px;
-  border-radius: 12px;
-  margin-bottom: 14px;
-}
-
-.card-info span {
-  font-weight: 600;
-  color: #1e293b;
-}
-
-.btn-detail {
-  width: 100%;
-  padding: 10px 0;
-  background: #24455e;
-  color: white;
-  border-radius: 10px;
-  font-weight: 600;
-  transition: 0.25s;
-}
-
-.btn-detail:hover {
-  background: #1b3345;
-}
-
-/* RESPONSIVE */
-@media (max-width: 640px) {
-  .premium-box {
-    padding: 24px;
-  }
-
-  .career-card {
-    padding: 18px;
-  }
-}
-
-/* ========================================= */
-/*        LOGO PERUSAHAAN DI CARD            */
-/* ========================================= */
-
 .company-logo {
   position: absolute;
   top: 14px;
   left: 14px;
-  z-index: 5;
   background: white;
   padding: 6px;
   border-radius: 50%;
@@ -188,12 +208,29 @@
   width: 36px;
   height: 36px;
   object-fit: contain;
-  border-radius: 50%;
 }
-/* ========================================= */
-/*       ANIMASI AUTO SCROLL MITRA           */
-/* ========================================= */
 
+/* INFO BOX */
+.card-info {
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+}
+
+/* BUTTON */
+.btn-detail {
+  width: 100%;
+  padding: 10px 0;
+  background: #24455e;
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* ========================================= */
+/* MITRA SCROLL ANIMATION */
+/* ========================================= */
 @keyframes scroll-horizontal {
   0% {
     transform: translateX(0);

@@ -2,6 +2,7 @@
 <!-- HERO SLIDER -->
 <!-- ========================== -->
 <section class="hero-slider relative h-[80vh] overflow-hidden">
+  <!-- SLIDES -->
   <div
     class="slides-container"
     [style.transform]="'translateX(-' + currentSlide * 100 + '%)'"
@@ -13,59 +14,36 @@
     ></div>
   </div>
 
+  <!-- DARK OVERLAY -->
   <div class="absolute inset-0 bg-black/50 z-10"></div>
 
-  <!-- TEXT -->
+  <!-- TEXT AREA -->
   <div
     *ngFor="let slide of slides; let i = index"
-    class="absolute z-20 w-full h-full flex flex-col justify-center px-6 slide-text-wrapper"
+    class="absolute z-20 w-full h-full flex flex-col justify-center slide-text-wrapper"
     [ngClass]="{ active: currentSlide === i }"
   >
-    <div class="max-w-6xl mx-auto">
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 max-w-xl">
-        {{ slide.title }}
-      </h1>
+    <div class="hero-text-box">
+      <h1>{{ slide.title }}</h1>
+      <p>{{ slide.desc }}</p>
 
-      <p class="text-white text-lg max-w-xl mb-6">
-        {{ slide.desc }}
-      </p>
-
-      <a
-        routerLink="/career/loker"
-        class="inline-block text-white px-6 py-3 rounded-lg font-semibold hover:opacity-80 transition"
-        style="background-color: #24455e"
-      >
-        Lihat Lowongan
-      </a>
+      <a routerLink="/career/loker" class="cta-btn">Lihat Lowongan</a>
     </div>
   </div>
 
-  <!-- PREV -->
-  <button
-    (click)="prevSlide()"
-    class="absolute left-5 top-1/2 -translate-y-1/2 z-30 text-white text-5xl font-light hover:opacity-70"
-  >
-    ‹
-  </button>
+  <!-- BUTTON PREV -->
+  <button (click)="prevSlide()" class="slider-btn slider-prev">‹</button>
 
-  <!-- NEXT -->
-  <button
-    (click)="nextSlide()"
-    class="absolute right-5 top-1/2 -translate-y-1/2 z-30 text-white text-5xl font-light hover:opacity-70"
-  >
-    ›
-  </button>
+  <!-- BUTTON NEXT -->
+  <button (click)="nextSlide()" class="slider-btn slider-next">›</button>
 
   <!-- BULLETS -->
-  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-3">
+  <div class="bullets">
     <div
       *ngFor="let slide of slides; let i = index"
-      class="w-3 h-3 rounded-full cursor-pointer transition-all duration-300"
+      class="bullet"
+      [ngClass]="{ active: currentSlide === i }"
       (click)="goToSlide(i)"
-      [ngClass]="{
-        'bg-white scale-125': currentSlide === i,
-        'bg-white/40': currentSlide !== i
-      }"
     ></div>
   </div>
 </section>
@@ -80,7 +58,7 @@
     </h3>
     <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">TERBARU</h2>
 
-    <!-- NAV -->
+    <!-- NAV CATEGORY -->
     <div class="flex justify-center flex-wrap gap-4 mb-10">
       <button
         class="nav-elegant"
@@ -150,7 +128,7 @@
       <img src="assets/img/mitra/goto.png" class="h-12" />
       <img src="assets/img/mitra/pertamina.png" class="h-12" />
 
-      <!-- repeat for infinite -->
+      <!-- Repeat for infinite looping -->
       <img src="assets/img/mitra/google.png" class="h-12" />
       <img src="assets/img/mitra/bni.png" class="h-12" />
       <img src="assets/img/mitra/pln.png" class="h-12" />

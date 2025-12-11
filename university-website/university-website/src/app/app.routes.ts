@@ -15,6 +15,7 @@ import { LowonganComponent } from './components/career/lowongan/lowongan.compone
 import { MagangComponent } from './components/career/magang/magang.component';
 import { EventComponent } from './components/career/event/event.component';
 import { LoginadminComponent } from './components/career/login-admin/login-admin.component';
+// import { MitraComponent } from './components/career/mitra/mitra.component'; // ⭐ route MITRA Baru
 
 /* ===============================
    DASHBOARD ADMIN
@@ -37,34 +38,39 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
 
+  /* ===============================
+       CAREER CENTER ROUTING
+  ================================ */
   {
     path: 'career',
-    component: CareerLayoutComponent,
+    component: CareerLayoutComponent, // ⭐ TANPA header/footer, sudah diperbaiki
     children: [
       { path: '', component: CareerComponent },
+      { path: 'home', component: CareerComponent },
       { path: 'loker', component: LowonganComponent },
       { path: 'magang', component: MagangComponent },
       { path: 'event', component: EventComponent },
+      // { path: 'mitra', component: MitraComponent }, // ⭐ ROUTE MITRA BARU
       { path: 'login-admin', component: LoginadminComponent },
 
-      // ========== ADMIN DASHBOARD ==========
+      /* ===============================
+          ADMIN DASHBOARD ROUTING
+      ================================ */
       {
         path: 'admin',
-        component: DashboardAdminComponent,   // layout: sidebar + cards + <router-outlet>
+        component: DashboardAdminComponent,
         children: [
-          // TIDAK ADA lagi { path: '', component: DashboardAdminComponent }
-
-          // LOWONGAN CRUD
+          // CRUD LOWONGAN
           { path: 'lowongan', component: ListLowonganComponent },
           { path: 'lowongan/add', component: FormLowonganComponent },
           { path: 'lowongan/edit/:id', component: FormLowonganComponent },
 
-          // PERUSAHAAN CRUD
+          // CRUD PERUSAHAAN
           { path: 'perusahaan', component: ListPerusahaanComponent },
           { path: 'perusahaan/tambah', component: FormPerusahaanComponent },
           { path: 'perusahaan/edit/:id', component: FormPerusahaanComponent },
 
-          // ADMIN CRUD
+          // CRUD ADMIN
           { path: 'admin', component: ListAdminComponent },
           { path: 'admin/tambah', component: FormAdminComponent },
           { path: 'admin/edit/:id', component: FormAdminComponent },
