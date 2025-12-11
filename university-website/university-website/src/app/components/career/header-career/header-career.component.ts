@@ -10,13 +10,8 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./header-career.component.css'],
 })
 export class HeaderCareerComponent {
-  mobileMenuOpen = false;
   showSearch = false;
   showLanguageMenu = false;
-
-  toggleMobileMenu() {
-    this.mobileMenuOpen = !this.mobileMenuOpen;
-  }
 
   openSearch() {
     this.showSearch = true;
@@ -31,7 +26,7 @@ export class HeaderCareerComponent {
   }
 
   selectLanguage(lang: string) {
-    console.log('Language selected:', lang);
+    console.log('Selected language:', lang);
     this.showLanguageMenu = false;
   }
 }

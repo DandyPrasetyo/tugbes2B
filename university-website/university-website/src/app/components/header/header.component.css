@@ -1,20 +1,44 @@
-.nav-link {
-  @apply text-gray-700 font-semibold hover:text-blue-700 transition-colors duration-200 relative;
+/* Use Inter globally */
+:host {
+  font-family: "Inter", sans-serif;
 }
 
-.nav-link::after {
-  content: "";
-  @apply absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-600 transition-all duration-300;
+/* Playfair font for campus name */
+.font-playfair {
+  font-family: "Playfair Display", serif;
 }
 
-.nav-link:hover::after {
-  @apply w-full;
+/* Divider (thicker + taller) */
+.divider-vertical {
+  width: 3px;
+  height: 48px;
+  background-color: #24455e;
+  opacity: 0.9;
+  border-radius: 3px;
 }
 
-.active {
-  @apply text-blue-700;
+/* Desktop nav link */
+.nav-item {
+  @apply text-gray-700 font-semibold transition-all;
 }
 
-.active::after {
-  @apply w-full;
+/* Hover effect (Matches Design) */
+.nav-item:hover {
+  @apply text-white;
+  background-color: #24455e; /* custom */
+}
+/* Mobile dropdown animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.25s ease-out;
 }

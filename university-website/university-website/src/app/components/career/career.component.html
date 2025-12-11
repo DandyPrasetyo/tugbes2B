@@ -2,7 +2,6 @@
 <!-- HERO SLIDER -->
 <!-- ========================== -->
 <section class="hero-slider relative h-[80vh] overflow-hidden">
-  <!-- SLIDES WRAPPER -->
   <div
     class="slides-container"
     [style.transform]="'translateX(-' + currentSlide * 100 + '%)'"
@@ -14,10 +13,9 @@
     ></div>
   </div>
 
-  <!-- OVERLAY -->
   <div class="absolute inset-0 bg-black/50 z-10"></div>
 
-  <!-- TEXT PER SLIDE -->
+  <!-- TEXT -->
   <div
     *ngFor="let slide of slides; let i = index"
     class="absolute z-20 w-full h-full flex flex-col justify-center px-6 slide-text-wrapper"
@@ -42,7 +40,7 @@
     </div>
   </div>
 
-  <!-- BUTTON PREV -->
+  <!-- PREV -->
   <button
     (click)="prevSlide()"
     class="absolute left-5 top-1/2 -translate-y-1/2 z-30 text-white text-5xl font-light hover:opacity-70"
@@ -50,7 +48,7 @@
     ‹
   </button>
 
-  <!-- BUTTON NEXT -->
+  <!-- NEXT -->
   <button
     (click)="nextSlide()"
     class="absolute right-5 top-1/2 -translate-y-1/2 z-30 text-white text-5xl font-light hover:opacity-70"
@@ -58,7 +56,7 @@
     ›
   </button>
 
-  <!-- BULLET INDICATOR -->
+  <!-- BULLETS -->
   <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-3">
     <div
       *ngFor="let slide of slides; let i = index"
@@ -73,24 +71,23 @@
 </section>
 
 <!-- ========================== -->
-<!--  LOWONGAN & MAGANG TERBARU -->
+<!-- LOWONGAN & MAGANG -->
 <!-- ========================== -->
 <section class="mt-20">
   <div class="premium-box">
-    <!-- SECTION TITLE -->
     <h3 class="text-blue-600 font-semibold tracking-wide text-center">
       INFORMASI KARIER
     </h3>
     <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">TERBARU</h2>
 
-    <!-- NAV BOX -->
+    <!-- NAV -->
     <div class="flex justify-center flex-wrap gap-4 mb-10">
       <button
         class="nav-elegant"
         [class.active]="selectedCategory === 'loker'"
         (click)="selectCategory('loker')"
       >
-        <span class="nav-icon">💼</span> Loker
+        💼 Loker
       </button>
 
       <button
@@ -98,25 +95,21 @@
         [class.active]="selectedCategory === 'magang'"
         (click)="selectCategory('magang')"
       >
-        <span class="nav-icon">🪪</span> Magang
+        🪪 Magang
       </button>
     </div>
 
-    <!-- CONTENT CARD -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <div *ngFor="let item of displayedItems" class="career-card">
-        <!-- LOGO PERUSAHAAN -->
         <div class="company-logo">
           <img [src]="item.logo" />
         </div>
-        <!-- IMAGE -->
+
         <img [src]="item.img" />
 
-        <!-- TITLE & DESC -->
         <h4 class="career-title">{{ item.title }}</h4>
         <p class="career-desc">{{ item.desc }}</p>
 
-        <!-- INFO BOX -->
         <div class="card-info">
           <p>
             📅 Diposting: <span>{{ item.post }}</span>
@@ -131,7 +124,6 @@
       </div>
     </div>
 
-    <!-- BUTTON LANJUT -->
     <div class="text-center mt-8">
       <a [routerLink]="moreLink" class="btn-more">Lainnya →</a>
     </div>
@@ -150,7 +142,6 @@
     <div
       class="inline-flex gap-20 animate-scroll-slow items-center px-10 w-max"
     >
-      <!-- LOOP 1 -->
       <img src="assets/img/mitra/google.png" class="h-12" />
       <img src="assets/img/mitra/bni.png" class="h-12" />
       <img src="assets/img/mitra/pln.png" class="h-12" />
@@ -159,7 +150,7 @@
       <img src="assets/img/mitra/goto.png" class="h-12" />
       <img src="assets/img/mitra/pertamina.png" class="h-12" />
 
-      <!-- LOOP 2 (duplicate for infinite scroll) -->
+      <!-- repeat for infinite -->
       <img src="assets/img/mitra/google.png" class="h-12" />
       <img src="assets/img/mitra/bni.png" class="h-12" />
       <img src="assets/img/mitra/pln.png" class="h-12" />

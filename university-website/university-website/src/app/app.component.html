@@ -1,8 +1,20 @@
-<!-- header -->
-<app-header *ngIf="showHeaderFooter"></app-header>
+<!-- SEMUA HEADER & FOOTER DISSEMBUNYIKAN DI LOGIN -->
+<div *ngIf="!hideAllHeaderFooter">
+  <!-- HEADER UTAMA = tampil di NON-career -->
+  <app-header *ngIf="!isCareerPage"></app-header>
 
-<!-- konten halaman -->
+  <!-- HEADER CAREER = tampil khusus career -->
+  <app-header-career *ngIf="isCareerPage"></app-header-career>
+</div>
+
+<!-- AREA KONTEN HALAMAN -->
 <router-outlet></router-outlet>
 
-<!-- footer -->
-<app-footer *ngIf="showHeaderFooter"></app-footer>
+<!-- FOOTER -->
+<div *ngIf="!hideAllHeaderFooter">
+  <!-- FOOTER UTAMA untuk non-career -->
+  <app-footer *ngIf="!isCareerPage"></app-footer>
+
+  <!-- FOOTER CAREER khusus career -->
+  <app-footer-career *ngIf="isCareerPage"></app-footer-career>
+</div>

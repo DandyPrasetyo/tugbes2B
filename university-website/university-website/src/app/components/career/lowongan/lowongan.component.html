@@ -1,7 +1,5 @@
-<!-- LIST LOWONGAN -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
   <div *ngFor="let job of filteredLowongan" class="job-card">
-    <!-- HEADER -->
     <div class="flex items-center gap-4 mb-4">
       <img [src]="job.logo" class="h-14 w-14 rounded-lg object-cover border" />
       <div>
@@ -10,7 +8,6 @@
       </div>
     </div>
 
-    <!-- INFO -->
     <div class="text-gray-600 text-sm space-y-1">
       <p>
         📍 Lokasi: <strong>{{ job.lokasi }}</strong>
@@ -29,20 +26,21 @@
         <span
           *ngIf="job.status === 'Tersedia'"
           class="text-green-600 font-semibold"
-          >🟢 Tersedia</span
         >
+          🟢 Tersedia
+        </span>
         <span
           *ngIf="job.status === 'Ditutup'"
           class="text-red-600 font-semibold"
-          >🔴 Ditutup</span
         >
+          🔴 Ditutup
+        </span>
       </p>
     </div>
 
     <button class="btn-detail mt-4">Lihat Detail →</button>
   </div>
 
-  <!-- PESAN SAAT TIDAK ADA DATA -->
   <div
     *ngIf="filteredLowongan.length === 0"
     class="col-span-full text-center text-gray-500 py-8"

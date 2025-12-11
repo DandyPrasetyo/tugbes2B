@@ -3,11 +3,9 @@
     Event & Pelatihan Karier
   </h1>
 
-  <!-- FILTER SECTION -->
   <div
     class="bg-white p-6 rounded-xl shadow-md mb-10 grid grid-cols-1 md:grid-cols-4 gap-4"
   >
-    <!-- SEARCH -->
     <input
       type="text"
       [(ngModel)]="search"
@@ -15,7 +13,6 @@
       class="border rounded-lg px-4 py-2 w-full"
     />
 
-    <!-- CATEGORY FILTER -->
     <select
       [(ngModel)]="filterKategori"
       class="border rounded-lg px-4 py-2 w-full"
@@ -27,14 +24,12 @@
       <option>Job Fair</option>
     </select>
 
-    <!-- DATE FILTER -->
     <input
       type="date"
       [(ngModel)]="filterTanggal"
       class="border rounded-lg px-4 py-2 w-full"
     />
 
-    <!-- LOCATION FILTER -->
     <select
       [(ngModel)]="filterLokasi"
       class="border rounded-lg px-4 py-2 w-full"
@@ -47,13 +42,11 @@
     </select>
   </div>
 
-  <!-- LIST EVENT -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     <div *ngFor="let ev of filteredEvents" class="event-card">
       <img [src]="ev.banner" class="rounded-lg mb-4 h-40 w-full object-cover" />
 
       <h2 class="text-xl font-bold text-blue-800">{{ ev.judul }}</h2>
-
       <p class="text-gray-700 text-sm mt-1">{{ ev.kategori }}</p>
 
       <div class="text-gray-600 text-sm space-y-1 mt-3">
