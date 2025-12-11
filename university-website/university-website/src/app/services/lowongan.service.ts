@@ -65,13 +65,13 @@ export class LowonganService {
 
   // ===============================
   // UPDATE dengan ganti poster (Multipart)
+  //   → sesuaikan dengan controller:
+  //     @PutMapping(path = "/{id}", consumes = MULTIPART_FORM_DATA)
   // ===============================
   updateWithPoster(id: number, lowongan: any, file: File): Observable<any> {
     const formData = this.buildFormData(lowongan, file);
-    return this.http.put(
-      `${this.apiUrl}/lowongan/${id}/with-poster`,
-      formData
-    );
+    // pakai endpoint yang sama (/lowongan/{id}), hanya beda Content-Type
+    return this.http.put(`${this.apiUrl}/lowongan/${id}`, formData);
   }
 
   // ===============================

@@ -35,10 +35,10 @@
           {{ row.deskripsi }}
         </td>
 
-        <!-- Poster / flayer -->
+        <!-- Poster / flayer (SUDAH DIPERBAIKI) -->
         <td>
           <ng-container *ngIf="row.flayer; else noFlayer">
-            <img [src]="row.flayer"
+            <img [src]="'http://localhost:8080/' + row.flayer"
                  alt="Poster Lowongan"
                  class="w-16 h-16 object-cover rounded" />
           </ng-container>
@@ -63,7 +63,7 @@
           </span>
         </td>
 
-        <!-- Aksi: HANYA dibungkus div -->
+        <!-- Aksi -->
         <td>
           <div class="action-buttons">
             <a class="btn-edit"

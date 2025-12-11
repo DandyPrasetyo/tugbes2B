@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http'; // <-- TAMBAHAN
+import { LowonganService } from '../../../services/lowongan.service';
+import { Lowongan } from '../../../models/lowongan.model';
 
 @Component({
   selector: 'app-loker',
@@ -10,14 +11,14 @@ import { HttpClient } from '@angular/common/http'; // <-- TAMBAHAN
   templateUrl: './lowongan.component.html',
   styleUrls: ['./lowongan.component.css'],
 })
-export class LowonganComponent {
+export class LowonganComponent implements OnInit {
   search = '';
   filterLokasi = '';
   filterTipe = '';
   filterStatus = '';
 
-  // DATA DUMMY LAMA (tetap dipakai sebagai default)
-  lowongan = [
+  // DATA DUMMY LAMA (dipakai jika API gagal)
+  lowongan: any[] = [
     {
       posisi: 'Frontend Developer',
       perusahaan: 'PT Astra Digital',
@@ -60,26 +61,24 @@ export class LowonganComponent {
     },
   ];
 
-  private apiUrl = 'http://localhost:8080/api/lowongan'; // <-- URL backend
+  constructor(private lowonganService: LowonganService) {}
 
-  constructor(private http: HttpClient) {} // <-- INJEK HttpClient
-
-  ngOnInit() {
-    // Coba ambil data dari backend, kalau gagal tetap pakai data dummy di atas
-    this.http.get<any[]>(this.apiUrl).subscribe({
-      next: (data) => {
-        if (data && data.length) {
-          this.lowongan = data;
-        }
-      },
-      error: (err) => {
-        console.error(
-          'Gagal load data lowongan dari API, pakai dummy saja',
-          err
-        );
-      },
-    });
-  }
+ngOnInit(): void {
+  this.lowonganService.getAll().subscribe({
+    next: (data: any[]) => {
+      if (data && data.length) {
+        // langsung pakai data dari backend tanpa mapping ribet
+        this.lowongan = data;
+      }
+    },
+    error: (err) => {
+      console.error(
+        'Gagal load data lowongan dari API, pakai data dummy',
+        err
+      );
+    },
+  });
+}
 
   get filteredLowongan() {
     return this.lowongan.filter((job) => {

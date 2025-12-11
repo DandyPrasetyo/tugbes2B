@@ -3,39 +3,55 @@
   <div *ngFor="let job of filteredLowongan" class="job-card">
     <!-- HEADER -->
     <div class="flex items-center gap-4 mb-4">
-      <img [src]="job.logo" class="h-14 w-14 rounded-lg object-cover border" />
+      <!-- untuk dummy pakai job.logo, untuk backend bisa pakai job.flayer -->
+      <img
+        [src]="job.flayer || job.logo || 'assets/img/loker1.jpg'"
+        class="h-14 w-14 rounded-lg object-cover border"
+      />
       <div>
-        <h2 class="text-xl font-bold text-blue-800">{{ job.posisi }}</h2>
-        <p class="text-gray-700 font-medium">{{ job.perusahaan }}</p>
+        <!-- judul lowongan -->
+        <h2 class="text-xl font-bold text-blue-800">
+          {{ job.judulLowongan || job.posisi }}
+        </h2>
+        <!-- nama perusahaan -->
+        <p class="text-gray-700 font-medium">
+          {{ job.perusahaan?.nama_perusahaan || job.perusahaan }}
+        </p>
       </div>
     </div>
 
     <!-- INFO -->
     <div class="text-gray-600 text-sm space-y-1">
       <p>
-        📍 Lokasi: <strong>{{ job.lokasi }}</strong>
+        📍 Lokasi:
+        <strong>{{ job.perusahaan?.alamat || job.lokasi }}</strong>
       </p>
       <p>
-        💼 Tipe: <strong>{{ job.tipe }}</strong>
+        💼 Tipe:
+        <strong>{{ job.tipePekerjaan || job.tipe }}</strong>
       </p>
       <p>
-        📅 Diposting: <strong>{{ job.posted }}</strong>
+        📅 Diposting:
+        <strong>{{ job.createdAt || job.posted || '-' }}</strong>
       </p>
       <p>
-        ⏳ Deadline: <strong>{{ job.deadline }}</strong>
+        ⏳ Deadline:
+        <strong>{{ job.batasTanggal || job.deadline }}</strong>
       </p>
 
       <p class="mt-2">
         <span
-          *ngIf="job.status === 'Tersedia'"
+          *ngIf="job.status === 'Aktif' || job.status === 'Tersedia'"
           class="text-green-600 font-semibold"
-          >🟢 Tersedia</span
         >
+          🟢 {{ job.status === 'Aktif' ? 'Tersedia' : job.status }}
+        </span>
         <span
-          *ngIf="job.status === 'Ditutup'"
+          *ngIf="job.status === 'Tutup' || job.status === 'Ditutup'"
           class="text-red-600 font-semibold"
-          >🔴 Ditutup</span
         >
+          🔴 {{ job.status === 'Tutup' ? 'Ditutup' : job.status }}
+        </span>
       </p>
     </div>
 

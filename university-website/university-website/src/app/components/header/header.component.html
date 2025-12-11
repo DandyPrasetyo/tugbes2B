@@ -40,13 +40,64 @@
 
       <!-- Desktop Navigation -->
       <nav class="hidden lg:flex items-center space-x-1">
+        <!-- item lain tetap pakai array navigation kecuali PROFIL -->
         <a *ngFor="let item of navigation"
            [routerLink]="item.path"
-           routerLinkActive="bg-blue-600 text-white"
+           routerLinkActive="active"
            [routerLinkActiveOptions]="{exact: item.path === '/'}"
-           class="px-4 py-2 rounded-lg font-semibold transition-all text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+           class="nav-link px-4 py-2 rounded-lg font-semibold transition-all hover:bg-blue-50"
+           *ngIf="item.name !== 'Profil'">
           {{ item.name }}
         </a>
+
+        <!-- PROFIL DROPDOWN (desktop, klik) -->
+        <div class="relative">
+          <button
+            type="button"
+            class="nav-link px-4 py-2 rounded-lg font-semibold transition-all inline-flex items-center gap-1 hover:bg-blue-50"
+            (click)="toggleProfil()"
+          >
+            <span>PROFIL</span>
+            <span class="text-xs transition-transform duration-200" [class.rotate-180]="profilOpen">v</span>
+          </button>
+
+          <!-- Menu dropdown: kotak putih besar di bawah PROFIL -->
+          <div
+            *ngIf="profilOpen"
+            class="absolute left-1/2 -translate-x-1/2 mt-3
+                   w-[360px] rounded-3xl bg-white shadow-2xl
+                   ring-1 ring-black/5 transition duration-150"
+          >
+            <ul class="py-4 space-y-2 text-base text-gray-700">
+              <li>
+                <a routerLink="/profil" class="block px-6 py-1 hover:bg-gray-100" (click)="closeProfil()">
+                  Profil
+                </a>
+              </li>
+              <li>
+                <a routerLink="/tentang-kampus" class="block px-6 py-1 hover:bg-gray-100" (click)="closeProfil()">
+                  Tentang Kampus
+                </a>
+              </li>
+              <li>
+                <a routerLink="/visi-misi" class="block px-6 py-1 hover:bg-gray-100" (click)="closeProfil()">
+                  Visi &amp; Misi
+                </a>
+              </li>
+              <li>
+                <a routerLink="/struktur-organisasi" class="block px-6 py-1 hover:bg-gray-100" (click)="closeProfil()">
+                  Struktur Organisasi
+                </a>
+              </li>
+              <li>
+                <a routerLink="/fasilitas" class="block px-6 py-1 hover:bg-gray-100" (click)="closeProfil()">
+                  Fasilitas
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
         <a routerLink="/portal"
            class="ml-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all">
           Portal
@@ -61,14 +112,46 @@
 
     <!-- Mobile Menu -->
     <div *ngIf="mobileMenuOpen" class="lg:hidden py-4 border-t">
+      <!-- item lain kecuali PROFIL -->
       <a *ngFor="let item of navigation"
          [routerLink]="item.path"
          (click)="closeMobileMenu()"
          routerLinkActive="text-blue-600 bg-blue-50"
          [routerLinkActiveOptions]="{exact: item.path === '/'}"
-         class="block w-full text-left px-4 py-3 font-semibold text-gray-700 hover:bg-gray-50">
+         class="block w-full text-left px-4 py-3 font-semibold text-gray-700 hover:bg-gray-50"
+         *ngIf="item.name !== 'Profil'">
         {{ item.name }}
       </a>
+
+      <!-- PROFIL DROPDOWN (mobile, accordion) -->
+      <div class="px-4">
+        <button
+          type="button"
+          class="w-full flex items-center justify-between py-3 font-semibold text-gray-700"
+          (click)="mobileProfilOpen = !mobileProfilOpen"
+        >
+          <span>PROFIL</span>
+          <span class="text-xs">{{ mobileProfilOpen ? '˄' : '˅' }}</span>
+        </button>
+        <div *ngIf="mobileProfilOpen" class="pl-3 pb-2 space-y-1 text-sm text-gray-700">
+          <a routerLink="/profil" (click)="closeMobileMenu()" class="block py-1">
+            Profil
+          </a>
+          <a routerLink="/tentang-kampus" (click)="closeMobileMenu()" class="block py-1">
+            Tentang Kampus
+          </a>
+          <a routerLink="/visi-misi" (click)="closeMobileMenu()" class="block py-1">
+            Visi &amp; Misi
+          </a>
+          <a routerLink="/struktur-organisasi" (click)="closeMobileMenu()" class="block py-1">
+            Struktur Organisasi
+          </a>
+          <a routerLink="/fasilitas" (click)="closeMobileMenu()" class="block py-1">
+            Fasilitas
+          </a>
+        </div>
+      </div>
+
       <a routerLink="/portal"
          (click)="closeMobileMenu()"
          class="block w-full text-left px-4 py-3 font-semibold text-white bg-blue-600 mt-2 rounded-lg">
