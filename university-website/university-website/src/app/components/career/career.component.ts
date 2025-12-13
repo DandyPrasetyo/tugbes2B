@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -10,6 +10,9 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./career.component.css'],
 })
 export class CareerComponent implements OnInit {
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
   /* ====================================== */
   /*               HERO SLIDER              */
   /* ====================================== */
@@ -37,7 +40,12 @@ export class CareerComponent implements OnInit {
   private slideInterval: any;
 
   ngOnInit(): void {
-    this.startAutoSlide();
+
+    // 🔥 FIX SSR: hanya jalankan interval di browser, bukan di server
+    if (isPlatformBrowser(this.platformId)) {
+      this.startAutoSlide();
+    }
+
     this.displayedItems = this.lowonganList;
     this.moreLink = '/career/loker';
   }
@@ -68,7 +76,7 @@ export class CareerComponent implements OnInit {
   lowonganList = [
     {
       img: 'assets/img/loker1.jpg',
-      logo: 'assets/img/mitra/astrawhite.png', // <-- Tambah logo
+      logo: 'assets/img/mitra/astrawhite.png',
       title: 'PT Astra Otoparts',
       desc: 'Mechanical Engineering, IT, Production Staff',
       post: '12 Nov 2025',

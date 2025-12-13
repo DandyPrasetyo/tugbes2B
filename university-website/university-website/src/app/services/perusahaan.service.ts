@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -48,5 +48,13 @@ export class PerusahaanService {
   // HAPUS PERUSAHAAN
   delete(id: number): Observable<ApiResponse<null>> {
     return this.http.delete<ApiResponse<null>>(`${this.baseUrl}/${id}`);
+  }
+
+  // UPLOAD LOGO PERUSAHAAN
+  uploadLogo(id: number, formData: FormData): Observable<ApiResponse<Perusahaan>> {
+    return this.http.post<ApiResponse<Perusahaan>>(
+      `${this.baseUrl}/${id}/upload-logo`,
+      formData
+    );
   }
 }

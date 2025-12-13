@@ -16,6 +16,75 @@
       />
     </div>
 
+    <!-- UPLOAD LOGO PERUSAHAAN -->
+    <div>
+      <label class="form-label">Upload Logo Perusahaan</label>
+
+      <!-- Input file -->
+      <div class="flex items-center gap-3">
+        <label class="px-4 py-2 rounded-lg bg-blue-700 text-white text-sm cursor-pointer hover:bg-blue-800">
+          Pilih File
+          <input
+            type="file"
+            class="hidden"
+            (change)="onLogoSelected($event)"
+            accept="image/png,image/jpeg,image/jpg,image/svg+xml,image/gif,image/webp"
+          />
+        </label>
+
+        <span class="text-sm text-gray-600 truncate max-w-xs">
+          {{ selectedLogoName || 'Belum ada file dipilih' }}
+        </span>
+      </div>
+
+      <!-- Keterangan format/ukuran -->
+      <p class="mt-1 text-xs text-gray-500">
+        PNG, JPG, JPEG, SVG, GIF, WebP &middot; Maksimal 2MB
+      </p>
+
+      <!-- Error upload logo -->
+      <p *ngIf="logoError" class="mt-1 text-sm text-red-600">
+        {{ logoError }}
+      </p>
+
+      <!-- Preview logo -->
+      <div class="mt-3 flex items-center gap-4">
+        <div
+          class="w-24 h-24 rounded-lg border border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden"
+        >
+          <img
+            *ngIf="logoPreviewUrl; else noLogo"
+            [src]="logoPreviewUrl"
+            alt="Logo perusahaan"
+            class="w-full h-full object-contain"
+          />
+          <ng-template #noLogo>
+            <span class="text-xs text-gray-400 text-center px-2">
+              {{ isEdit ? 'Belum ada logo' : 'Preview logo' }}
+            </span>
+          </ng-template>
+        </div>
+
+        <!-- Aksi ganti / hapus (saat edit) -->
+        <div class="flex flex-col gap-1 text-xs text-blue-700" *ngIf="isEdit">
+          <button
+            type="button"
+            class="text-left hover:underline"
+            (click)="triggerLogoInput()"
+          >
+            Ganti logo
+          </button>
+          <button
+            type="button"
+            class="text-left text-red-600 hover:underline"
+            (click)="removeLogo()"
+          >
+            Hapus logo
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- ALAMAT -->
     <div>
       <label class="form-label">Alamat</label>

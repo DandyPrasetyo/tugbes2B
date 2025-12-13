@@ -40,19 +40,20 @@
             <span *ngIf="!p.website">-</span>
           </td>
 
-          <!-- Logo -->
-          <td>
-            <ng-container *ngIf="p.logo; else noLogo">
-              <img
-                [src]="p.logo"
-                alt="Logo {{ p.nama_perusahaan }}"
-                class="logo-img"
-              />
-            </ng-container>
-            <ng-template #noLogo>
-              <span class="text-gray-400 text-xs">Tidak ada logo</span>
-            </ng-template>
-          </td>
+         <!-- Logo -->
+<td>
+  <ng-container *ngIf="p.logo; else noLogo">
+    <img
+      [src]="'http://localhost:8080/uploads/logo-perusahaan/' + p.logo"
+      [alt]="'Logo ' + p.nama_perusahaan"
+      class="logo-img"
+    />
+  </ng-container>
+  <ng-template #noLogo>
+    <span class="text-gray-400 text-xs">Tidak ada logo</span>
+  </ng-template>
+</td>
+
 
           <td class="text-center aksi">
             <!-- Edit -->

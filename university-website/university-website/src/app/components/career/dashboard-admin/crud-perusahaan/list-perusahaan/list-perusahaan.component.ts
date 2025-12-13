@@ -16,6 +16,9 @@ export class ListPerusahaanComponent implements OnInit {
   perusahaanList: Perusahaan[] = [];
   loading = true;
 
+  // base URL untuk logo yang di‑serve backend
+  logoBaseUrl = 'http://localhost:8080/uploads/logo-perusahaan/';
+
   constructor(private perusahaanService: PerusahaanService) {}
 
   ngOnInit(): void {

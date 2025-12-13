@@ -1,16 +1,26 @@
 package com.psdku.lmj.university_backend.controller;
 
-import com.psdku.lmj.university_backend.dto.ApiResponse;
-import com.psdku.lmj.university_backend.model.Perusahaan;
-import com.psdku.lmj.university_backend.service.PerusahaanService;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.Optional;
+import com.psdku.lmj.university_backend.dto.ApiResponse;
+import com.psdku.lmj.university_backend.model.Perusahaan;
+import com.psdku.lmj.university_backend.service.PerusahaanService;
 
 @RestController
 @RequestMapping("/api/perusahaan")
@@ -93,6 +103,34 @@ public class PerusahaanController {
     public ResponseEntity<ApiResponse> uploadLogo(
             @PathVariable Long id,
             @RequestParam("file") MultipartFile file) {
+
+        // Validasi dasar di controller: wajib ada file
+        if (file == null || file.isEmpty()) {
+            return ResponseEntity.badRequest()
+                    .body(new ApiResponse(false, "File logo wajib diupload", null));
+        }
+
+        // Batas ukuran 2MB
+        long maxSize = 2 * 1024 * 1024; // 2MB
+        if (file.getSize() > maxSize) {
+            return ResponseEntity.badRequest()
+                    .body(new ApiResponse(false, "Ukuran logo maksimal 2MB", null));
+        }
+
+        // Validasi MIME type image yang diizinkan
+        String contentType = file.getContentType();
+        if (contentType == null ||
+                !(contentType.equals("image/png") ||
+                  contentType.equals("image/jpeg") ||
+                  contentType.equals("image/jpg") ||
+                  contentType.equals("image/svg+xml") ||
+                  contentType.equals("image/gif") ||
+                  contentType.equals("image/webp"))) {
+            return ResponseEntity.badRequest()
+                    .body(new ApiResponse(false,
+                            "Format logo tidak didukung. Gunakan PNG, JPG, JPEG, SVG, GIF, atau WebP",
+                            null));
+        }
 
         try {
             Perusahaan perusahaan = perusahaanService.uploadLogo(id, file);
