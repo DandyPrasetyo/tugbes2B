@@ -4,7 +4,7 @@
 <section
   class="relative bg-[#24395e] text-white h-[600px] flex items-center overflow-hidden"
 >
-  <!-- Background -->
+  <!-- Background Image -->
   <div class="absolute inset-0">
     <img
       [src]="currentImage"
@@ -18,7 +18,7 @@
     class="absolute inset-0 bg-[#24455E] bg-opacity-45 z-10 pointer-events-none"
   ></div>
 
-  <!-- Konten -->
+  <!-- Content -->
   <div
     *ngIf="slideTexts.length"
     class="relative max-w-4xl mx-auto px-4 py-16 text-left z-40 whitespace-pre-line transition-opacity duration-300"
@@ -38,7 +38,6 @@
       {{ slideTexts[currentIndex].sub }}
     </p>
 
-    <!-- 🔥 BUTTON DINAMIS -->
     <a
       [routerLink]="slideTexts[currentIndex].route"
       class="bg-yellow-300 text-blue-900 font-bold py-3 px-8 rounded-lg text-lg inline-block"
@@ -47,7 +46,7 @@
     </a>
   </div>
 
-  <!-- Prev & Next -->
+  <!-- Prev / Next -->
   <div
     class="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-6 z-30 pointer-events-none"
   >
@@ -81,7 +80,7 @@
 </section>
 
 <!-- ============================ -->
-<!-- FASILITAS KAMPUS (SLIDER)   -->
+<!-- FASILITAS KAMPUS -->
 <!-- ============================ -->
 <section class="py-12">
   <h2 class="text-center text-2xl font-bold mb-6">FASILITAS KAMPUS</h2>
@@ -105,7 +104,9 @@
         class="min-w-[220px] snap-center bg-white rounded-lg shadow p-3 text-center"
       >
         <img [src]="f.img" class="h-32 w-full object-cover rounded" />
-        <p class="mt-2 font-semibold">{{ f.nama }}</p>
+        <p class="mt-2 font-semibold">
+          {{ f.nama }}
+        </p>
       </div>
     </div>
 
@@ -118,9 +119,7 @@
     </button>
   </div>
 
-  <!-- ================================ -->
-  <!-- GRID ICON FASILITAS TAMBAHAN     -->
-  <!-- ================================ -->
+  <!-- Grid Icon -->
   <div
     class="grid grid-cols-2 md:grid-cols-5 gap-6 mt-10 px-6 max-w-[900px] mx-auto"
   >
@@ -128,14 +127,18 @@
       *ngFor="let f of fasilitasList"
       class="flex flex-col items-center bg-white shadow rounded-lg p-4"
     >
-      <span class="text-3xl">{{ f.icon }}</span>
-      <p class="font-semibold mt-2">{{ f.title }}</p>
+      <span class="text-3xl">
+        {{ f.icon }}
+      </span>
+      <p class="font-semibold mt-2">
+        {{ f.title }}
+      </p>
     </div>
   </div>
 </section>
 
 <!-- ============================ -->
-<!-- BERITA UTAMA                 -->
+<!-- BERITA UTAMA -->
 <!-- ============================ -->
 <section class="py-12 mt-10">
   <h2 class="text-left text-2xl font-bold mb-3 max-w-[1200px] mx-auto px-6">
@@ -144,17 +147,16 @@
 
   <div class="border-t-2 border-black mb-8 w-3/4 mx-auto"></div>
 
-  <!-- GRID 3 KOLOM SAMA BESAR -->
   <div
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 max-w-[1200px] mx-auto"
   >
     <a
       *ngFor="let b of beritaList"
       [routerLink]="['/berita', b.id]"
-      class="block w-full cursor-pointer"
+      class="block w-full"
     >
       <div
-        class="bg-white shadow rounded-lg p-4 border-2 border-black h-full flex flex-col hover:shadow-lg transition"
+        class="bg-white border-2 border-black rounded-lg p-4 h-full flex flex-col hover:shadow-lg hover:-translate-y-1 transition"
       >
         <img
           [src]="b.img"
@@ -167,40 +169,28 @@
       </div>
     </a>
   </div>
-</section>
-<!-- ========================= -->
-<!-- MODAL POPUP BERITA        -->
-<!-- ========================= -->
-<div
-  *ngIf="selectedBerita as berita"
-  class="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
->
-  <div class="bg-white p-6 rounded max-w-xl w-full shadow-lg">
-    <img [src]="berita.img" class="rounded mb-4 w-full" />
 
-    <h3 class="text-xl font-bold mb-3">
-      {{ berita.judul }}
-    </h3>
-
-    <button
-      class="bg-red-600 text-white px-4 py-2 rounded"
-      (click)="selectedBerita = null"
+  <!-- Button -->
+  <div class="text-center mt-10">
+    <a
+      routerLink="/berita"
+      class="inline-block px-8 py-3 bg-[#24455e] text-white font-semibold rounded-lg hover:opacity-90 transition"
     >
-      Tutup
-    </button>
+      Lihat Semua Berita
+    </a>
   </div>
-</div>
+</section>
 
 <!-- ============================ -->
-<!-- POLINEMA DALAM ANGKA         -->
+<!-- POLINEMA DALAM ANGKA -->
 <!-- ============================ -->
 <section class="py-12 mt-6">
   <h2 class="text-center text-2xl font-bold mb-8">POLINEMA DALAM ANGKA</h2>
 
   <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 px-6 max-w-[900px] mx-auto">
     <div
-      class="shadow rounded-lg p-6 text-center border-2"
       *ngFor="let a of angkaList"
+      class="shadow rounded-lg p-6 text-center border-2"
       style="background-color: #87c2fd; border-color: #5aa4e8"
     >
       <h3 class="text-4xl font-bold text-[#24455E]">

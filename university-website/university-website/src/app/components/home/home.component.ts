@@ -77,15 +77,11 @@ dan siap menghadapi tantangan dunia kerja.`,
 
   changeSlide(i: number): void {
     if (i === this.currentIndex) return;
-
-    this.fadeAndChange(() => {
-      this.currentIndex = i;
-    });
+    this.fadeAndChange(() => (this.currentIndex = i));
   }
 
   private fadeAndChange(action: () => void): void {
     this.isFading = true;
-
     setTimeout(() => {
       action();
       this.currentImage = this.images[this.currentIndex];
@@ -158,12 +154,6 @@ dan siap menghadapi tantangan dunia kerja.`,
       judul: 'Closing Ceremony NTVSC 2025',
     },
   ];
-
-  selectedBerita: any = null;
-
-  goToBerita(id: number): void {
-    this.router.navigate(['/berita', id]);
-  }
 
   /* ==========================
         ANGKA

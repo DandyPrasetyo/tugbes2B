@@ -26,27 +26,36 @@
   background-color: #24455e;
 }
 
-/* Dropdown arrow */
-.dropdown-arrow {
+/* Parent arrow (menu dropdown) */
+.parent-arrow {
   font-size: 12px;
-  transition: transform 0.25s ease;
+  opacity: 0.8;
 }
 
-/* Rotate arrow on hover */
-.group:hover .dropdown-arrow {
-  transform: rotate(180deg);
-}
-
-/* Dropdown custom shape */
+/* Dropdown shape */
 .dropdown-menu {
-  border-radius: 0 20px 20px 20px; /* TL TR BR BL */
+  border-radius: 0 20px 20px 20px;
 }
 
-/* Smooth item hover */
-.dropdown-menu a {
+/* Dropdown item */
+.dropdown-item {
   transition: all 0.2s ease;
 }
 
+/* Submenu arrow */
+.submenu-arrow {
+  font-size: 14px;
+  opacity: 0.7;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Arrow move on hover */
+.dropdown-item:hover .submenu-arrow {
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+/* Smooth radius */
 .dropdown-menu a:first-child {
   border-top-right-radius: 16px;
 }

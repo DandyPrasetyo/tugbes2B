@@ -34,7 +34,7 @@
       <!-- NAVIGATION -->
       <nav class="flex items-center gap-6">
         <ng-container *ngFor="let item of navigation">
-          <!-- MENU TANPA DROPDOWN -->
+          <!-- MENU BIASA (TANPA PANAH) -->
           <a
             *ngIf="item.path"
             [routerLink]="item.path"
@@ -43,24 +43,26 @@
             {{ item.name }}
           </a>
 
-          <!-- MENU DENGAN DROPDOWN -->
+          <!-- MENU DROPDOWN (ADA PANAH) -->
           <div *ngIf="item.children" class="relative group">
             <button
               class="nav-item px-4 py-2 rounded-md text-[14px] tracking-wide flex items-center gap-2"
             >
               {{ item.name }}
-              <span class="dropdown-arrow">▾</span>
+              <span class="parent-arrow">▾</span>
             </button>
 
+            <!-- DROPDOWN -->
             <div
               class="dropdown-menu absolute left-0 top-full mt-2 w-60 bg-white border shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
             >
               <a
                 *ngFor="let child of item.children"
                 [routerLink]="child.path"
-                class="block px-5 py-3 text-sm text-gray-700 hover:bg-[#24455e] hover:text-white"
+                class="dropdown-item flex items-center justify-between px-5 py-3 text-sm text-gray-700 hover:bg-[#24455e] hover:text-white"
               >
                 {{ child.name }}
+                <span class="submenu-arrow">›</span>
               </a>
             </div>
           </div>

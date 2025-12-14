@@ -11,10 +11,7 @@ import { RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
   navigation = [
-    {
-      name: 'BERANDA',
-      path: '/',
-    },
+    { name: 'BERANDA', path: '/' },
     {
       name: 'PROFIL',
       children: [
@@ -51,13 +48,7 @@ export class HeaderComponent {
         { name: 'Hasil Seleksi', path: '/pmb/hasil' },
       ],
     },
-    {
-      name: 'CARRER',
-      path: '/career',
-    },
-    {
-      name: 'CONTACT',
-      path: '/contact',
-    },
+    { name: 'CARRER', path: '/career' },
+    { name: 'CONTACT', path: '/contact' },
   ];
 }
