@@ -7,10 +7,19 @@
 }
 
 .fasilitas-slider::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  display: none; /* Chrome / Safari */
 }
 
+/* ============================= */
+/* HERO SLIDER (SMOOTH) */
+/* ============================= */
 
+/* membuat transisi gambar halus */
+.hero-slider img,
+section img {
+  transition: opacity 0.3s ease-in-out;
+  will-change: opacity;
+}
 
 /* ============================= */
 /* FASILITAS KAMPUS SLIDER */
@@ -19,17 +28,16 @@
 #fasilitasSlider {
   display: flex;
   align-items: center;
+  scroll-behavior: smooth;
 }
 
 #fasilitasSlider .snap-center {
-  transition: transform 0.2s ease;
+  transition: transform 0.25s ease;
 }
 
 #fasilitasSlider .snap-center:hover {
   transform: scale(1.05);
 }
-
-
 
 /* ============================= */
 /* BERITA */
@@ -47,11 +55,10 @@
   width: 280px;
   background: #ffffff;
   border-radius: 10px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  text-align: center;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .news-card img {
@@ -63,9 +70,8 @@
 
 .news-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
-
-
 
 /* ============================= */
 /* ANGKA / STATISTIK */
@@ -84,8 +90,8 @@
   background: #ffffff;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  transition: 0.3s;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .angka-box h3 {
@@ -101,9 +107,8 @@
 
 .angka-box:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
 }
-
-
 
 /* ============================= */
 /* RESPONSIVE */
@@ -112,6 +117,10 @@
 @media (max-width: 900px) {
   .news-container {
     gap: 15px;
+  }
+
+  .angka-container {
+    gap: 25px;
   }
 }
 
