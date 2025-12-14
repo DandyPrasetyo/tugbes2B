@@ -1,7 +1,15 @@
 .job-card {
-  @apply bg-white shadow-md rounded-xl p-6 border transition hover:shadow-xl;
-  @apply flex flex-col justify-between;
-  min-height: 180px;
+  @apply bg-white shadow-md rounded-xl border transition hover:opacity-80;
+  @apply p-3;
+  max-width: 480px;
+  width: 100%;
+}
+
+/* lebar 3 kolom di layar md ke atas, tetap rapat tanpa kolom kosong */
+@media (min-width: 768px) {
+  .job-card {
+    flex: 0 0 calc(33.333% - 0.5rem);
+  }
 }
 
 .btn-detail {
@@ -9,9 +17,15 @@
   @apply text-sm font-medium;
 }
 
+/* TAMBAHAN: bungkus tombol agar rata kanan bawah */
+.job-card .btn-detail {
+  align-self: flex-end;    /* tombol nempel ke kanan */
+  margin-top: 1rem;        /* jarak dari konten atas */
+}
+
 /* Responsif: sedikit rapat di mobile */
 @media (max-width: 768px) {
   .job-card {
-    @apply p-4;
+    @apply p-3;            /* lebih kecil lagi di mobile */
   }
 }

@@ -42,10 +42,8 @@ export class LowonganService {
     );
 
     if (file) {
-  formData.append('flayer', file); // tadinya 'poster'
-}
-
-
+      formData.append('flayer', file); // tadinya 'poster'
+    }
 
     return formData;
   }
@@ -70,7 +68,11 @@ export class LowonganService {
   //   → sesuaikan dengan controller:
   //     @PutMapping(path = "/{id}", consumes = MULTIPART_FORM_DATA)
   // ===============================
-  updateWithPoster(id: number, lowongan: any, file: File): Observable<any> {
+  updateWithPoster(
+    id: number,
+    lowongan: any,
+    file: File
+  ): Observable<any> {
     const formData = this.buildFormData(lowongan, file);
     // pakai endpoint yang sama (/lowongan/{id}), hanya beda Content-Type
     return this.http.put(`${this.apiUrl}/lowongan/${id}`, formData);

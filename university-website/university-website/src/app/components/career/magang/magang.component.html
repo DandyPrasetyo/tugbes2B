@@ -39,23 +39,22 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div
       *ngFor="let item of filteredMagang"
-      class="magang-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col"
+      class="magang-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col mx-auto"
     >
       <!-- POSTER MAGANG -->
-     <div
-  class="w-full bg-gray-100 flex items-center justify-center magang-image-wrapper"
-  *ngIf="item.image"
->
-  <img
-    [src]="item.image"
-    alt="{{ item.posisi }}"
-    class="w-full h-auto object-contain"
-  />
-</div>
-
+      <div
+        class="w-full bg-gray-100 flex items-center justify-center magang-image-wrapper"
+        *ngIf="item.image"
+      >
+        <img
+          [src]="item.image"
+          [alt]="item.posisi"
+          class="magang-card-image"
+        />
+      </div>
 
       <!-- ISI CARD -->
-      <div class="p-5 flex flex-col flex-1">
+      <div class="p-4 flex flex-col flex-1">
         <!-- Judul / Nama Perusahaan -->
         <h2 class="text-xl font-bold text-blue-800">
           {{ item.judul || item.posisi }}

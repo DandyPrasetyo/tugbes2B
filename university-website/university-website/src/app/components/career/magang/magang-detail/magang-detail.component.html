@@ -1,0 +1,82 @@
+<section class="detail-container" *ngIf="!loading && !errorMessage">
+  <!-- HEADER -->
+  <header class="detail-header">
+    <h1 class="detail-title">{{ judulTampil }}</h1>
+    <p class="detail-company">
+      {{ magang?.perusahaan?.nama_perusahaan || 'Program Magang' }}
+    </p>
+    <p class="detail-meta">
+      📍 {{ magang?.lokasi || magang?.perusahaan?.alamat || '-' }}
+      • 💼 {{ magang?.tipePekerjaan || 'Magang' }}
+      • ⏳ {{ magang?.batasTanggal || '-' }}
+    </p>
+  </header>
+
+  <!-- POSTER / FLYER JIKA ADA -->
+  <div class="detail-poster" *ngIf="magang?.flayer">
+    <img
+      [src]="'http://localhost:8080/' + magang.flayer"
+      [alt]="judulTampil"
+    />
+  </div>
+
+  <!-- DESKRIPSI -->
+  <section class="detail-section" *ngIf="magang?.deskripsi">
+    <h2>Deskripsi Program Magang</h2>
+    <p>{{ magang.deskripsi }}</p>
+  </section>
+
+  <!-- TATA CARA PENDAFTARAN -->
+  <section class="detail-section">
+    <h2>{{ tataCaraPendaftaranTitle }}</h2>
+    <ul>
+      <li>1. Baca deskripsi dan persyaratan magang dengan teliti.</li>
+      <li>2. Siapkan CV, transkrip, dan dokumen pendukung lain.</li>
+      <li>3. Daftar melalui link pendaftaran resmi di bawah.</li>
+    </ul>
+  </section>
+
+  <!-- INFORMASI PENDAFTARAN -->
+  <section class="detail-section">
+    <h2>{{ infoPendaftaranTitle }}</h2>
+    <p>
+      📅 Periode magang:
+      <strong>{{ magang?.periodePendaftaran || magang?.batasTanggal || '-' }}</strong>
+    </p>
+    <p>
+      🔗 Link pendaftaran:
+      <a
+        *ngIf="magang?.linkPendaftaran; else noLink"
+        [href]="magang.linkPendaftaran"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ magang.linkPendaftaran }}
+      </a>
+      <ng-template #noLink>Belum ada link pendaftaran yang diinput.</ng-template>
+    </p>
+  </section>
+
+  <!-- KONTAK -->
+  <section class="detail-section">
+    <h2>{{ kontakTitle }}</h2>
+    <p *ngIf="magang?.kontakEmail">
+      📧 Email: <strong>{{ magang.kontakEmail }}</strong>
+    </p>
+    <p *ngIf="magang?.kontakTelepon">
+      📱 Telepon/WA: <strong>{{ magang.kontakTelepon }}</strong>
+    </p>
+    <p *ngIf="!magang?.kontakEmail && !magang?.kontakTelepon">
+      Kontak belum diisi. Silakan hubungi Career Center Polinema Lumajang.
+    </p>
+  </section>
+</section>
+
+<!-- STATE LOADING / ERROR -->
+<section class="detail-state" *ngIf="loading">
+  Memuat detail program magang...
+</section>
+
+<section class="detail-state error" *ngIf="!loading && errorMessage">
+  {{ errorMessage }}
+</section>

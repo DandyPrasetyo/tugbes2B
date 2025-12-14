@@ -14,6 +14,12 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
   overflow: hidden; /* PENTING: agar poster full width */
   transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+
+  /* tambahan untuk mengecilkan card */
+  max-width: 420px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .magang-card:hover {
@@ -23,9 +29,6 @@
 }
 
 /* ============================= */
-/* POSTER MAGANG (FULL WIDTH) */
-/* ============================= */
-/* ============================= */
 /* POSTER MAGANG FULL (TIDAK ZOOM) */
 /* ============================= */
 .magang-card .magang-image-wrapper {
@@ -34,16 +37,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px;
+  padding: 0;              /* hilangkan padding biar rapi */
+  height: 220px;           /* tinggi area preview gambar */
+  overflow: hidden;        /* sembunyikan bagian bawah */
 }
 
 .magang-card .magang-image-wrapper img {
   width: 100%;
-  height: auto;          /* IKUT RASIO ASLI */
-  max-height: 520px;     /* AMAN UNTUK POSTER PANJANG */
-  object-fit: contain;  /* INI KUNCINYA */
+  height: 100%;            /* isi penuh area wrapper */
+  object-fit: cover;       /* crop, jadi kelihatan seperti zoom */
+  object-position: top;    /* fokus di bagian atas poster */
 }
-
 
 /* ============================= */
 /* ISI CARD */

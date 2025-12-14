@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LowonganService } from '../../../services/lowongan.service';
 import { Lowongan } from '../../../models/lowongan.model';
+import { Router } from '@angular/router'; // <--- TAMBAHAN
 
 @Component({
   selector: 'app-loker',
@@ -63,23 +64,27 @@ export class LowonganComponent implements OnInit {
     },
   ];
 
-  constructor(private lowonganService: LowonganService) {}
+  constructor(
+    private lowonganService: LowonganService,
+    private router: Router // <--- TAMBAHAN
+  ) {}
 
   ngOnInit(): void {
     this.lowonganService.getAll().subscribe({
-      next: (data: Lowongan[]) => {                    // <-- pakai tipe Lowongan
+      next: (data: Lowongan[]) => {
+        // <-- pakai tipe Lowongan
         if (data && data.length) {
           // hanya lowongan NON-MAGANG yang tampil di menu Loker
           this.lowongan = data
             .filter((job) => job.tipePekerjaan !== 'Magang')
             .map((job) => ({
               // mapping ke struktur yang sudah dipakai di template & filter
-              judul: job.judulLowongan,               // <-- judul lowongan (kolom Judul Lowongan)
-              posisi: job.posisi,                     // <-- kolom Posisi
+              judul: job.judulLowongan, // <-- judul lowongan (kolom Judul Lowongan)
+              posisi: job.posisi, // <-- kolom Posisi
               judulLowongan: job.judulLowongan,
-              perusahaan: job.perusahaanId,           // ganti nanti kalau sudah ambil nama perusahaan
-              lokasi: job.lokasi,                     // <-- ambil lokasi dari backend
-              deskripsi: job.deskripsi,               // <-- tambahan: deskripsi dari backend
+              perusahaan: job.perusahaanId, // ganti nanti kalau sudah ambil nama perusahaan
+              lokasi: job.lokasi, // <-- ambil lokasi dari backend
+              deskripsi: job.deskripsi, // <-- tambahan: deskripsi dari backend
               tipe:
                 job.tipePekerjaan === 'Full_time'
                   ? 'Fulltime'
@@ -89,7 +94,8 @@ export class LowonganComponent implements OnInit {
               posted: job.createdAt,
               deadline: job.batasTanggal,
               status: job.status === 'Aktif' ? 'Tersedia' : 'Ditutup',
-              flayer: job.flayer,                     // supaya bisa dipakai di HTML
+              flayer: job.flayer, // supaya bisa dipakai di HTML
+              lowonganId: (job as any).lowonganId ?? (job as any).lowongan_id, // <--- TAMBAHAN kecil untuk id kalau ada
             }));
         }
       },
@@ -111,5 +117,19 @@ export class LowonganComponent implements OnInit {
         (this.filterStatus ? job.status === this.filterStatus : true)
       );
     });
+  }
+
+  // <--- TAMBAHAN: klik "Lihat Detail" di kartu
+  lihatDetail(job: any) {
+    if (job.lowonganId || job.lowongan_id || job.id) {
+      const id = job.lowonganId || job.lowongan_id || job.id;
+      // sesuaikan dengan route: /career/loker/:id
+      this.router.navigate(['/career/loker', id]);
+    } else {
+      // kalau suatu saat mau pakai state ke halaman lain, route fallback bisa disesuaikan
+      this.router.navigate(['/career/loker'], {
+        state: { data: job },
+      });
+    }
   }
 }

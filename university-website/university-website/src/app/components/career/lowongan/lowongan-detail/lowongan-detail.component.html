@@ -1,0 +1,82 @@
+<section class="detail-container" *ngIf="!loading && !errorMessage">
+  <!-- HEADER: judul + perusahaan + lokasi -->
+  <header class="detail-header">
+    <h1 class="detail-title">{{ judulTampil }}</h1>
+    <p class="detail-company">
+      {{ lowongan?.perusahaan?.namaPerusahaan || lowongan?.perusahaanNama || '-' }}
+    </p>
+    <p class="detail-meta">
+      📍 {{ lowongan?.lokasi || '-' }}
+      • 💼 {{ lowongan?.tipePekerjaan || lowongan?.tipe || '-' }}
+      • ⏳ {{ lowongan?.batasTanggal || '-' }}
+    </p>
+  </header>
+
+  <!-- POSTER / GAMBAR JIKA ADA -->
+  <div class="detail-poster" *ngIf="lowongan?.flayer">
+    <img
+      [src]="'http://localhost:8080/' + lowongan.flayer"
+      [alt]="judulTampil"
+    />
+  </div>
+
+  <!-- DESKRIPSI UTAMA -->
+  <section class="detail-section" *ngIf="lowongan?.deskripsi">
+    <h2>Deskripsi Lowongan</h2>
+    <p>{{ lowongan.deskripsi }}</p>
+  </section>
+
+  <!-- TATA CARA PENDAFTARAN -->
+  <section class="detail-section">
+    <h2>{{ tataCaraPendaftaranTitle }}</h2>
+    <ul>
+      <li>1. Baca persyaratan dan deskripsi lowongan dengan teliti.</li>
+      <li>2. Siapkan CV, portofolio, dan dokumen pendukung lain.</li>
+      <li>3. Daftar melalui link pendaftaran resmi yang tertera di bawah.</li>
+    </ul>
+  </section>
+
+  <!-- INFORMASI PENDAFTARAN -->
+  <section class="detail-section">
+    <h2>{{ infoPendaftaranTitle }}</h2>
+    <p>
+      📅 Periode pendaftaran:
+      <strong>{{ lowongan?.periodePendaftaran || lowongan?.batasTanggal || '-' }}</strong>
+    </p>
+    <p>
+      🔗 Link pendaftaran:
+      <a
+        *ngIf="lowongan?.linkPendaftaran; else noLink"
+        [href]="lowongan.linkPendaftaran"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ lowongan.linkPendaftaran }}
+      </a>
+      <ng-template #noLink>Belum ada link pendaftaran yang diinput.</ng-template>
+    </p>
+  </section>
+
+  <!-- KONTAK -->
+  <section class="detail-section">
+    <h2>{{ kontakTitle }}</h2>
+    <p *ngIf="lowongan?.kontakEmail">
+      📧 Email: <strong>{{ lowongan.kontakEmail }}</strong>
+    </p>
+    <p *ngIf="lowongan?.kontakTelepon">
+      📱 Telepon/WA: <strong>{{ lowongan.kontakTelepon }}</strong>
+    </p>
+    <p *ngIf="!lowongan?.kontakEmail && !lowongan?.kontakTelepon">
+      Kontak belum diisi. Silakan hubungi Career Center Polinema Lumajang.
+    </p>
+  </section>
+</section>
+
+<!-- STATE LOADING / ERROR -->
+<section class="detail-state" *ngIf="loading">
+  Memuat detail lowongan...
+</section>
+
+<section class="detail-state error" *ngIf="!loading && errorMessage">
+  {{ errorMessage }}
+</section>

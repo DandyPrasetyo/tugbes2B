@@ -66,20 +66,19 @@ export class MagangComponent implements OnInit {
           this.magang = data
             .filter((job) => job.tipePekerjaan === 'Magang')
             .map((job: any) => ({
-              // pakai any supaya boleh baca job.id walaupun tidak ada di interface Lowongan
-              id: job.id,                                    // <-- id untuk routing
-              judul: job.judulLowongan,                     // <-- judul lowongan (MNCTV)
-              posisi: job.posisi,                           // <-- kolom Posisi (ACTOR)
-              perusahaan:
-                job.perusahaan?.nama_perusahaan || 'Perusahaan',
+              // gunakan lowonganId sebagai id untuk routing
+              id: job.lowonganId, // <-- id untuk routing
+              judul: job.judulLowongan, // <-- judul lowongan
+              posisi: job.posisi, // <-- kolom Posisi
+              perusahaan: job.perusahaan?.nama_perusahaan || 'Perusahaan',
               // pakai lokasi entity dulu, lalu fallback ke alamat perusahaan
               lokasi:
                 job.lokasi ||
                 job.perusahaan?.alamat ||
                 'Lokasi tidak ada',
-              deskripsi: job.deskripsi,                     // <-- tambahan deskripsi
-              tipe: job.tipePekerjaan,                      // <-- simpan tipe pekerjaan
-              durasi: 'Magang',                             // bisa diganti jika ada field durasi di backend
+              deskripsi: job.deskripsi, // <-- tambahan deskripsi
+              tipe: job.tipePekerjaan, // <-- simpan tipe pekerjaan
+              durasi: 'Magang', // bisa diganti jika ada field durasi di backend
               posted: job.createdAt || '-',
               deadline: job.batasTanggal || '-',
               status: job.status === 'Aktif' ? 'Tersedia' : 'Ditutup',
@@ -87,7 +86,7 @@ export class MagangComponent implements OnInit {
             }));
         }
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Gagal load magang dari API, pakai data dummy', err);
       },
     });
@@ -106,7 +105,7 @@ export class MagangComponent implements OnInit {
   // === TAMBAHAN: klik "Lihat Detail" untuk pindah halaman ===
   lihatDetail(item: any) {
     if (item.id) {
-      this.router.navigate(['/career/magang', item.id]); // [web:22][web:23]
+      this.router.navigate(['/career/magang', item.id]);
     } else {
       console.warn('Item magang belum punya id, detail belum bisa dibuka');
     }
