@@ -24,28 +24,26 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   slideTexts = [
     {
-      // SLIDE 1
-      title: `SELAMAT DATANG DI
-POLITEKNIK NEGERI MALANG PSDKU
-LUMAJANG`,
-      desc: `Bersama kami kamu akan tumbuh menjadi pribadi mandiri,
-terampil, dan siap menghadapi tantangan dunia kerja.`,
+      title: `SELAMAT DATANG DI POLITEKNIK NEGERI MALANG PSDKU LUMAJANG`,
+      desc: `Bersama kami kamu akan tumbuh menjadi pribadi mandiri, terampil,
+dan siap menghadapi tantangan dunia kerja.`,
       sub: 'Ayo gabung dan jadikan mimpimu kenyataan!',
       route: '/pmb',
+      buttonText: 'Daftar Sekarang',
     },
     {
-      // SLIDE 2
       title: 'KAMPUS VOKASI UNGGULAN',
       desc: 'Pendidikan vokasi berbasis praktik\nsesuai kebutuhan dunia industri.',
       sub: 'Belajar langsung, siap kerja.',
       route: '/pmb',
+      buttonText: 'Daftar Sekarang',
     },
     {
-      // SLIDE 3
       title: 'SIAP BERSAING DI DUNIA KERJA',
       desc: 'Kurikulum aplikatif, dosen profesional,\ndan fasilitas modern.',
       sub: 'Bangun masa depanmu bersama kami.',
       route: '/career',
+      buttonText: 'Jelajahi Karir',
     },
   ];
 

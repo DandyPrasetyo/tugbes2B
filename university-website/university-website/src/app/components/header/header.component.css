@@ -1,14 +1,13 @@
-/* Use Inter globally */
 :host {
   font-family: "Inter", sans-serif;
 }
 
-/* Playfair font for campus name */
+/* Playfair font */
 .font-playfair {
   font-family: "Playfair Display", serif;
 }
 
-/* Divider (thicker + taller) */
+/* Divider */
 .divider-vertical {
   width: 3px;
   height: 48px;
@@ -17,28 +16,42 @@
   border-radius: 3px;
 }
 
-/* Desktop nav link */
+/* Desktop nav */
 .nav-item {
   @apply text-gray-700 font-semibold transition-all;
 }
 
-/* Hover effect (Matches Design) */
 .nav-item:hover {
   @apply text-white;
-  background-color: #24455e; /* custom */
-}
-/* Mobile dropdown animation */
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  background-color: #24455e;
 }
 
-.animate-slide-down {
-  animation: slideDown 0.25s ease-out;
+/* Dropdown arrow */
+.dropdown-arrow {
+  font-size: 12px;
+  transition: transform 0.25s ease;
+}
+
+/* Rotate arrow on hover */
+.group:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown custom shape */
+.dropdown-menu {
+  border-radius: 0 20px 20px 20px; /* TL TR BR BL */
+}
+
+/* Smooth item hover */
+.dropdown-menu a {
+  transition: all 0.2s ease;
+}
+
+.dropdown-menu a:first-child {
+  border-top-right-radius: 16px;
+}
+
+.dropdown-menu a:last-child {
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
 }
