@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';   // <-- DITAMBAH ROUTER
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,104 +9,160 @@ import { RouterModule, Router } from '@angular/router';   // <-- DITAMBAH ROUTER
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
-
-  constructor(private router: Router) {}  // <-- DITAMBAHKAN
+export class HomeComponent implements OnInit, OnDestroy {
+  constructor(private router: Router) {}
 
   /* ==========================
         HERO SLIDER
   ========================== */
-  images = [
+
+  images: string[] = [
     'assets/img/kampus4.jpg',
     'assets/img/kampus3.jpg',
     'assets/img/kampus0.jpg',
   ];
 
-  currentIndex = 0;
-  currentImage = this.images[0];
-
-  nextSlide() {
-    this.currentIndex = (this.currentIndex + 1) % this.images.length;
-    this.currentImage = this.images[this.currentIndex];
-  }
-
-  prevSlide() {
-    this.currentIndex =
-      (this.currentIndex - 1 + this.images.length) % this.images.length;
-    this.currentImage = this.images[this.currentIndex];
-  }
-
-  changeSlide(i: number) {
-    this.currentIndex = i;
-    this.currentImage = this.images[i];
-  }
-
-
-  /* ==========================
-        FASILITAS KAMPUS
-  ========================== */
-  fasilitasList = [
-    { nama: 'Ruang Kelas', img: 'assets/img/kelas.jpg', icon: '🏫', title: 'Ruang Kelas' },
-    { nama: 'Laboratorium Komputer', img: 'assets/img/lab.jpg', icon: '💻', title: 'Lab Komputer' },
-    { nama: 'Perpustakaan', img: 'assets/img/perpus.jpeg', icon: '📚', title: 'Perpustakaan' },
-    { nama: 'Kantin Kamppas', img: 'assets/img/kantin.jpg', icon: '🍽️', title: 'Kantin' },
-    { nama: 'Lapangan Voli', img: 'assets/img/voli.jpg', icon: '🏐', title: 'Lapangan' },
-    { nama: 'Parkiran', img: 'assets/img/parkir.jpg', icon: '🅿️', title: 'Parkir' },
-    { nama: 'WiFi Kecepatan Tinggi', img: 'assets/img/s1.jpg', icon: '📶', title: 'WiFi' }
+  slideTexts = [
+    {
+      title: `SELAMAT DATANG DI POLITEKNIK NEGERI MALANG PSDKU LUMAJANG`,
+      desc: `Bersama kami kamu akan tumbuh menjadi pribadi mandiri, terampil,
+dan siap menghadapi tantangan dunia kerja.`,
+      sub: 'Ayo gabung dan jadikan mimpimu kenyataan!',
+      route: '/pmb',
+      buttonText: 'Daftar Sekarang',
+    },
+    {
+      title: 'KAMPUS VOKASI UNGGULAN',
+      desc: 'Pendidikan vokasi berbasis praktik\nsesuai kebutuhan dunia industri.',
+      sub: 'Belajar langsung, siap kerja.',
+      route: '/pmb',
+      buttonText: 'Daftar Sekarang',
+    },
+    {
+      title: 'SIAP BERSAING DI DUNIA KERJA',
+      desc: 'Kurikulum aplikatif, dosen profesional,\ndan fasilitas modern.',
+      sub: 'Bangun masa depanmu bersama kami.',
+      route: '/career',
+      buttonText: 'Jelajahi Karir',
+    },
   ];
 
-  scrollFasilitas(direction: 'next' | 'prev') {
+  currentIndex = 0;
+  currentImage = this.images[0];
+  isFading = false;
+  private sliderInterval!: number;
+
+  ngOnInit(): void {
+    this.sliderInterval = window.setInterval(() => {
+      this.nextSlide();
+    }, 3500);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.sliderInterval);
+  }
+
+  nextSlide(): void {
+    this.fadeAndChange(() => {
+      this.currentIndex = (this.currentIndex + 1) % this.images.length;
+    });
+  }
+
+  prevSlide(): void {
+    this.fadeAndChange(() => {
+      this.currentIndex =
+        (this.currentIndex - 1 + this.images.length) % this.images.length;
+    });
+  }
+
+  changeSlide(i: number): void {
+    if (i === this.currentIndex) return;
+    this.fadeAndChange(() => (this.currentIndex = i));
+  }
+
+  private fadeAndChange(action: () => void): void {
+    this.isFading = true;
+    setTimeout(() => {
+      action();
+      this.currentImage = this.images[this.currentIndex];
+      this.isFading = false;
+    }, 300);
+  }
+
+  /* ==========================
+        FASILITAS
+  ========================== */
+
+  fasilitasList = [
+    {
+      nama: 'Ruang Kelas',
+      img: 'assets/img/kelas.jpg',
+      icon: '🏫',
+      title: 'Ruang Kelas',
+    },
+    {
+      nama: 'Laboratorium',
+      img: 'assets/img/lab.jpg',
+      icon: '💻',
+      title: 'Lab Komputer',
+    },
+    {
+      nama: 'Perpustakaan',
+      img: 'assets/img/perpus.jpeg',
+      icon: '📚',
+      title: 'Perpustakaan',
+    },
+    {
+      nama: 'Kantin',
+      img: 'assets/img/kantin.jpg',
+      icon: '🍽️',
+      title: 'Kantin',
+    },
+    {
+      nama: 'Lapangan',
+      img: 'assets/img/voli.jpg',
+      icon: '🏐',
+      title: 'Lapangan',
+    },
+  ];
+
+  scrollFasilitas(direction: 'next' | 'prev'): void {
     const slider = document.getElementById('fasilitasSlider');
     if (!slider) return;
 
-    const amount = 250;
-
-    if (direction === 'next') {
-      slider.scrollLeft += amount;
-    } else {
-      slider.scrollLeft -= amount;
-    }
+    slider.scrollLeft += direction === 'next' ? 260 : -260;
   }
 
-
   /* ==========================
-        BERITA UTAMA
+        BERITA
   ========================== */
+
   beritaList = [
-    { 
+    {
       id: 1,
       img: 'assets/img/berita/berita1.jpg',
-      judul: 'Politeknik Negeri Malang dan Universitas Negeri Surabaya Tandatangani Nota Kesepahaman untuk Perkuat Kolaborasi Tridharma'
+      judul: 'Kerja Sama Polinema & Unesa',
     },
-    { 
+    {
       id: 2,
       img: 'assets/img/berita/Bisnis.jpg',
-      judul: ' Politeknik Negeri Malang (Polinema) mencetak prestasi gemilang di KMIPN. Ada lima tim Polinema yang menyabet juara.'
+      judul: 'Prestasi Mahasiswa Polinema',
     },
-    { 
+    {
       id: 3,
       img: 'assets/img/berita/berita3.jpg',
-      judul: 'Polinema Sukses Gelar Closing Ceremony dan Awarding NTVSC 2025'
-    }
+      judul: 'Closing Ceremony NTVSC 2025',
+    },
   ];
 
-  selectedBerita: any = null;
-
-  openBerita(b: any) {
-    this.selectedBerita = b;
-  }
-
-  goToBerita(id: number) {      // <-- FUNGSI KLIK BERITA DITAMBAHKAN
-    this.router.navigate(['/berita', id]);
-  }
-
   /* ==========================
-        POLINEMA DALAM ANGKA
+        ANGKA
   ========================== */
+
   angkaList = [
     { angka: '1.500+', label: 'Mahasiswa Aktif' },
     { angka: '25+', label: 'Dosen & Tenaga Ahli' },
     { angka: '12', label: 'Laboratorium' },
-    { angka: '10+', label: 'Kerja Sama Industri' }
+    { angka: '10+', label: 'Kerja Sama Industri' },
   ];
 }

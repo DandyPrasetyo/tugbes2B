@@ -1,81 +1,73 @@
 <header class="sticky top-0 z-50">
   <!-- TOP BLUE BAR -->
   <div class="bg-[#103654] w-full">
-    <div
-      class="max-w-7xl mx-auto px-6 pr-[20px] py-2 flex items-center justify-end gap-6"
-    >
-      <!-- Search -->
+    <div class="max-w-7xl mx-auto px-6 py-2 flex justify-end gap-6">
       <button class="text-white hover:opacity-80">
         <img src="assets/img/icons/search.svg" class="w-6 h-6 invert" />
       </button>
 
-      <!-- Language -->
       <div class="flex items-center gap-2 cursor-pointer">
         <img src="assets/img/icons/flag.svg" class="w-6 h-6 rounded-full" />
-        <span class="text-white text-sm font-medium hidden sm:inline">ID</span>
+        <span class="text-white text-sm font-medium">ID</span>
       </div>
-
-      <!-- Burger -->
-      <button class="text-white" (click)="toggleMobileMenu()">
-        <img
-          *ngIf="!mobileMenuOpen"
-          src="assets/img/icons/menu.svg"
-          class="w-8 h-8 invert"
-        />
-        <img
-          *ngIf="mobileMenuOpen"
-          src="assets/img/icons/x.svg"
-          class="w-8 h-8 invert"
-        />
-      </button>
     </div>
   </div>
 
-  <!-- WHITE NAV SECTION -->
+  <!-- WHITE NAV -->
   <div class="bg-white shadow-md border-b border-gray-200">
     <div
       class="max-w-7xl mx-auto px-6 h-[84px] flex items-center justify-between"
     >
-      <!-- LOGO + NAME -->
-      <a routerLink="/" class="flex items-center cursor-pointer">
+      <!-- LOGO -->
+      <a routerLink="/" class="flex items-center">
         <img src="assets/img/logo.png" class="w-14" />
-
         <div class="ml-4 flex items-center gap-6">
           <div class="leading-tight font-playfair">
-            <div class="text-[17px] md:text-[20px] font-bold text-[#1d2b36]">
+            <div class="text-[18px] font-bold text-[#1d2b36]">
               POLITEKNIK<br />NEGERI MALANG
             </div>
           </div>
-
-          <div class="hidden md:block divider-vertical"></div>
+          <div class="divider-vertical"></div>
         </div>
       </a>
 
-      <!-- DESKTOP NAV -->
-      <nav class="hidden lg:flex items-center gap-10">
-        <a
-          *ngFor="let item of navigation"
-          [routerLink]="item.path"
-          class="nav-item px-4 py-2 rounded-md text-[14px] tracking-wide"
-        >
-          {{ item.name }}
-        </a>
-      </nav>
-    </div>
+      <!-- NAVIGATION -->
+      <nav class="flex items-center gap-6">
+        <ng-container *ngFor="let item of navigation">
+          <!-- MENU BIASA (TANPA PANAH) -->
+          <a
+            *ngIf="item.path"
+            [routerLink]="item.path"
+            class="nav-item px-4 py-2 rounded-md text-[14px] tracking-wide"
+          >
+            {{ item.name }}
+          </a>
 
-    <!-- MOBILE MENU -->
-    <div
-      *ngIf="mobileMenuOpen"
-      class="lg:hidden py-2 border-t animate-slide-down"
-    >
-      <a
-        *ngFor="let item of navigation"
-        [routerLink]="item.path"
-        (click)="closeMobileMenu()"
-        class="block px-4 py-3 font-semibold text-gray-700 hover:bg-blue-600 hover:text-white"
-      >
-        {{ item.name }}
-      </a>
+          <!-- MENU DROPDOWN (ADA PANAH) -->
+          <div *ngIf="item.children" class="relative group">
+            <button
+              class="nav-item px-4 py-2 rounded-md text-[14px] tracking-wide flex items-center gap-2"
+            >
+              {{ item.name }}
+              <span class="parent-arrow">▾</span>
+            </button>
+
+            <!-- DROPDOWN -->
+            <div
+              class="dropdown-menu absolute left-0 top-full mt-2 w-60 bg-white border shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+            >
+              <a
+                *ngFor="let child of item.children"
+                [routerLink]="child.path"
+                class="dropdown-item flex items-center justify-between px-5 py-3 text-sm text-gray-700 hover:bg-[#24455e] hover:text-white"
+              >
+                {{ child.name }}
+                <span class="submenu-arrow">›</span>
+              </a>
+            </div>
+          </div>
+        </ng-container>
+      </nav>
     </div>
   </div>
 </header>

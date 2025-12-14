@@ -7,6 +7,12 @@ import { HomeComponent } from './components/home/home.component';
 import { ContactComponent } from './components/contact/contact.component';
 
 /* ===============================
+   BERITA (BARU)
+================================ */
+import { BeritaListComponent } from './components/berita/berita-list/berita-list.component';
+import { BeritaDetailComponent } from './components/berita/berita-detail/berita-detail.component';
+
+/* ===============================
    CAREER CENTER (LAYOUT)
 ================================ */
 import { CareerLayoutComponent } from './components/career/layout-career/layout-career.component';
@@ -15,9 +21,10 @@ import { LowonganComponent } from './components/career/lowongan/lowongan.compone
 import { MagangComponent } from './components/career/magang/magang.component';
 import { EventComponent } from './components/career/event/event.component';
 import { LoginadminComponent } from './components/career/login-admin/login-admin.component';
-// import { MitraComponent } from './components/career/mitra/mitra.component'; // ⭐ route MITRA Baru
 
-// ⭐⭐ TAMBAHAN: halaman mitra (grid) & detail mitra
+/* ===============================
+   MITRA
+================================ */
 import { MitraComponent } from './components/career/mitra/mitra.component';
 
 /* ⭐⭐ TAMBAHAN: halaman detail lowongan (career publik) */
@@ -25,6 +32,8 @@ import { LowonganDetailComponent } from './components/career/lowongan/lowongan-d
 
 /* ⭐⭐ TAMBAHAN: halaman detail magang (career publik) */
 import { MagangDetailComponent } from './components/career/magang/magang-detail/magang-detail.component';
+
+
 
 /* ===============================
    DASHBOARD ADMIN
@@ -44,15 +53,30 @@ import { ListAdminComponent } from './components/career/dashboard-admin/crud-adm
 import { FormAdminComponent } from './components/career/dashboard-admin/crud-admin/form-admin/form-admin.component';
 
 export const routes: Routes = [
+  /* ===============================
+       WEBSITE UTAMA
+  ================================ */
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
+
 
   /* ===============================
        CAREER CENTER ROUTING
    ================================ */
+
+  /* ===============================
+       BERITA (BARU)
+  ================================ */
+  { path: 'berita', component: BeritaListComponent },
+  { path: 'berita/:id', component: BeritaDetailComponent },
+
+  /* ===============================
+       CAREER CENTER
+  ================================ */
+
   {
     path: 'career',
-    component: CareerLayoutComponent, // ⭐ TANPA header/footer, sudah diperbaiki
+    component: CareerLayoutComponent,
     children: [
       { path: '', component: CareerComponent },
       { path: 'home', component: CareerComponent },
@@ -73,29 +97,37 @@ export const routes: Routes = [
 
       { path: 'event', component: EventComponent },
 
-      // ⭐⭐ ROUTE MITRA BARU (GRID & DETAIL)
+      /* MITRA */
       { path: 'mitra', component: MitraComponent },
 
       { path: 'login-admin', component: LoginadminComponent },
 
       /* ===============================
+
            ADMIN DASHBOARD ROUTING
        ================================ */
+
+
       {
         path: 'admin',
         component: DashboardAdminComponent,
         children: [
-          // CRUD LOWONGAN
+          /* CRUD LOWONGAN */
           { path: 'lowongan', component: ListLowonganComponent },
           { path: 'lowongan/add', component: FormLowonganComponent },
           { path: 'lowongan/edit/:id', component: FormLowonganComponent },
 
+
           // CRUD PERUSAHAAN
+          /* CRUD PERUSAHAAN */
           { path: 'perusahaan', component: ListPerusahaanComponent },
           { path: 'perusahaan/tambah', component: FormPerusahaanComponent },
           { path: 'perusahaan/edit/:id', component: FormPerusahaanComponent },
 
           // CRUD ADMIN
+
+          /* CRUD ADMIN */
+
           { path: 'admin', component: ListAdminComponent },
           { path: 'admin/tambah', component: FormAdminComponent },
           { path: 'admin/edit/:id', component: FormAdminComponent },
@@ -103,6 +135,11 @@ export const routes: Routes = [
       },
     ],
   },
+
+
+  /* ===============================
+       FALLBACK
+  ================================ */
 
   { path: '**', redirectTo: '' },
 ];
