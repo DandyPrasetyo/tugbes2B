@@ -103,6 +103,7 @@ public class LowonganController {
             @RequestParam(required = false) String status,
             @RequestParam(required = false) Long adminId,
             @RequestParam(required = false) Long perusahaanId,
+            @RequestParam(required = false) String lokasi,    // <-- tambahan lokasi
             @RequestPart(value = "flayer", required = false) MultipartFile posterFile
     ) {
 
@@ -127,6 +128,7 @@ public class LowonganController {
         req.setStatus(status);
         req.setAdminId(adminId);
         req.setPerusahaanId(perusahaanId);
+        req.setLokasi(lokasi); // <-- tambahan lokasi
 
         String posterPath = null;
 

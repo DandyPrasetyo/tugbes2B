@@ -11,6 +11,7 @@ public class LowonganRequest {
     private String deskripsi;
     private String tipePekerjaan;
     private Long gaji; // <- FIX INT → LONG
+    private String lokasi; // <-- tambahan lokasi
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate batasTanggal;
@@ -23,7 +24,7 @@ public class LowonganRequest {
 
     public LowonganRequest(String judulLowongan, String posisi, String deskripsi, String tipePekerjaan,
                            Long gaji, LocalDate batasTanggal, String status,
-                           Long adminId, Long perusahaanId) {
+                           Long adminId, Long perusahaanId, String lokasi) { // <-- lokasi di konstruktor
 
         this.judulLowongan = judulLowongan;
         this.posisi = posisi;
@@ -34,6 +35,7 @@ public class LowonganRequest {
         this.status = status;
         this.adminId = adminId;
         this.perusahaanId = perusahaanId;
+        this.lokasi = lokasi;
     }
 
     public String getJudulLowongan() { return judulLowongan; }
@@ -50,6 +52,9 @@ public class LowonganRequest {
 
     public Long getGaji() { return gaji; }
     public void setGaji(Long gaji) { this.gaji = gaji; }
+
+    public String getLokasi() { return lokasi; }          // <-- getter lokasi
+    public void setLokasi(String lokasi) { this.lokasi = lokasi; } // <-- setter lokasi
 
     public LocalDate getBatasTanggal() { return batasTanggal; }
     public void setBatasTanggal(LocalDate batasTanggal) { this.batasTanggal = batasTanggal; }

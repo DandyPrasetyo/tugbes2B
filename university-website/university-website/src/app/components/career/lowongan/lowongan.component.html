@@ -1,16 +1,23 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
   <div *ngFor="let job of filteredLowongan" class="job-card">
     <div class="flex items-center gap-4 mb-4">
-   <img
-  *ngIf="job.flayer"
-  [src]="posterBaseUrl + job.flayer"
-  class="h-14 w-14 rounded-lg object-cover border"
-/>
+      <img
+        *ngIf="job.flayer"
+        [src]="posterBaseUrl + job.flayer"
+        class="h-14 w-14 rounded-lg object-cover border"
+      />
 
       <div>
+        <!-- Judul lowongan (kolom Judul Lowongan) -->
         <h2 class="text-xl font-bold text-blue-800">
-          {{ job.judulLowongan || job.posisi }}
+          {{ job.judul || job.judulLowongan || job.posisi }}
         </h2>
+
+        <!-- Posisi (kolom Posisi) -->
+        <p class="text-sm text-gray-700" *ngIf="job.posisi">
+          🧑‍💼 Posisi: <strong>{{ job.posisi }}</strong>
+        </p>
+
         <p class="text-gray-700 font-medium">
           {{ job.perusahaan?.nama_perusahaan || job.perusahaan }}
         </p>
@@ -20,8 +27,27 @@
     <div class="text-gray-600 text-sm space-y-1">
       <p>
         📍 Lokasi:
-        <strong>{{ job.perusahaan?.alamat || job.lokasi }}</strong>
+        <strong>
+          <a
+            [href]="
+              'https://www.google.com/maps/search/?api=1&query=' +
+              (job.lokasi || job.perusahaan?.alamat)
+            "
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-blue-700 underline"
+          >
+            {{ job.lokasi || job.perusahaan?.alamat }}
+          </a>
+        </strong>
       </p>
+
+      <!-- Deskripsi dari backend -->
+      <p *ngIf="job.deskripsi">
+        📝 Deskripsi:
+        <span>{{ job.deskripsi }}</span>
+      </p>
+
       <p>
         💼 Tipe:
         <strong>{{ job.tipePekerjaan || job.tipe }}</strong>

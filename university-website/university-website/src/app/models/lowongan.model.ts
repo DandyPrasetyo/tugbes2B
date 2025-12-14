@@ -4,6 +4,8 @@ export interface Lowongan {
   perusahaanId: number;
   judulLowongan: string;
   posisi: string;
+  // === FIELD BARU LOKASI ===
+  lokasi?: string;
   deskripsi?: string;
   flayer?: string;
   tipePekerjaan: 'Full_time' | 'Part_time' | 'Magang';

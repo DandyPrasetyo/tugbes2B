@@ -2,6 +2,19 @@
   @apply bg-white shadow-md rounded-xl p-5 border hover:shadow-xl transition;
 }
 
+/* wrapper gambar: tinggi mengikuti konten, tidak memotong */
+.event-card .event-image-wrapper {
+  @apply w-full rounded-lg bg-gray-100;
+  overflow: visible;
+}
+
+/* gambar: penuh lebar card, tinggi mengikuti rasio asli */
+.event-card .event-image-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .btn-detail {
   @apply bg-[#24455e] text-white px-4 py-2 rounded-lg hover:opacity-80;
 }

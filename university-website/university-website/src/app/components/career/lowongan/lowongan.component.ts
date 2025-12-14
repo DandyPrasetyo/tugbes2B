@@ -66,24 +66,41 @@ export class LowonganComponent implements OnInit {
   constructor(private lowonganService: LowonganService) {}
 
   ngOnInit(): void {
-  this.lowonganService.getAll().subscribe({
-    next: (data: any[]) => {
-      if (data && data.length) {
-        // hanya lowongan NON-MAGANG yang tampil di menu Loker
-        this.lowongan = data.filter(
-          (job) => job.tipePekerjaan !== 'Magang'
+    this.lowonganService.getAll().subscribe({
+      next: (data: Lowongan[]) => {                    // <-- pakai tipe Lowongan
+        if (data && data.length) {
+          // hanya lowongan NON-MAGANG yang tampil di menu Loker
+          this.lowongan = data
+            .filter((job) => job.tipePekerjaan !== 'Magang')
+            .map((job) => ({
+              // mapping ke struktur yang sudah dipakai di template & filter
+              judul: job.judulLowongan,               // <-- judul lowongan (kolom Judul Lowongan)
+              posisi: job.posisi,                     // <-- kolom Posisi
+              judulLowongan: job.judulLowongan,
+              perusahaan: job.perusahaanId,           // ganti nanti kalau sudah ambil nama perusahaan
+              lokasi: job.lokasi,                     // <-- ambil lokasi dari backend
+              deskripsi: job.deskripsi,               // <-- tambahan: deskripsi dari backend
+              tipe:
+                job.tipePekerjaan === 'Full_time'
+                  ? 'Fulltime'
+                  : job.tipePekerjaan === 'Part_time'
+                  ? 'Parttime'
+                  : job.tipePekerjaan,
+              posted: job.createdAt,
+              deadline: job.batasTanggal,
+              status: job.status === 'Aktif' ? 'Tersedia' : 'Ditutup',
+              flayer: job.flayer,                     // supaya bisa dipakai di HTML
+            }));
+        }
+      },
+      error: (err) => {
+        console.error(
+          'Gagal load data lowongan dari API, pakai data dummy',
+          err
         );
-      }
-    },
-    error: (err) => {
-      console.error(
-        'Gagal load data lowongan dari API, pakai data dummy',
-        err
-      );
-    },
-  });
-}
-
+      },
+    });
+  }
 
   get filteredLowongan() {
     return this.lowongan.filter((job) => {

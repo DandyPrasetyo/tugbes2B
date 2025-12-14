@@ -66,6 +66,9 @@ public class LowonganService {
         // ✔ ENUM FIX (sesuai entity)
         l.setStatus(Lowongan.StatusLowongan.valueOf(req.getStatus()));
 
+        // lokasi
+        l.setLokasi(req.getLokasi()); // <-- lokasi
+
         // ✔ Admin
         Long adminId = (req.getAdminId() != null) ? req.getAdminId() : 1L;
         Admin admin = adminRepository.findById(adminId)
@@ -84,7 +87,6 @@ public class LowonganService {
 
         return lowonganRepository.save(l);
     }
-
 
     // =====================================================
     // UPDATE LOWONGAN
@@ -105,6 +107,10 @@ public class LowonganService {
         if (req.getStatus() != null)
             l.setStatus(Lowongan.StatusLowongan.valueOf(req.getStatus()));
 
+        if (req.getLokasi() != null) {      // <-- lokasi
+            l.setLokasi(req.getLokasi());
+        }
+
         if (req.getAdminId() != null) {
             Admin admin = adminRepository.findById(req.getAdminId())
                     .orElseThrow(() -> new RuntimeException("Admin tidak ditemukan"));
@@ -123,7 +129,6 @@ public class LowonganService {
 
         return lowonganRepository.save(l);
     }
-
 
     // =====================================================
     // DELETE

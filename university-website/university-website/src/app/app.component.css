@@ -1,10 +1,17 @@
-header {
+/* HAPUS aturan global header fixed */
+/* header {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-}
+} */
 
-main {
-  padding-top: 500px; /* tinggi header */
+/* HAPUS juga padding global ini jika tidak dipakai elemen <main> */
+/* main {
+  padding-top: 500px;
+} */
+
+/* Jarak khusus untuk halaman career selain beranda */
+.career-main {
+  margin-top: 200px; /* sesuaikan sampai konten pas di bawah header career */
 }

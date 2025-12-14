@@ -20,6 +20,7 @@ export class ListLowonganComponent implements OnInit {
   judulFilter = '';
   posisiFilter = '';
   tipeFilter = '';           // '', 'Part_time', 'Full_time', 'Magang'
+  lokasiFilter = '';         // <-- tambahan lokasi
 
   // info hasil
   hasilCount = 0;            // X hasil
@@ -52,23 +53,26 @@ export class ListLowonganComponent implements OnInit {
     const j = this.judulFilter.toLowerCase().trim();
     const p = this.posisiFilter.toLowerCase().trim();
     const t = this.tipeFilter.toLowerCase().trim();
+    const l = this.lokasiFilter.toLowerCase().trim();   // <-- tambahan lokasi
 
     // kalau semua filter kosong, tampilkan semua data
-    if (!j && !p && !t) {
+    if (!j && !p && !t && !l) {                         // <-- lokasi ikut dicek
       this.filteredList = this.lowonganList;
       this.hasilCount = this.filteredList.length;
       return;
     }
 
     this.filteredList = this.lowonganList.filter((row) => {
-      const judul  = (row.judulLowongan || '').toLowerCase();
-      const posisi = (row.posisi || '').toLowerCase();
-      const tipe   = (row.tipePekerjaan || '').toLowerCase();
+      const judul   = (row.judulLowongan || '').toLowerCase();
+      const posisi  = (row.posisi || '').toLowerCase();
+      const tipe    = (row.tipePekerjaan || '').toLowerCase();
+      const lokasi  = (row.lokasi || '').toLowerCase(); // <-- tambahan lokasi
 
       // AND logic per-field, tapi field kosong diabaikan
-      if (j && !judul.includes(j))  return false;
-      if (p && !posisi.includes(p)) return false;
-      if (t && tipe !== t)          return false;
+      if (j && !judul.includes(j))   return false;
+      if (p && !posisi.includes(p))  return false;
+      if (t && tipe !== t)           return false;
+      if (l && !lokasi.includes(l))  return false;      // <-- tambahan lokasi
 
       return true;
     });
@@ -81,6 +85,7 @@ export class ListLowonganComponent implements OnInit {
     this.judulFilter = '';
     this.posisiFilter = '';
     this.tipeFilter = '';
+    this.lokasiFilter = '';                               // <-- tambahan lokasi
     this.filteredList = this.lowonganList;
     this.hasilCount = this.filteredList.length;
   }
@@ -89,7 +94,10 @@ export class ListLowonganComponent implements OnInit {
   highlight(text: string): string {
     if (!text) return text;
     const term =
-      (this.judulFilter || this.posisiFilter || this.tipeFilter).trim();
+      (this.judulFilter ||
+       this.posisiFilter ||
+       this.lokasiFilter ||      // <-- tambahan lokasi
+       this.tipeFilter).trim();
     if (!term) return text;
 
     const safe = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

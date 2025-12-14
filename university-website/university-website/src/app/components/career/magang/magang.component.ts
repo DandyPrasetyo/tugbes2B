@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LowonganService } from '../../../services/lowongan.service';
 import { Lowongan } from '../../../models/lowongan.model';
+import { Router } from '@angular/router'; // <--- TAMBAHAN
 
 @Component({
   selector: 'app-magang',
@@ -52,7 +53,10 @@ export class MagangComponent implements OnInit {
     },
   ];
 
-  constructor(private lowonganService: LowonganService) {}
+  constructor(
+    private lowonganService: LowonganService,
+    private router: Router // <--- TAMBAHAN
+  ) {}
 
   ngOnInit(): void {
     this.lowonganService.getAll().subscribe({
@@ -61,12 +65,21 @@ export class MagangComponent implements OnInit {
           // mapping hanya lowongan dengan tipe Magang
           this.magang = data
             .filter((job) => job.tipePekerjaan === 'Magang')
-            .map((job) => ({
-              posisi: job.judulLowongan || job.posisi,
+            .map((job: any) => ({
+              // pakai any supaya boleh baca job.id walaupun tidak ada di interface Lowongan
+              id: job.id,                                    // <-- id untuk routing
+              judul: job.judulLowongan,                     // <-- judul lowongan (MNCTV)
+              posisi: job.posisi,                           // <-- kolom Posisi (ACTOR)
               perusahaan:
-                (job as any).perusahaan?.nama_perusahaan || 'Perusahaan',
-              lokasi: (job as any).perusahaan?.alamat || 'Lokasi tidak ada',
-              durasi: 'Magang', // bisa diganti jika ada field durasi di backend
+                job.perusahaan?.nama_perusahaan || 'Perusahaan',
+              // pakai lokasi entity dulu, lalu fallback ke alamat perusahaan
+              lokasi:
+                job.lokasi ||
+                job.perusahaan?.alamat ||
+                'Lokasi tidak ada',
+              deskripsi: job.deskripsi,                     // <-- tambahan deskripsi
+              tipe: job.tipePekerjaan,                      // <-- simpan tipe pekerjaan
+              durasi: 'Magang',                             // bisa diganti jika ada field durasi di backend
               posted: job.createdAt || '-',
               deadline: job.batasTanggal || '-',
               status: job.status === 'Aktif' ? 'Tersedia' : 'Ditutup',
@@ -88,5 +101,14 @@ export class MagangComponent implements OnInit {
         (this.filterDurasi ? item.durasi === this.filterDurasi : true)
       );
     });
+  }
+
+  // === TAMBAHAN: klik "Lihat Detail" untuk pindah halaman ===
+  lihatDetail(item: any) {
+    if (item.id) {
+      this.router.navigate(['/career/magang', item.id]); // [web:22][web:23]
+    } else {
+      console.warn('Item magang belum punya id, detail belum bisa dibuka');
+    }
   }
 }

@@ -8,7 +8,23 @@
 </div>
 
 <!-- AREA KONTEN -->
-<router-outlet></router-outlet>
+<div *ngIf="isCareerPage; else normalContent">
+  <!-- Beranda career tanpa jarak -->
+  <div *ngIf="currentUrl === '/career/home'; else careerInner">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- Halaman career lain (event, magang, loker, mitra) dengan jarak bawah header -->
+  <ng-template #careerInner>
+    <div class="career-main">
+      <router-outlet></router-outlet>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #normalContent>
+  <router-outlet></router-outlet>
+</ng-template>
 
 <!-- FOOTER -->
 <div *ngIf="!hideAllHeaderFooter">

@@ -1,23 +1,72 @@
 /* HERO SECTION */
 .career-hero {
   background: linear-gradient(to right, #1e3a8a, #3b82f6);
-  color: white;
+  color: rgb(171, 165, 165);
 }
 
-/* CARD */
-.career-card {
-  @apply bg-white border rounded-xl shadow-md p-6 text-center 
-         hover:shadow-xl transition cursor-pointer;
+/* ============================= */
+/* KARTU MAGANG */
+/* ============================= */
+.magang-card {
+  background-color: var(--career-primary-soft);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+  overflow: hidden; /* PENTING: agar poster full width */
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
 }
 
-.icon-box {
-  @apply w-16 h-16 mx-auto rounded-full flex items-center justify-center text-3xl mb-4 transition;
+.magang-card:hover {
+  border-color: var(--career-primary);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
 }
 
-.career-title {
-  @apply text-xl font-semibold text-gray-800 mb-2;
+/* ============================= */
+/* POSTER MAGANG (FULL WIDTH) */
+/* ============================= */
+/* ============================= */
+/* POSTER MAGANG FULL (TIDAK ZOOM) */
+/* ============================= */
+.magang-card .magang-image-wrapper {
+  width: 100%;
+  background-color: #f8fafc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
 }
 
-.career-desc {
-  @apply text-gray-600 text-sm;
+.magang-card .magang-image-wrapper img {
+  width: 100%;
+  height: auto;          /* IKUT RASIO ASLI */
+  max-height: 520px;     /* AMAN UNTUK POSTER PANJANG */
+  object-fit: contain;  /* INI KUNCINYA */
+}
+
+
+/* ============================= */
+/* ISI CARD */
+/* ============================= */
+.magang-card .card-body {
+  padding: 1.25rem;
+}
+
+/* ============================= */
+/* TOMBOL DETAIL */
+/* ============================= */
+.btn-detail {
+  background-color: var(--career-primary);
+  color: #ffffff;
+  padding: 0.5rem 1.4rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-detail:hover {
+  background-color: #1e40af;
 }

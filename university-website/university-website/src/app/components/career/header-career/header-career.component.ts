@@ -13,6 +13,22 @@ export class HeaderCareerComponent {
   showSearch = false;
   showLanguageMenu = false;
 
+  // ======= HEADER SHOW/HIDE =======
+  showHeader = true; // header selalu tampil
+
+  // Logika sembunyi/muncul dimatikan
+  // @HostListener('document:mousemove', ['$event'])
+  // onMouseMove(e: MouseEvent) {
+  //   const y = e.clientY;
+  //
+  //   if (y <= 180) {
+  //     this.showHeader = true;
+  //   } else if (y > 260) {
+  //     this.showHeader = false;
+  //   }
+  // }
+
+  // ======= EXISTING CODE (tetap) =======
   openSearch() {
     this.showSearch = true;
   }

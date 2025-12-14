@@ -234,3 +234,15 @@
     display: none;
   }
 }
+
+/* ============================================== */
+/* SHOW / HIDE HEADER (HOVER ATAS LAYAR)          */
+/* ============================================== */
+/* Header sekarang selalu terlihat; animasi hide di-nonaktifkan */
+.header-visibility {
+  /* sebelumnya ada transition + transform, sekarang dibiarkan default */
+}
+
+.hidden-header {
+  /* kosongkan supaya tidak pernah menggeser header ke atas */
+}

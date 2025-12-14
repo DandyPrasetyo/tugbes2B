@@ -62,6 +62,8 @@
         <th scope="col">No</th>
         <th scope="col">Judul Lowongan</th>
         <th scope="col">Posisi</th>
+        <!-- KOLOM BARU LOKASI -->
+        <th scope="col">Lokasi</th>
         <th scope="col">Deskripsi</th>
         <th scope="col">Poster</th>
         <th scope="col">Tipe Pekerjaan</th>
@@ -75,7 +77,7 @@
 
     <tbody>
       <tr *ngIf="loading">
-        <td colspan="11" class="loading">Memuat data...</td>
+        <td colspan="12" class="loading">Memuat data...</td>
       </tr>
 
       <tr *ngFor="let row of filteredList ?? []; let i = index">
@@ -84,6 +86,10 @@
         <!-- highlight judul, posisi, deskripsi, tipe -->
         <td [innerHTML]="highlight(row?.judulLowongan || '')"></td>
         <td [innerHTML]="highlight(row?.posisi || '')"></td>
+
+        <!-- LOKASI BARU -->
+        <td [innerHTML]="highlight(row?.lokasi || '')"></td>
+
         <td
           class="max-w-xs truncate"
           [innerHTML]="highlight(row?.deskripsi || '')"
@@ -139,7 +145,7 @@
       </tr>
 
       <tr *ngIf="!loading && (filteredList?.length ?? 0) === 0">
-        <td colspan="11" class="no-data">
+        <td colspan="12" class="no-data">
           Tidak ada lowongan yang ditemukan.
         </td>
       </tr>

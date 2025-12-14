@@ -4,13 +4,22 @@
  */
 package com.psdku.lmj.university_backend.model;
 
-import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "lowongan")
@@ -37,6 +46,10 @@ public class Lowongan {
 
     @Column(nullable = false, length = 100)
     private String posisi;
+
+    // === FIELD BARU: lokasi lowongan (kota/alamat singkat) ===
+    @Column(name = "lokasi", length = 150)
+    private String lokasi;
 
     @Column(columnDefinition = "TEXT")
     private String deskripsi;
