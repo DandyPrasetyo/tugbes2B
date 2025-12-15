@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header-career',
@@ -15,6 +16,18 @@ export class HeaderCareerComponent {
 
   // ======= HEADER SHOW/HIDE =======
   showHeader = true; // header selalu tampil
+
+  // indikator halaman career home vs halaman lain (event/magang/loker/mitra)
+  isHome = true;
+
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter((e) => e instanceof NavigationEnd))
+      .subscribe((e: any) => {
+        const url = e.urlAfterRedirects || e.url;
+        this.isHome = url === '/career' || url.startsWith('/career/home');
+      });
+  }
 
   // Logika sembunyi/muncul dimatikan
   // @HostListener('document:mousemove', ['$event'])

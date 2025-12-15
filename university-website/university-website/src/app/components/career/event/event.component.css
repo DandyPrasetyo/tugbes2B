@@ -18,3 +18,20 @@
 .btn-detail {
   @apply bg-[#24455e] text-white px-4 py-2 rounded-lg hover:opacity-80;
 }
+
+/* ====== TAMBAHAN: poster di LIST (di-crop bagian bawah, fokus atas) ====== */
+.poster-wrapper {
+  width: 100%;
+  height: 220px;          /* atur tinggi sesuai tampilan yang kamu mau */
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #f3f4f6;
+}
+
+.poster-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* isi penuh kotak, bagian bawah terpotong */
+  object-position: top;   /* fokus di bagian atas poster */
+  display: block;
+}

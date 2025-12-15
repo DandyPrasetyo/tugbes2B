@@ -24,14 +24,22 @@ export class MitraComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.perusahaanService.getAll().subscribe((data) => {
-      this.companies = data;
-      this.filtered = data;
+    this.perusahaanService.getAll().subscribe({
+      next: (data) => {
+        this.companies = data;
+        this.filtered = data;
+      },
+      error: (err) => {
+        console.error('Gagal load data perusahaan', err);
+        this.companies = [];
+        this.filtered = [];
+      },
     });
   }
 
-  onSearch(term: string): void {
-    const t = term.toLowerCase();
+  // ✅ DIPERBAIKI AGAR AMAN JIKA term UNDEFINED
+  onSearch(term?: string): void {
+    const t = (term || '').toLowerCase();
     this.filtered = this.companies.filter((c) =>
       (c.nama_perusahaan || '').toLowerCase().includes(t)
     );

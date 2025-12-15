@@ -32,7 +32,9 @@
   <div class="career-logo">
     <img src="assets/img/logo.png" class="logo-img" />
     <div class="logo-text">
-      <h2>POLINEMA</h2>
+      <h2 [ngClass]="isHome ? 'logo-main-home' : 'logo-main-other'">
+        POLINEMA
+      </h2>
       <p>CAREER CENTER</p>
     </div>
   </div>

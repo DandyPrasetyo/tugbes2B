@@ -62,23 +62,20 @@ export class MagangComponent implements OnInit {
     this.lowonganService.getAll().subscribe({
       next: (data: Lowongan[]) => {
         if (data && data.length) {
-          // mapping hanya lowongan dengan tipe Magang
           this.magang = data
             .filter((job) => job.tipePekerjaan === 'Magang')
             .map((job: any) => ({
-              // gunakan lowonganId sebagai id untuk routing
-              id: job.lowonganId, // <-- id untuk routing
-              judul: job.judulLowongan, // <-- judul lowongan
-              posisi: job.posisi, // <-- kolom Posisi
+              id: job.lowonganId,
+              judul: job.judulLowongan,
+              posisi: job.posisi,
               perusahaan: job.perusahaan?.nama_perusahaan || 'Perusahaan',
-              // pakai lokasi entity dulu, lalu fallback ke alamat perusahaan
               lokasi:
                 job.lokasi ||
                 job.perusahaan?.alamat ||
                 'Lokasi tidak ada',
-              deskripsi: job.deskripsi, // <-- tambahan deskripsi
-              tipe: job.tipePekerjaan, // <-- simpan tipe pekerjaan
-              durasi: 'Magang', // bisa diganti jika ada field durasi di backend
+              deskripsi: job.deskripsi,
+              tipe: job.tipePekerjaan,
+              durasi: 'Magang',
               posted: job.createdAt || '-',
               deadline: job.batasTanggal || '-',
               status: job.status === 'Aktif' ? 'Tersedia' : 'Ditutup',
@@ -92,12 +89,17 @@ export class MagangComponent implements OnInit {
     });
   }
 
+  // ✅ DIPERBAIKI AGAR TIDAK CRASH (TANPA UBAH LOGIKA LAIN)
   get filteredMagang() {
     return this.magang.filter((item) => {
+      const posisi = item.posisi ?? '';
+      const lokasi = item.lokasi ?? '';
+      const durasi = item.durasi ?? '';
+
       return (
-        item.posisi.toLowerCase().includes(this.search.toLowerCase()) &&
-        (this.filterLokasi ? item.lokasi === this.filterLokasi : true) &&
-        (this.filterDurasi ? item.durasi === this.filterDurasi : true)
+        posisi.toLowerCase().includes(this.search.toLowerCase()) &&
+        (this.filterLokasi ? lokasi === this.filterLokasi : true) &&
+        (this.filterDurasi ? durasi === this.filterDurasi : true)
       );
     });
   }

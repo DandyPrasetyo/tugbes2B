@@ -128,8 +128,18 @@
   margin: 0;
   font-size: 22px;
   font-weight: 800;
-  color: #ffffff;
+  /* HAPUS color di sini */
 }
+
+/* warna POLINEMA dinamis: beranda vs halaman lain */
+.logo-main-home {
+  color: #ffffff;   /* beranda */
+}
+
+.logo-main-other {
+  color: #111827;   /* event/magang/loker/mitra */
+}
+
 
 .logo-text p {
   margin: 0;

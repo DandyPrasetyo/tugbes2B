@@ -1,0 +1,26 @@
+<section *ngIf="!loading && !errorMessage" class="event-detail">
+  <button class="back-button" (click)="goBack()">
+    ← Kembali ke daftar event
+  </button>
+
+  <div class="detail-poster">
+    <img [src]="event?.banner" [alt]="judulTampil" />
+  </div>
+
+  <h1 class="detail-title">{{ judulTampil }}</h1>
+
+  <p class="detail-meta">
+    <span>{{ event?.kategori }}</span> ·
+    <span>{{ event?.tanggal }}</span> ·
+    <span>{{ event?.lokasi }}</span>
+  </p>
+
+  <h2 class="detail-subtitle">Deskripsi</h2>
+  <p class="detail-text">
+    {{ event?.deskripsi }}
+  </p>
+</section>
+
+<div *ngIf="errorMessage" class="error">
+  {{ errorMessage }}
+</div>

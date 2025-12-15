@@ -1,5 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule, NgClass } from '@angular/common';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Inject,
+  PLATFORM_ID,
+} from '@angular/core';
+import { CommonModule, NgClass, isPlatformBrowser } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 
 @Component({
@@ -10,7 +16,10 @@ import { RouterModule, Router } from '@angular/router';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   /* ==========================
         HERO SLIDER
@@ -50,16 +59,21 @@ dan siap menghadapi tantangan dunia kerja.`,
   currentIndex = 0;
   currentImage = this.images[0];
   isFading = false;
-  private sliderInterval!: number;
+  private sliderInterval: any;
 
   ngOnInit(): void {
-    this.sliderInterval = window.setInterval(() => {
-      this.nextSlide();
-    }, 3500);
+    // 🔥 FIX SSR: hanya jalan di browser
+    if (isPlatformBrowser(this.platformId)) {
+      this.sliderInterval = window.setInterval(() => {
+        this.nextSlide();
+      }, 3500);
+    }
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.sliderInterval);
+    if (this.sliderInterval) {
+      clearInterval(this.sliderInterval);
+    }
   }
 
   nextSlide(): void {
@@ -127,6 +141,9 @@ dan siap menghadapi tantangan dunia kerja.`,
   ];
 
   scrollFasilitas(direction: 'next' | 'prev'): void {
+    // 🔥 FIX SSR
+    if (!isPlatformBrowser(this.platformId)) return;
+
     const slider = document.getElementById('fasilitasSlider');
     if (!slider) return;
 

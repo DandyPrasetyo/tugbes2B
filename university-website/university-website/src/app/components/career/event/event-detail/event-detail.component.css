@@ -1,0 +1,43 @@
+.event-detail {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+}
+
+/* FULL poster di DETAIL, tidak ke-crop */
+.detail-poster {
+  width: 100%;
+  /* HAPUS batas tinggi kalau mau benar-benar full:
+     kalau tetap mau dibatasi, pakai max-height yang besar */
+  /* max-height: 520px;  <-- boleh dihapus */
+  overflow: visible;        /* PENTING: jangan hidden */
+  border-radius: 0.75rem;
+  background-color: #f3f4f6;
+  margin-bottom: 1.75rem;
+}
+
+.detail-poster img {
+  width: 100%;
+  height: auto;             /* PENTING: biar rasio asli terjaga */
+  object-fit: contain;      /* jangan cover, supaya tidak dipotong */
+  display: block;
+}
+
+/* tombol kembali */
+.back-button {
+  margin-bottom: 1rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  border: 1px solid #d1d5db;
+  background-color: #f9fafb;
+  color: #374151;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: #e5e7eb;
+}

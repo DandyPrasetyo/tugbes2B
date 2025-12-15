@@ -44,12 +44,11 @@
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     <div *ngFor="let ev of filteredEvents" class="event-card">
-      <!-- WRAPPER POSTER TANPA CROP -->
-      <div class="event-image-wrapper w-full rounded-lg bg-gray-100">
+      <!-- POSTER: TAMPIL SETENGAH ATAS DI LIST -->
+      <div class="poster-wrapper">
         <img
           [src]="ev.banner"
-          alt="{{ ev.judul }}"
-          class="w-full h-auto object-contain"
+          [alt]="ev.judul"
         />
       </div>
 
@@ -61,7 +60,9 @@
         <p>📍 {{ ev.lokasi }}</p>
       </div>
 
-      <button class="btn-detail mt-4">Lihat Detail →</button>
+      <button class="btn-detail mt-4" (click)="lihatDetail(ev)">
+        Lihat Detail →
+      </button>
     </div>
   </div>
 </section>

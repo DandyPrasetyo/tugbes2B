@@ -72,19 +72,16 @@ export class LowonganComponent implements OnInit {
   ngOnInit(): void {
     this.lowonganService.getAll().subscribe({
       next: (data: Lowongan[]) => {
-        // <-- pakai tipe Lowongan
         if (data && data.length) {
-          // hanya lowongan NON-MAGANG yang tampil di menu Loker
           this.lowongan = data
             .filter((job) => job.tipePekerjaan !== 'Magang')
             .map((job) => ({
-              // mapping ke struktur yang sudah dipakai di template & filter
-              judul: job.judulLowongan, // <-- judul lowongan (kolom Judul Lowongan)
-              posisi: job.posisi, // <-- kolom Posisi
+              judul: job.judulLowongan,
+              posisi: job.posisi,
               judulLowongan: job.judulLowongan,
-              perusahaan: job.perusahaanId, // ganti nanti kalau sudah ambil nama perusahaan
-              lokasi: job.lokasi, // <-- ambil lokasi dari backend
-              deskripsi: job.deskripsi, // <-- tambahan: deskripsi dari backend
+              perusahaan: job.perusahaanId,
+              lokasi: job.lokasi,
+              deskripsi: job.deskripsi,
               tipe:
                 job.tipePekerjaan === 'Full_time'
                   ? 'Fulltime'
@@ -94,8 +91,9 @@ export class LowonganComponent implements OnInit {
               posted: job.createdAt,
               deadline: job.batasTanggal,
               status: job.status === 'Aktif' ? 'Tersedia' : 'Ditutup',
-              flayer: job.flayer, // supaya bisa dipakai di HTML
-              lowonganId: (job as any).lowonganId ?? (job as any).lowongan_id, // <--- TAMBAHAN kecil untuk id kalau ada
+              flayer: job.flayer,
+              lowonganId:
+                (job as any).lowonganId ?? (job as any).lowongan_id,
             }));
         }
       },
@@ -108,13 +106,19 @@ export class LowonganComponent implements OnInit {
     });
   }
 
+  // ✅ DIPERBAIKI DI SINI (AGAR TIDAK CRASH)
   get filteredLowongan() {
     return this.lowongan.filter((job) => {
+      const posisi = job.posisi ?? '';
+      const lokasi = job.lokasi ?? '';
+      const tipe = job.tipe ?? '';
+      const status = job.status ?? '';
+
       return (
-        job.posisi.toLowerCase().includes(this.search.toLowerCase()) &&
-        (this.filterLokasi ? job.lokasi === this.filterLokasi : true) &&
-        (this.filterTipe ? job.tipe === this.filterTipe : true) &&
-        (this.filterStatus ? job.status === this.filterStatus : true)
+        posisi.toLowerCase().includes(this.search.toLowerCase()) &&
+        (this.filterLokasi ? lokasi === this.filterLokasi : true) &&
+        (this.filterTipe ? tipe === this.filterTipe : true) &&
+        (this.filterStatus ? status === this.filterStatus : true)
       );
     });
   }
@@ -123,10 +127,8 @@ export class LowonganComponent implements OnInit {
   lihatDetail(job: any) {
     if (job.lowonganId || job.lowongan_id || job.id) {
       const id = job.lowonganId || job.lowongan_id || job.id;
-      // sesuaikan dengan route: /career/loker/:id
       this.router.navigate(['/career/loker', id]);
     } else {
-      // kalau suatu saat mau pakai state ke halaman lain, route fallback bisa disesuaikan
       this.router.navigate(['/career/loker'], {
         state: { data: job },
       });

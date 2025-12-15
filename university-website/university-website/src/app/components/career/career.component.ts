@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './career.component.html',
   styleUrls: ['./career.component.css'],
 })
-export class CareerComponent implements OnInit {
+export class CareerComponent implements OnInit, OnDestroy {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -41,7 +41,7 @@ export class CareerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // 🔥 FIX SSR: hanya jalankan interval di browser, bukan di server
+    // 🔥 FIX SSR: hanya jalankan interval di browser
     if (isPlatformBrowser(this.platformId)) {
       this.startAutoSlide();
     }
@@ -50,20 +50,31 @@ export class CareerComponent implements OnInit {
     this.moreLink = '/career/loker';
   }
 
+  // ✅ PENTING: hentikan interval agar tidak crash
+  ngOnDestroy(): void {
+    if (this.slideInterval) {
+      clearInterval(this.slideInterval);
+    }
+  }
+
   startAutoSlide() {
+    if (!this.slides || this.slides.length === 0) return;
     this.slideInterval = setInterval(() => this.nextSlide(), 4000);
   }
 
   nextSlide() {
+    if (!this.slides || this.slides.length === 0) return;
     this.currentSlide = (this.currentSlide + 1) % this.slides.length;
   }
 
   prevSlide() {
+    if (!this.slides || this.slides.length === 0) return;
     this.currentSlide =
       (this.currentSlide - 1 + this.slides.length) % this.slides.length;
   }
 
   goToSlide(index: number) {
+    if (!this.slides || this.slides.length === 0) return;
     this.currentSlide = index;
   }
 
