@@ -7,10 +7,16 @@
     class="slides-container"
     [style.transform]="'translateX(-' + currentSlide * 100 + '%)'"
   >
+    <!-- 🔥 TAMBAHAN FIX ZOOM (TANPA HAPUS KODE LAMA) -->
     <div
       *ngFor="let slide of slides"
       class="slide-item"
-      [style.backgroundImage]="'url(/assets/img/' + slide.image + ')'"
+      [ngStyle]="{
+        'background-image': 'url(/assets/img/' + slide.image + ')',
+        'background-size': 'contain',
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat'
+      }"
     ></div>
   </div>
 
@@ -128,7 +134,7 @@
       <img src="assets/img/mitra/goto.png" class="h-12" />
       <img src="assets/img/mitra/pertamina.png" class="h-12" />
 
-      <!-- Repeat for infinite looping -->
+      <!-- Repeat -->
       <img src="assets/img/mitra/google.png" class="h-12" />
       <img src="assets/img/mitra/bni.png" class="h-12" />
       <img src="assets/img/mitra/pln.png" class="h-12" />

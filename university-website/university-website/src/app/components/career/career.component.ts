@@ -36,7 +36,7 @@ export class CareerComponent implements OnInit, OnDestroy {
       desc: 'Cari lowongan pekerjaan dari perusahaan terpercaya setiap hari.',
     },
     {
-      image: 'loker.jpg',
+      image: 'loker.jpeg',
       title: 'Tingkatkan Skill dan Kompetensimu',
       desc: 'Ikuti pelatihan dan workshop untuk masa depan profesionalmu.',
     },
@@ -77,6 +77,19 @@ export class CareerComponent implements OnInit, OnDestroy {
 
   goToSlide(index: number) {
     this.currentSlide = index;
+  }
+
+  /* ====================================== */
+  /*        TAMBAHAN FIX BACKGROUND HERO    */
+  /* ====================================== */
+
+  get heroBackgroundStyle() {
+    return {
+      'background-image': `url(assets/img/${this.slides[this.currentSlide].image})`,
+      'background-size': 'contain', // ⬅️ supaya gambar tidak zoom
+      'background-position': 'center center',
+      'background-repeat': 'no-repeat',
+    };
   }
 
   /* ====================================== */
