@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Inject,
+  PLATFORM_ID,
+} from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -10,7 +16,6 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./career.component.css'],
 })
 export class CareerComponent implements OnInit, OnDestroy {
-
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   /* ====================================== */
@@ -40,8 +45,7 @@ export class CareerComponent implements OnInit, OnDestroy {
   private slideInterval: any;
 
   ngOnInit(): void {
-
-    // 🔥 FIX SSR: hanya jalankan interval di browser
+    // 🔥 FIX SSR: hanya jalankan di browser
     if (isPlatformBrowser(this.platformId)) {
       this.startAutoSlide();
     }
@@ -50,7 +54,7 @@ export class CareerComponent implements OnInit, OnDestroy {
     this.moreLink = '/career/loker';
   }
 
-  // ✅ PENTING: hentikan interval agar tidak crash
+  // ✅ Hentikan interval saat component dihancurkan
   ngOnDestroy(): void {
     if (this.slideInterval) {
       clearInterval(this.slideInterval);
@@ -63,18 +67,15 @@ export class CareerComponent implements OnInit, OnDestroy {
   }
 
   nextSlide() {
-    if (!this.slides || this.slides.length === 0) return;
     this.currentSlide = (this.currentSlide + 1) % this.slides.length;
   }
 
   prevSlide() {
-    if (!this.slides || this.slides.length === 0) return;
     this.currentSlide =
       (this.currentSlide - 1 + this.slides.length) % this.slides.length;
   }
 
   goToSlide(index: number) {
-    if (!this.slides || this.slides.length === 0) return;
     this.currentSlide = index;
   }
 
