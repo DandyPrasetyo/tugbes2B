@@ -10,7 +10,6 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./career.component.css'],
 })
 export class CareerComponent implements OnInit {
-
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   /* ====================================== */
@@ -26,12 +25,12 @@ export class CareerComponent implements OnInit {
       desc: 'Akses informasi magang, lowongan kerja, dan pelatihan karier terbaru.',
     },
     {
-      image: 'kampus3.jpg',
+      image: 'loker11.jpg',
       title: 'Temukan Peluang Kerja Terbaik',
       desc: 'Cari lowongan pekerjaan dari perusahaan terpercaya setiap hari.',
     },
     {
-      image: 'kampus0.jpg',
+      image: 'loker.jpg',
       title: 'Tingkatkan Skill dan Kompetensimu',
       desc: 'Ikuti pelatihan dan workshop untuk masa depan profesionalmu.',
     },
@@ -40,7 +39,6 @@ export class CareerComponent implements OnInit {
   private slideInterval: any;
 
   ngOnInit(): void {
-
     // 🔥 FIX SSR: hanya jalankan interval di browser, bukan di server
     if (isPlatformBrowser(this.platformId)) {
       this.startAutoSlide();
