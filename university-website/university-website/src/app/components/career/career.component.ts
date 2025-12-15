@@ -26,12 +26,12 @@ export class CareerComponent implements OnInit, OnDestroy {
       desc: 'Akses informasi magang, lowongan kerja, dan pelatihan karier terbaru.',
     },
     {
-      image: 'kampus3.jpg',
+      image: 'loker11.jpg',
       title: 'Temukan Peluang Kerja Terbaik',
       desc: 'Cari lowongan pekerjaan dari perusahaan terpercaya setiap hari.',
     },
     {
-      image: 'kampus0.jpg',
+      image: 'loker.jpg',
       title: 'Tingkatkan Skill dan Kompetensimu',
       desc: 'Ikuti pelatihan dan workshop untuk masa depan profesionalmu.',
     },
