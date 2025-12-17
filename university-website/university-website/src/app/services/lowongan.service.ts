@@ -16,7 +16,12 @@ export class LowonganService {
   // GET Lowongan terbaru (beranda)
   // ===============================
   getLatest(limit: number): Observable<Lowongan[]> {
-    // ambil semua dari /lowongan lalu urutkan terbaru di frontend
+    // OPSI 1: pakai endpoint backend /lowongan/latest/{limit}
+    // return this.http
+    //   .get<any>(`${this.apiUrl}/lowongan/latest/${limit}`)
+    //   .pipe(map((res) => res.data as Lowongan[]));
+
+    // OPSI 2 (aktif sekarang): ambil semua dari /lowongan lalu urutkan di frontend
     return this.getAll().pipe(
       map((list: Lowongan[]) =>
         [...list]
@@ -83,8 +88,6 @@ export class LowonganService {
 
   // ===============================
   // UPDATE dengan ganti poster (Multipart)
-  //   → sesuaikan dengan controller:
-  //     @PutMapping(path = "/{id}", consumes = MULTIPART_FORM_DATA)
   // ===============================
   updateWithPoster(
     id: number,
