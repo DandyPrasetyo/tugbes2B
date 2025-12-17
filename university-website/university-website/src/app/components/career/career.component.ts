@@ -6,7 +6,11 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+
+// TAMBAHAN: service lowongan & magang
+import { LowonganService } from '@services/lowongan.service';
+import { MagangService } from '@services/magang.service';
 
 @Component({
   selector: 'app-career',
@@ -16,7 +20,17 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./career.component.css'],
 })
 export class CareerComponent implements OnInit, OnDestroy {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private lowonganService: LowonganService, // TAMBAHAN
+    private magangService: MagangService,     // TAMBAHAN
+    private router: Router                    // TAMBAHAN
+  ) {}
+
+  // TAMBAHAN: base URL poster & logo (sesuai backend)
+  posterBaseUrl = 'http://localhost:8080/';
+  // SAMA seperti MitraComponent
+  logoBaseUrl = 'http://localhost:8080/uploads/logo-perusahaan/';
 
   /* ====================================== */
   /*               HERO SLIDER              */
@@ -45,16 +59,15 @@ export class CareerComponent implements OnInit, OnDestroy {
   private slideInterval: any;
 
   ngOnInit(): void {
-    // 🔥 FIX SSR: hanya jalankan di browser
     if (isPlatformBrowser(this.platformId)) {
       this.startAutoSlide();
     }
 
-    this.displayedItems = this.lowonganList;
+    this.displayedItems = [];
     this.moreLink = '/career/loker';
+    this.loadLatestFromBackend();
   }
 
-  // ✅ Hentikan interval saat component dihancurkan
   ngOnDestroy(): void {
     if (this.slideInterval) {
       clearInterval(this.slideInterval);
@@ -79,14 +92,10 @@ export class CareerComponent implements OnInit, OnDestroy {
     this.currentSlide = index;
   }
 
-  /* ====================================== */
-  /*        TAMBAHAN FIX BACKGROUND HERO    */
-  /* ====================================== */
-
   get heroBackgroundStyle() {
     return {
       'background-image': `url(assets/img/${this.slides[this.currentSlide].image})`,
-      'background-size': 'contain', // ⬅️ supaya gambar tidak zoom
+      'background-size': 'contain',
       'background-position': 'center center',
       'background-repeat': 'no-repeat',
     };
@@ -164,12 +173,80 @@ export class CareerComponent implements OnInit, OnDestroy {
   selectCategory(category: string) {
     this.selectedCategory = category;
 
-    if (category === 'loker') {
-      this.displayedItems = this.lowonganList;
-      this.moreLink = '/career/loker';
+    this.displayedItems = [];
+    this.moreLink = category === 'loker' ? '/career/loker' : '/career/magang';
+
+    this.loadLatestFromBackend();
+  }
+
+  /* ====================================== */
+  /*         TAMBAHAN: DATA BACKEND         */
+  /* ====================================== */
+
+  private loadLatestFromBackend(): void {
+    if (this.selectedCategory === 'loker') {
+      this.lowonganService.getLatest(3).subscribe({
+        next: (list: any[]) => {
+          this.displayedItems = list
+            .filter((job) => job.tipePekerjaan !== 'Magang')
+            .map((job) => ({
+              _id: job.lowonganId,
+              img: job.flayer ? this.posterBaseUrl + job.flayer : '',
+              // LOGO SAMA CARA AMBILNYA DENGAN MITRA
+              logo: job.perusahaan?.logo
+                ? this.logoBaseUrl + job.perusahaan.logo
+                : '',
+              title: job.judulLowongan,
+              desc: job.posisi,
+              post: job.createdAt ?? '-',
+              deadline: job.batasTanggal ?? '-',
+              statusHtml:
+                job.status === 'Aktif'
+                  ? "🔵 <span class='text-green-600'>Tersedia</span>"
+                  : "🔴 <span class='text-red-600'>Ditutup</span>",
+            }));
+        },
+        error: (err) => {
+          console.error('Gagal load lowongan terbaru', err);
+        },
+      });
     } else {
-      this.displayedItems = this.magangList;
-      this.moreLink = '/career/magang';
+      this.magangService.getLatest(3).subscribe({
+        next: (list: any[]) => {
+          console.log('MAGANG LATEST', list);
+
+          this.displayedItems = list.map((job) => ({
+            _id: job.lowonganId,
+            img: job.flayer ? this.posterBaseUrl + job.flayer : '',
+            // LOGO SAMA CARA AMBILNYA DENGAN MITRA
+            logo: job.perusahaan?.logo
+              ? this.logoBaseUrl + job.perusahaan.logo
+              : '',
+            title: job.judulLowongan,
+            desc: job.posisi,
+            post: job.createdAt ?? '-',
+            deadline: job.batasTanggal ?? '-',
+            statusHtml:
+              job.status === 'Aktif'
+                ? "🔵 <span class='text-green-600'>Tersedia</span>"
+                : "🔴 <span class='text-red-600'>Ditutup</span>",
+          }));
+        },
+        error: (err) => {
+          console.error('Gagal load magang terbaru', err);
+        },
+      });
+    }
+  }
+
+  // TAMBAHAN: tombol Detail di card beranda
+  goDetail(item: any): void {
+    if (!item?._id) return;
+
+    if (this.selectedCategory === 'loker') {
+      this.router.navigate(['/career/loker', item._id]);
+    } else {
+      this.router.navigate(['/career/magang', item._id]);
     }
   }
 }

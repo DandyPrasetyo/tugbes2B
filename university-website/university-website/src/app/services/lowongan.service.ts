@@ -13,6 +13,24 @@ export class LowonganService {
   constructor(private http: HttpClient) {}
 
   // ===============================
+  // GET Lowongan terbaru (beranda)
+  // ===============================
+  getLatest(limit: number): Observable<Lowongan[]> {
+    // ambil semua dari /lowongan lalu urutkan terbaru di frontend
+    return this.getAll().pipe(
+      map((list: Lowongan[]) =>
+        [...list]
+          .sort((a: any, b: any) => {
+            const da = new Date(a.createdAt ?? 0).getTime();
+            const db = new Date(b.createdAt ?? 0).getTime();
+            return db - da; // terbaru dulu
+          })
+          .slice(0, limit)
+      )
+    );
+  }
+
+  // ===============================
   // GET Semua Lowongan
   // ===============================
   getAll(): Observable<Lowongan[]> {

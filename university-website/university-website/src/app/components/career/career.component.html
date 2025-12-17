@@ -86,10 +86,11 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <div *ngFor="let item of displayedItems" class="career-card">
         <div class="company-logo">
-          <img [src]="item.logo" />
+          <img [src]="item.logo" alt="Logo perusahaan" />
         </div>
 
-        <img [src]="item.img" />
+        <!-- TAMBAHAN class & alt untuk poster -->
+        <img [src]="item.img" alt="Poster karier" class="career-poster" />
 
         <h4 class="career-title">{{ item.title }}</h4>
         <p class="career-desc">{{ item.desc }}</p>
@@ -104,7 +105,8 @@
           <p [innerHTML]="item.statusHtml"></p>
         </div>
 
-        <button class="btn-detail">Detail</button>
+        <!-- TAMBAHAN: klik Detail panggil TS -->
+        <button class="btn-detail" (click)="goDetail(item)">Detail</button>
       </div>
     </div>
 

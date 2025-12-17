@@ -158,36 +158,43 @@ export class FormPerusahaanComponent implements OnInit {
     });
   }
 
-  save(): void {
-    if (this.isEdit) {
-      this.perusahaanService.update(this.id, this.perusahaan).subscribe({
-        next: (res: any) => {
-          // res.data = Perusahaan
-          const perusahaanId = res.data?.id ?? this.id;
-          this.uploadLogoIfAny(perusahaanId);
+save(): void {
+  if (this.isEdit) {
+    this.perusahaanService.update(this.id, this.perusahaan).subscribe({
+      next: (res: any) => {
+        // coba pakai perusahaanId dulu, kalau tidak ada pakai id, kalau masih tidak ada pakai this.id
+        const perusahaanId = res.data?.perusahaanId ?? res.data?.id ?? this.id;
+        this.uploadLogoIfAny(perusahaanId);
 
-          alert('Perusahaan berhasil diperbarui');
-          this.router.navigate(['/career/admin/perusahaan']);
-        },
-        error: (err: any) => {
-          console.error('Gagal update perusahaan:', err);
-          alert('Gagal update perusahaan');
-        },
-      });
-    } else {
-      this.perusahaanService.create(this.perusahaan).subscribe({
-        next: (res: any) => {
-          const perusahaanId = res.data?.id;
-          this.uploadLogoIfAny(perusahaanId);
+        alert('Perusahaan berhasil diperbarui');
+        this.router.navigate(['/career/admin/perusahaan']);
+      },
+      error: (err: any) => {
+        console.error('Gagal update perusahaan:', err);
+        alert('Gagal update perusahaan');
+      },
+    });
+  } else {
+    this.perusahaanService.create(this.perusahaan).subscribe({
+      next: (res: any) => {
+        // ambil id dari response create
+        const perusahaanId = res.data?.perusahaanId ?? res.data?.id;
 
-          alert('Perusahaan berhasil ditambahkan');
-          this.router.navigate(['/career/admin/perusahaan']);
-        },
-        error: (err: any) => {
-          console.error('Gagal tambah perusahaan:', err);
-          alert('Gagal tambah perusahaan');
-        },
-      });
-    }
+        if (!perusahaanId) {
+          console.error('ID perusahaan tidak ditemukan di response:', res);
+        }
+
+        this.uploadLogoIfAny(perusahaanId);
+
+        alert('Perusahaan berhasil ditambahkan');
+        this.router.navigate(['/career/admin/perusahaan']);
+      },
+      error: (err: any) => {
+        console.error('Gagal tambah perusahaan:', err);
+        alert('Gagal tambah perusahaan');
+      },
+    });
   }
+}
+
 }

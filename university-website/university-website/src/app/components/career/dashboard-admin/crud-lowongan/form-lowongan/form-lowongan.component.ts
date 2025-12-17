@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { LowonganService } from '@services/lowongan.service';
+// TAMBAHAN: service & model perusahaan
+import { PerusahaanService } from '@services/perusahaan.service';
+import { Perusahaan } from '@models/perusahaan.model';
 
 @Component({
   selector: 'app-form-lowongan',
@@ -16,7 +19,7 @@ export class FormLowonganComponent implements OnInit {
   // struktur sesuai LowonganRequest + response backend
   lowongan: any = {
     adminId: 1,
-    perusahaanId: 2, // default perusahaanId yang valid
+    perusahaanId: 2, // default perusahaanId yang valid (backend tetap butuh)
     judulLowongan: '',
     posisi: '',
     deskripsi: '',
@@ -25,6 +28,8 @@ export class FormLowonganComponent implements OnInit {
     gaji: null,
     batasTanggal: '',
     status: 'Aktif',
+    lokasi: '', // opsional: kalau mau diisi dari form
+    namaPerusahaan: '', // TAMBAHAN: teks perusahaan bebas dari form
   };
 
   // file poster yang dipilih user
@@ -33,19 +38,38 @@ export class FormLowonganComponent implements OnInit {
   isEdit = false;
   id!: number;
 
+  // TAMBAHAN: daftar perusahaan untuk dropdown (saat ini tidak dipakai di form)
+  perusahaanList: Perusahaan[] = [];
+
   constructor(
     private lowonganService: LowonganService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private perusahaanService: PerusahaanService // TAMBAHAN
   ) {}
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
 
+    // TAMBAHAN: load semua perusahaan untuk select (bisa dipakai nanti)
+    this.loadPerusahaan();
+
     if (this.id) {
       this.isEdit = true;
       this.loadDetail();
     }
+  }
+
+  // TAMBAHAN: ambil data perusahaan dari backend
+  private loadPerusahaan(): void {
+    this.perusahaanService.getAll().subscribe({
+      next: (data) => {
+        this.perusahaanList = data;
+      },
+      error: (err) => {
+        console.error('Gagal memuat daftar perusahaan:', err);
+      },
+    });
   }
 
   loadDetail(): void {
@@ -55,8 +79,17 @@ export class FormLowonganComponent implements OnInit {
       if (!this.lowongan.adminId) {
         this.lowongan.adminId = 1;
       }
-      if (!this.lowongan.perusahaanId) {
+
+      // 💡 TAMBAHAN: isi perusahaanId dari relasi perusahaan jika ada
+      if (!this.lowongan.perusahaanId && this.lowongan.perusahaan?.perusahaanId) {
+        this.lowongan.perusahaanId = this.lowongan.perusahaan.perusahaanId;
+      } else if (!this.lowongan.perusahaanId) {
         this.lowongan.perusahaanId = 2;
+      }
+
+      // pastikan properti namaPerusahaan selalu ada
+      if (!this.lowongan.namaPerusahaan) {
+        this.lowongan.namaPerusahaan = '';
       }
     });
   }

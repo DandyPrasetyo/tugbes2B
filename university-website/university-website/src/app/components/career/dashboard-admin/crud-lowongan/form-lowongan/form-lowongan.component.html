@@ -40,6 +40,36 @@
       />
     </div>
 
+    <!-- PERUSAHAAN (PILIH DARI MASTER) -->
+    <div>
+      <label class="font-semibold">Perusahaan</label>
+      <select
+        class="form-input"
+        [(ngModel)]="lowongan.perusahaanId"
+        name="perusahaanId"
+        required
+      >
+        <option [ngValue]="null" disabled>
+          Pilih perusahaan...
+        </option>
+        <option *ngFor="let p of perusahaanList" [ngValue]="p.perusahaanId">
+          {{ p.nama_perusahaan }}
+        </option>
+      </select>
+    </div>
+
+    <!-- NAMA PERUSAHAAN (KETIK BEBAS) -->
+    <div>
+      <label class="font-semibold">Nama Perusahaan (tampil di kartu)</label>
+      <input
+        type="text"
+        [(ngModel)]="lowongan.namaPerusahaan"
+        name="namaPerusahaan"
+        class="form-input"
+        placeholder="Contoh: PT PLN Persero, MNCTV"
+      />
+    </div>
+
     <!-- Deskripsi -->
     <div>
       <label class="font-semibold">Deskripsi</label>
