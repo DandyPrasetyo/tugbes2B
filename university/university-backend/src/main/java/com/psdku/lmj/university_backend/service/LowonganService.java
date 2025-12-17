@@ -8,6 +8,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,9 +28,10 @@ public class LowonganService {
     private final AdminRepository adminRepository;
     private final PerusahaanRepository perusahaanRepository;
 
-    public LowonganService(LowonganRepository lowonganRepository,
-                           AdminRepository adminRepository,
-                           PerusahaanRepository perusahaanRepository) {
+    public LowonganService(
+            LowonganRepository lowonganRepository,
+            AdminRepository adminRepository,
+            PerusahaanRepository perusahaanRepository) {
 
         this.lowonganRepository = lowonganRepository;
         this.adminRepository = adminRepository;
@@ -163,5 +166,14 @@ public class LowonganService {
         } catch (IOException e) {
             throw new RuntimeException("Gagal menyimpan file poster", e);
         }
+    }
+
+    // =====================================================
+    // GET LATEST (untuk career homepage)
+    // =====================================================
+    public List<Lowongan> getLatestLowongan(int limit) {
+        return lowonganRepository
+                .findAll(PageRequest.of(0, limit, Sort.by(Sort.Direction.DESC, "createdAt")))
+                .getContent();
     }
 }

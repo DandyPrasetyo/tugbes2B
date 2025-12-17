@@ -41,6 +41,13 @@ public class LowonganController {
         return ResponseEntity.ok(new ApiResponse(true, "Data lowongan berhasil diambil", list));
     }
 
+    // 🔹 GET LATEST (untuk career homepage)
+    @GetMapping("/latest/{limit}")
+    public ResponseEntity<ApiResponse> getLatestLowongan(@PathVariable int limit) {
+        List<Lowongan> list = lowonganService.getLatestLowongan(limit);
+        return ResponseEntity.ok(new ApiResponse(true, "Data lowongan terbaru berhasil diambil", list));
+    }
+
     // GET BY ID
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse> getLowonganById(@PathVariable Long id) {

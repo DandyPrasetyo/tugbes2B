@@ -1,17 +1,24 @@
 package com.psdku.lmj.university_backend.controller;
 
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.psdku.lmj.university_backend.dto.ApiResponse;
 import com.psdku.lmj.university_backend.dto.LoginRequest;
 import com.psdku.lmj.university_backend.model.Admin;
 import com.psdku.lmj.university_backend.service.AdminService;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -20,6 +27,16 @@ public class AuthController {
 
     @Autowired
     private AdminService adminService;
+
+    /* ============================
+            CEK AUTH (BARU)
+       ============================ */
+    @GetMapping
+    public ResponseEntity<ApiResponse> authCheck() {
+        return ResponseEntity.ok(
+                new ApiResponse(true, "Auth endpoint aktif", null)
+        );
+    }
 
     /* ============================
             LOGIN ADMIN
