@@ -1,0 +1,107 @@
+<div *ngIf="perusahaan" class="mitra-detail-wrapper">
+
+  <div class="mitra-card">
+
+    <!-- HEADER -->
+    <div class="mitra-header">
+      <img
+        [src]="logoBaseUrl + perusahaan.logo"
+        alt="{{ perusahaan.nama_perusahaan }}"
+        class="mitra-logo"
+        onerror="this.src='assets/img/no-logo.png'"
+      />
+
+      <div class="mitra-title">
+        <h2>{{ perusahaan.nama_perusahaan }}</h2>
+        <span class="mitra-badge">Mitra Resmi Career Center</span>
+      </div>
+    </div>
+
+    <!-- DESKRIPSI -->
+    <div class="mitra-section">
+      <h4>Profil Perusahaan</h4>
+
+      <p class="mitra-description">
+        {{ perusahaan.deskripsi }}
+      </p>
+
+      <p class="mitra-description">
+        Perusahaan ini menjalin kerja sama strategis dengan Politeknik Negeri Malang
+        dalam rangka mendukung pengembangan kompetensi mahasiswa dan alumni melalui
+        berbagai program kolaboratif, peningkatan keterampilan kerja, serta
+        penyesuaian kebutuhan industri terhadap dunia pendidikan vokasi.
+      </p>
+
+      <p class="mitra-description">
+        Kolaborasi ini diharapkan mampu menciptakan lulusan yang siap kerja,
+        profesional, serta memiliki daya saing tinggi di tingkat nasional maupun
+        internasional.
+      </p>
+    </div>
+
+    <!-- KONTAK -->
+    <div class="mitra-section kontak">
+      <h4>Informasi Kontak</h4>
+
+      <div class="kontak-grid">
+        <div class="kontak-item">
+          <strong>Alamat</strong>
+          <span>{{ perusahaan.alamat }}</span>
+        </div>
+
+        <div class="kontak-item">
+          <strong>Email</strong>
+          <span>{{ perusahaan.email }}</span>
+        </div>
+
+        <div class="kontak-item">
+          <strong>Telepon</strong>
+          <span>{{ perusahaan.no_telp }}</span>
+        </div>
+
+        <div class="kontak-item" *ngIf="perusahaan.website">
+          <strong>Website</strong>
+          <a
+            [href]="perusahaan.website"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ perusahaan.website }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAPS -->
+    <div class="mitra-section">
+      <h4>Lokasi Perusahaan</h4>
+
+      <div style="margin-top:12px;border-radius:14px;overflow:hidden">
+        <iframe
+          [src]="getSafeMapsEmbed()"
+          width="100%"
+          height="300"
+          style="border:0"
+          loading="lazy">
+        </iframe>
+      </div>
+
+      <a
+        [href]="getMapsLinkAccurate()"
+        target="_blank"
+        style="display:inline-block;margin-top:8px;font-weight:600;color:#2563eb"
+      >
+        📍 Buka di Google Maps
+      </a>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="mitra-card-footer">
+      <a routerLink="/career/mitra" class="btn-back">
+        ← Kembali ke Daftar Mitra
+      </a>
+    </div>
+
+  </div>
+
+</div>

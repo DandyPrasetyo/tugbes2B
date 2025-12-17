@@ -6,7 +6,11 @@ export interface Perusahaan {
   no_telp?: number;
   deskripsi?: string;
   website?: string;
-  logo?: string | null;   // path / URL logo
+  logo?: string | null;
+
+  latitude?: number;    // ⬅️ TAMBAH
+  longitude?: number;   // ⬅️ TAMBAH
+
   createdAt?: string;
   updatedAt?: string;
 }

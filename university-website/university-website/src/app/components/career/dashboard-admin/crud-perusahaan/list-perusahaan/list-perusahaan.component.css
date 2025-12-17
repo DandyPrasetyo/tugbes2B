@@ -114,10 +114,39 @@
   font-size: 0.9rem;
 }
 
-/* Logo perusahaan di tabel */
+/* Logo perusahaan di tabel (CSS LAMA - TIDAK DIUBAH) */
 .logo-img {
   width: 40px;
   height: 40px;
   object-fit: cover;
   border-radius: 8px;
+}
+
+/* ================================================= */
+/* TAMBAHAN FIX LOGO DASHBOARD (TANPA UBAH CSS LAMA) */
+/* ================================================= */
+
+.logo-cell {
+  width: 120px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.logo-wrapper {
+  width: 80px;
+  height: 80px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Logo baru khusus list dashboard */
+.company-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* KUNCI AGAR LOGO TIDAK TERPOTONG */
 }

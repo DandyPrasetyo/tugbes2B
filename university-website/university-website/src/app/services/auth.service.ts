@@ -25,12 +25,17 @@ export class AuthService {
   // BASE URL ADMIN (LOGIN + CRUD)
   private adminUrl = 'http://localhost:8080/api/admin';
 
+  // ================= TAMBAHAN (TIDAK MENGUBAH YANG LAMA) =================
+  // BASE URL AUTH (LOGIN VIA AUTH CONTROLLER)
+  private authUrl = 'http://localhost:8080/api/auth';
+  // =====================================================================
+
   constructor(
     private http: HttpClient,
     private router: Router
   ) {}
 
-  /* LOGIN ADMIN */
+  /* LOGIN ADMIN (ADMIN CONTROLLER — TETAP ADA, TIDAK DIUBAH) */
   login(payload: { email: string; password: string }): Observable<ApiResponse<LoginData>> {
     // POST http://localhost:8080/api/admin/login
     return this.http.post<ApiResponse<LoginData>>(
@@ -39,27 +44,46 @@ export class AuthService {
     );
   }
 
+  // ================= TAMBAHAN AMAN =================
+  // LOGIN ADMIN VIA AUTH CONTROLLER (POST)
+  loginAuth(payload: { email: string; password: string }): Observable<ApiResponse<LoginData>> {
+    // POST http://localhost:8080/api/auth/login
+    return this.http.post<ApiResponse<LoginData>>(
+      `${this.authUrl}/login`,
+      payload
+    );
+  }
+
+  // 🔹 GET LOGIN (KHUSUS TESTING POSTMAN, TIDAK DIPAKAI ANGULAR)
+  // contoh:
+  // GET /api/auth/login?email=xxx&password=yyy
+  loginAuthGet(email: string, password: string): Observable<ApiResponse<LoginData>> {
+    return this.http.get<ApiResponse<LoginData>>(
+      `${this.authUrl}/login`,
+      {
+        params: { email, password }
+      }
+    );
+  }
+  // =================================================
+
   /* LOGOUT ADMIN */
   logout(): void {
-    // hapus data login yang kamu simpan
     localStorage.removeItem('token');
     localStorage.removeItem('adminId');
     localStorage.removeItem('nama');
 
-    // redirect ke halaman login admin (lihat app.routes.ts → path: 'career/login-admin')
     this.router.navigate(['/career/login-admin']);
   }
 
   /* ================== CRUD ADMIN ================== */
 
-  // GET semua admin
   getAll(): Observable<Admin[]> {
     return this.http
       .get<ApiResponse<Admin[]>>(this.adminUrl)
       .pipe(map((res) => res.data));
   }
 
-  // GET admin by id
   getById(id: number): Observable<Admin> {
     return this.http
       .get<ApiResponse<Admin>>(`${this.adminUrl}/${id}`)

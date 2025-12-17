@@ -27,6 +27,9 @@ import { LoginadminComponent } from './components/career/login-admin/login-admin
 ================================ */
 import { MitraComponent } from './components/career/mitra/mitra.component';
 
+/* ⭐⭐ TAMBAHAN: halaman detail mitra */
+import { MitraDetailComponent } from './components/career/mitra/mitra-detail/mitra-detail.component';
+
 /* ⭐⭐ TAMBAHAN: halaman detail lowongan (career publik) */
 import { LowonganDetailComponent } from './components/career/lowongan/lowongan-detail/lowongan-detail.component';
 
@@ -35,7 +38,6 @@ import { MagangDetailComponent } from './components/career/magang/magang-detail/
 
 /* ⭐⭐ TAMBAHAN: halaman detail event (career publik) */
 import { EventDetailComponent } from './components/career/event/event-detail/event-detail.component';
-
 
 /* ===============================
    DASHBOARD ADMIN
@@ -62,10 +64,6 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
 
   /* ===============================
-       CAREER CENTER ROUTING
-   ================================= */
-
-  /* ===============================
        BERITA (BARU)
    ================================ */
   { path: 'berita', component: BeritaListComponent },
@@ -74,7 +72,6 @@ export const routes: Routes = [
   /* ===============================
        CAREER CENTER
    ================================ */
-
   {
     path: 'career',
     component: CareerLayoutComponent,
@@ -82,53 +79,42 @@ export const routes: Routes = [
       { path: '', component: CareerComponent },
       { path: 'home', component: CareerComponent },
 
-      // LIST LOWONGAN (halaman utama loker)
+      // LIST LOWONGAN
       { path: 'loker', component: LowonganComponent },
-
-      // ⭐⭐ TAMBAHAN: HALAMAN DETAIL LOWONGAN
-      // contoh URL: /career/loker/5
       { path: 'loker/:id', component: LowonganDetailComponent },
 
       // LIST MAGANG
       { path: 'magang', component: MagangComponent },
-
-      // ⭐⭐ TAMBAHAN: HALAMAN DETAIL MAGANG
-      // contoh URL: /career/magang/3
       { path: 'magang/:id', component: MagangDetailComponent },
 
+      // EVENT
       { path: 'event', component: EventComponent },
-
-      // ⭐⭐ TAMBAHAN: HALAMAN DETAIL EVENT
-      // contoh URL: /career/event/2
       { path: 'event/:id', component: EventDetailComponent },
 
       /* MITRA */
       { path: 'mitra', component: MitraComponent },
 
+      /* ⭐⭐ TAMBAHAN: DETAIL MITRA */
+      // contoh URL: /career/mitra/3
+      { path: 'mitra/:id', component: MitraDetailComponent },
+
       { path: 'login-admin', component: LoginadminComponent },
 
       /* ===============================
-
-           ADMIN DASHBOARD ROUTING
+           ADMIN DASHBOARD
        ================================ */
-
       {
         path: 'admin',
         component: DashboardAdminComponent,
         children: [
-          /* CRUD LOWONGAN */
           { path: 'lowongan', component: ListLowonganComponent },
           { path: 'lowongan/add', component: FormLowonganComponent },
           { path: 'lowongan/edit/:id', component: FormLowonganComponent },
 
-          // CRUD PERUSAHAAN
-          /* CRUD PERUSAHAAN */
           { path: 'perusahaan', component: ListPerusahaanComponent },
           { path: 'perusahaan/tambah', component: FormPerusahaanComponent },
           { path: 'perusahaan/edit/:id', component: FormPerusahaanComponent },
 
-          // CRUD ADMIN
-          /* CRUD ADMIN */
           { path: 'admin', component: ListAdminComponent },
           { path: 'admin/tambah', component: FormAdminComponent },
           { path: 'admin/edit/:id', component: FormAdminComponent },
@@ -140,6 +126,5 @@ export const routes: Routes = [
   /* ===============================
        FALLBACK
    ================================ */
-
   { path: '**', redirectTo: '' },
 ];

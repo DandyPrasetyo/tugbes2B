@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
@@ -19,11 +19,23 @@ export class LoginadminComponent {
   loading: boolean = false;
   errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {
-    const token = localStorage.getItem('token');
-    if (token) {
-      // optional auto-redirect
-      // this.router.navigate(['/career/admin']);
+  // cek apakah sedang di browser
+  private isBrowser: boolean;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    @Inject(PLATFORM_ID) platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+
+    // ⬇️ AMAN UNTUK SSR
+    if (this.isBrowser) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        // optional auto-redirect
+        // this.router.navigate(['/career/admin']);
+      }
     }
   }
 
@@ -46,21 +58,22 @@ export class LoginadminComponent {
 
     this.authService.login(payload).subscribe({
       next: (res) => {
-        // backend: { success, message, data: { token, adminId, nama } }
         const data = res.data;
 
         if (res.success && data && data.token) {
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('adminId', String(data.adminId));
+          if (this.isBrowser) {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('adminId', String(data.adminId));
 
-          if (this.remember) {
-            localStorage.setItem('rememberEmail', this.email);
-          } else {
-            localStorage.removeItem('rememberEmail');
-          }
+            if (this.remember) {
+              localStorage.setItem('rememberEmail', this.email);
+            } else {
+              localStorage.removeItem('rememberEmail');
+            }
 
-          if (data.nama) {
-            localStorage.setItem('adminName', data.nama);
+            if (data.nama) {
+              localStorage.setItem('adminName', data.nama);
+            }
           }
 
           this.loading = false;
@@ -80,10 +93,13 @@ export class LoginadminComponent {
   }
 
   ngOnInit() {
-    const remembered = localStorage.getItem('rememberEmail');
-    if (remembered) {
-      this.email = remembered;
-      this.remember = true;
+    // ⬇️ AMAN UNTUK SSR
+    if (this.isBrowser) {
+      const remembered = localStorage.getItem('rememberEmail');
+      if (remembered) {
+        this.email = remembered;
+        this.remember = true;
+      }
     }
   }
 }
