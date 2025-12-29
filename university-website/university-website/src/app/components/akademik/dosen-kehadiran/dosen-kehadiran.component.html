@@ -1,0 +1,136 @@
+<section class="kehadiran-container">
+  <h1 class="kehadiran-title">
+    Kehadiran Dosen Teknologi Informasi
+  </h1>
+
+  <!-- ================= FORM ABSEN (TAMBAHAN) ================= -->
+  <div class="absen-box">
+
+    <!-- ✅ HEADER ABSEN + LOGO POLINEMA (DIORGANISIR ULANG) -->
+    <div class="absen-header">
+      <div class="logo-flip">
+        <!-- ganti src dengan path logo Polinema di project-mu -->
+        <img src="assets/img/logo.png" alt="Logo Polinema" />
+      </div>
+      <h2 class="absen-header-text">
+        FRORM ABSEN DOSEN
+      </h2>
+    </div>
+
+    <div class="absen-field">
+      <input
+        type="text"
+        [(ngModel)]="formNama"
+        placeholder="Masukan Nama Dosen (boleh dengan jabatan)"
+        class="input"
+      >
+    </div>
+
+    <div class="absen-field">
+      <input
+        type="text"
+        [(ngModel)]="formJabatan"
+        placeholder="Masukan Prodi"
+        class="input"
+      >
+    </div>
+
+    <div class="absen-field">
+      <input
+        type="text"
+        [(ngModel)]="formMataKuliah"
+        placeholder="Masukan Mata Kuliah"
+        class="input"
+      >
+    </div>
+
+    <div class="absen-row">
+      <select [(ngModel)]="formStatus" class="input status-select">
+        <option value="Hadir">Hadir</option>
+        <option value="Izin">Izin</option>
+        <option value="Sakit">Sakit</option>
+      </select>
+
+      <input
+        type="date"
+        [(ngModel)]="formTanggal"
+        class="input tanggal-input"
+      >
+
+      <button (click)="absen()" class="btn-absen">
+        ABSEN
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= FILTER LIST (ASLI, TETAP) ================= -->
+  <div class="filter-box">
+    <input
+      type="text"
+      [(ngModel)]="searchNama"
+      placeholder="Cari nama dosen..."
+      class="input"
+    >
+
+    <select [(ngModel)]="selectedStatus" class="input">
+      <option value="">Semua Status</option>
+      <option value="Hadir">Hadir</option>
+      <option value="Izin">Izin</option>
+      <option value="Sakit">Sakit</option>
+    </select>
+
+    <div class="flex gap-2">
+      <button (click)="search()" class="btn-primary">
+        Cari yang sudah absen
+      </button>
+      <!-- ✅ TAMBAHAN: tombol reset pencarian -->
+      <button (click)="resetSearch()" class="btn-secondary">
+        Reset
+      </button>
+      <!-- ✅ TAMBAHAN: hapus semua data hari ini -->
+      <button (click)="clearAllToday()" class="btn-danger">
+        Hapus semua hari ini
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= LIST STATUS (ASLI, TETAP) ================= -->
+  <div class="card-grid">
+    <div *ngFor="let d of hasil; let i = index" class="card">
+      <h2 class="card-name">{{ d.nama }}</h2>
+
+      <!-- d.jabatan dipakai sebagai Prodi di tampilan -->
+      <p class="card-role">
+        <strong>Prodi:</strong> {{ d.jabatan }}
+      </p>
+
+      <p class="card-mk">
+        <strong>Mata Kuliah:</strong> {{ d.mataKuliah }}
+      </p>
+
+      <div class="card-footer">
+        <span
+          class="status"
+          [ngClass]="{
+            'status-hadir': d.status === 'Hadir',
+            'status-izin': d.status === 'Izin',
+            'status-sakit': d.status === 'Sakit'
+          }"
+        >
+          {{ d.status }}
+        </span>
+
+        <span class="tanggal">{{ d.tanggal }}</span>
+
+        <!-- ✅ TAMBAHAN: tombol hapus satu data -->
+        <button class="btn-secondary ml-2" (click)="deleteKehadiran(i)">
+          Hapus
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <p *ngIf="hasil.length === 0" class="empty">
+    Data dosen Belum bisa ditemukan, karena belum ada yang absen.
+  </p>
+</section>

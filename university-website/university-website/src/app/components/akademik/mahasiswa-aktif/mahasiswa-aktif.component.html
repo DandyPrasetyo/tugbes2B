@@ -1,0 +1,122 @@
+<section class="container">
+  <h1 class="title">Mahasiswa Aktif</h1>
+
+  <!-- ================= FILTER ================= -->
+  <div class="filter-box">
+    <input
+      type="text"
+      placeholder="Cari Nama Mahasiswa"
+      [(ngModel)]="searchNama"
+    />
+
+    <select [(ngModel)]="selectedProdi">
+      <option value="">Pilih Asal Prodi</option>
+      <option *ngFor="let p of prodiList" [value]="p">
+        {{ p }}
+      </option>
+    </select>
+
+    <select [(ngModel)]="selectedAngkatan">
+      <option value="">Pilih Tahun Angkatan</option>
+      <option *ngFor="let a of angkatanList" [value]="a">
+        {{ a }}
+      </option>
+    </select>
+
+    <button (click)="search()">Search</button>
+  </div>
+
+  <!-- ================= HASIL ================= -->
+  <div class="result">
+
+    <!-- TAMPILKAN DATA SESUAI PAGINATION -->
+    <div
+      class="card"
+      *ngFor="let m of mahasiswaPerHalaman"
+    >
+      <!-- HEADER KARTU: FOTO KIRI, JUDUL TENGAH, LOGO KANAN -->
+      <div class="card-header">
+        <img
+          class="card-foto"
+          [src]="m.foto || 'assets/img/mahasiswa/default.png'"
+          alt="Foto Mahasiswa"
+        />
+
+        <div class="card-title-block">
+          <h3>MAHASISWA POLITEKNIK NEGERI MALANG</h3>
+          <h4>KAMPUS LUMAJANG</h4>
+        </div>
+
+        <img
+          class="card-logo"
+          src="assets/img/logo.png"
+          alt="Logo Polinema"
+        />
+      </div>
+
+      <hr class="card-divider" />
+
+      <!-- BODY DATA: TEKS RAPI SEPERTI KARTU -->
+      <div class="card-body">
+        <div class="row">
+          <span class="label">NAMA</span>
+          <span class="colon">:</span>
+          <span class="value">{{ m.nama | uppercase }}</span>
+        </div>
+
+        <div class="row">
+          <span class="label">NIM</span>
+          <span class="colon">:</span>
+          <span class="value">{{ m.nim }}</span>
+        </div>
+
+        <div class="row">
+          <span class="label">ASAL PRODI</span>
+          <span class="colon">:</span>
+          <span class="value">{{ m.prodi | uppercase }}</span>
+        </div>
+
+        <div class="row">
+          <span class="label">STATUS</span>
+          <span class="colon">:</span>
+          <span
+            class="value status-text"
+            [ngClass]="m.status?.toLowerCase() === 'aktif' ? 'status-aktif' : 'status-tidak-aktif'"
+          >
+            {{ (m.status || 'AKTIF') | uppercase }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <p *ngIf="hasil.length === 0" class="empty">
+      Data mahasiswa tidak ditemukan
+    </p>
+  </div>
+
+  <!-- ================= PAGINATION ================= -->
+  <div
+    *ngIf="totalPages > 1"
+    class="pagination"
+  >
+    <!-- tombol Sebelumnya hanya muncul jika bukan halaman pertama -->
+    <button
+      *ngIf="currentPage > 1"
+      (click)="prevPage()"
+    >
+      ⬅ Sebelumnya
+    </button>
+
+    <span>
+      Halaman {{ currentPage }} dari {{ totalPages }}
+    </span>
+
+    <!-- tombol Selanjutnya hanya muncul jika bukan halaman terakhir -->
+    <button
+      *ngIf="currentPage < totalPages"
+      (click)="nextPage()"
+    >
+      Selanjutnya ➡
+    </button>
+  </div>
+</section>

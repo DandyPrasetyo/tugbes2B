@@ -1,0 +1,60 @@
+.beasiswa-page {
+  @apply max-w-5xl mx-auto px-4 py-10;
+}
+
+/* Banner atas */
+.beasiswa-banner {
+  @apply bg-[#103654] text-white rounded-3xl px-8 py-6 mb-8;
+}
+
+.beasiswa-banner-year {
+  @apply text-xs opacity-80 mb-1;
+}
+
+.beasiswa-banner-title {
+  @apply text-xl md:text-2xl font-semibold mb-1;
+}
+
+.beasiswa-banner-subtitle {
+  @apply text-xs md:text-sm opacity-80;
+}
+
+/* GRID KARTU BEASISWA */
+.beasiswa-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+}
+
+.beasiswa-card {
+  @apply block bg-white rounded-2xl shadow-sm border border-gray-200
+    px-6 py-5 hover:shadow-md hover:-translate-y-1 transition
+    cursor-pointer;
+}
+
+.beasiswa-card-header {
+  @apply mb-2;
+}
+
+.beasiswa-badge {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-[10px]
+    bg-green-100 text-green-700 uppercase tracking-wide;
+}
+
+.beasiswa-name {
+  @apply text-base md:text-lg font-semibold mb-3;
+}
+
+.beasiswa-meta {
+  @apply flex flex-col gap-1 text-[11px] text-gray-600 mb-3;
+}
+
+.beasiswa-status {
+  @apply font-medium;
+}
+
+.beasiswa-deadline strong {
+  @apply text-red-500;
+}
+
+.beasiswa-readmore {
+  @apply text-[11px] text-[#103654] font-semibold;
+}

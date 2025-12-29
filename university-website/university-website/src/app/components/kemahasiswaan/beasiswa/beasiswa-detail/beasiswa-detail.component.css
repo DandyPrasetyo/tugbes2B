@@ -1,0 +1,180 @@
+/* beasiswa-detail.component.css */
+
+/* Container & judul */
+.detail-page {
+  @apply max-w-5xl mx-auto px-4 py-10;
+}
+
+.detail-title {
+  @apply text-xl md:text-2xl font-semibold mb-2;
+}
+
+/* Baris badge di bawah judul */
+.detail-label-row {
+  @apply flex items-center gap-2 mb-4;
+}
+
+/* D4 & D3: lingkaran warna solid */
+.badge-jenjang {
+  @apply inline-flex items-center justify-center
+    w-8 h-8 rounded-full text-[11px] font-semibold;
+}
+
+/* Warna D4 (hijau lembut) */
+.badge-d4 {
+  @apply bg-green-200 text-green-900;
+}
+
+/* Warna D3 (biru/lembut) */
+.badge-d3 {
+  @apply bg-sky-200 text-sky-900;
+}
+
+/* Polinema: pill outline (background putih, garis abu, teks abu) */
+.badge-polinema {
+  @apply inline-flex items-center
+    px-4 py-1 rounded-full
+    border border-gray-400
+    bg-white
+    text-[11px] text-gray-600;
+}
+
+/* Status & deadline */
+.detail-status-row {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 border-y border-gray-200 py-4;
+}
+
+.detail-status-col {
+  @apply flex flex-col gap-1;
+}
+
+.detail-status-label {
+  @apply text-xs text-gray-500;
+}
+
+.detail-status-value {
+  @apply text-sm font-semibold text-gray-800;
+}
+
+.detail-deadline {
+  @apply text-sm font-semibold text-red-500;
+}
+
+/* Blok isi */
+.detail-block {
+  @apply border border-gray-200 rounded-xl px-5 py-4 mb-4 bg-white;
+}
+
+.detail-block-title {
+  @apply text-sm md:text-base font-semibold mb-2;
+}
+
+.detail-list {
+  @apply list-disc ml-5 text-xs md:text-sm text-gray-700 space-y-1;
+}
+
+/* Tombol kembali */
+.detail-back-row {
+  @apply flex justify-end mt-4;
+}
+
+.btn-kembali {
+  @apply inline-block px-6 py-2 rounded-full text-xs md:text-sm
+    bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold;
+}/* Container & judul */
+.detail-page {
+  @apply max-w-5xl mx-auto px-4 py-10;
+}
+
+.detail-title {
+  @apply text-xl md:text-2xl font-semibold mb-2;
+}
+
+/* Baris badge di bawah judul */
+.detail-label-row {
+  @apply flex items-center gap-2 mb-4;
+}
+
+/* D4 & D3: lingkaran warna solid */
+.badge-jenjang {
+  @apply inline-flex items-center justify-center
+    w-8 h-8 rounded-full text-[11px] font-semibold;
+}
+
+/* D4 hijau */
+.badge-d4 {
+  @apply bg-green-200 text-green-900;
+}
+
+/* D3 biru (atau sesuaikan) */
+.badge-d3 {
+  @apply bg-sky-200 text-sky-900;
+}
+
+/* Polinema: pill outline */
+.badge-polinema {
+  @apply inline-flex items-center
+    px-4 py-1 rounded-full
+    border border-gray-400
+    bg-white
+    text-[11px] text-gray-600;
+}
+
+/* Status & deadline */
+.detail-status-row {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4 mb-6
+    border-y border-gray-200 py-4;
+}
+
+.detail-status-col {
+  @apply flex flex-col gap-1;
+}
+
+.detail-status-label {
+  @apply text-xs text-gray-500;
+}
+
+.detail-status-value {
+  @apply text-sm font-semibold text-gray-800;
+}
+
+.detail-deadline {
+  @apply text-sm font-semibold text-red-500;
+}
+
+/* Blok isi (deskripsi, tujuan, sasaran, fasilitas) */
+.detail-block {
+  @apply border border-gray-200 rounded-xl px-5 py-4 mb-4 bg-white;
+}
+
+.detail-block-title {
+  @apply text-sm md:text-base font-semibold mb-2;
+}
+
+.detail-list {
+  @apply list-disc ml-5 text-xs md:text-sm text-gray-700 space-y-1;
+}
+
+/* Tombol kembali dengan efek 3D */
+.detail-back-row {
+  @apply flex justify-end mt-4;
+}
+
+.btn-kembali {
+  @apply inline-flex items-center justify-center
+    px-6 py-2 rounded-full text-xs md:text-sm
+    bg-gray-200 text-gray-800 font-semibold
+    border border-gray-300
+    border-b-4 border-b-gray-400   /* sisi bawah lebih gelap = 3D */
+    shadow-md                      /* bayangan */
+    transition-all;
+}
+
+.btn-kembali:hover {
+  @apply bg-gray-300 border-b-gray-500 translate-y-[1px];
+}
+
+.btn-kembali:active {
+  @apply translate-y-[2px] border-b-2 shadow-sm;
+}
+

@@ -1,0 +1,38 @@
+<section class="beasiswa-page">
+  <!-- Banner atas -->
+  <div class="beasiswa-banner">
+    <p class="beasiswa-banner-year">{{ pageYear }}</p>
+    <h1 class="beasiswa-banner-title">{{ pageTitle }}</h1>
+    <p class="beasiswa-banner-subtitle">
+      {{ pageSubtitle }}
+    </p>
+  </div>
+
+  <!-- GRID KARTU BEASISWA -->
+  <div class="beasiswa-grid">
+    <a
+      *ngFor="let b of beasiswaList"
+      class="beasiswa-card"
+      [routerLink]="['/kemahasiswaan/beasiswa', b.id]"
+    >
+      <!-- header kecil di atas kartu -->
+      <div class="beasiswa-card-header">
+        <span class="beasiswa-badge">{{ b.kategori }}</span>
+      </div>
+
+      <h2 class="beasiswa-name">
+        {{ b.nama }}
+      </h2>
+
+      <div class="beasiswa-meta">
+        <span class="beasiswa-status">{{ b.status }}</span>
+        <span class="beasiswa-deadline">
+          Deadline:
+          <strong>{{ b.deadline }}</strong>
+        </span>
+      </div>
+
+      <span class="beasiswa-readmore">Read more »</span>
+    </a>
+  </div>
+</section>

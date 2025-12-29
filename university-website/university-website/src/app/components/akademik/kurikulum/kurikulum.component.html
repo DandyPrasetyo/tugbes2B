@@ -1,0 +1,371 @@
+<section class="kurikulum-page">
+  <div class="kurikulum-panel">
+    <!-- SIDEBAR -->
+    <aside class="kurikulum-sidebar">
+      <h2 class="sidebar-title">KURIKULUM</h2>
+
+      <!-- Home -->
+      <button
+        type="button"
+        class="sidebar-item"
+        [class.active]="activeMenu === 'home'"
+        (click)="setActiveMenu('home')"
+      >
+        <span class="sidebar-item-inner">
+          <span class="icon home-icon"></span>
+          <span>Home</span>
+        </span>
+      </button>
+
+      <!-- Kalender Akademik -->
+      <button
+        type="button"
+        class="sidebar-item"
+        [class.active]="activeMenu === 'kalender'"
+        (click)="setActiveMenu('kalender')"
+      >
+        <span class="sidebar-item-inner">
+          <span class="icon calendar-icon"></span>
+          <span>Kalender Akademik</span>
+        </span>
+      </button>
+
+      <!-- Kartu KRS -->
+      <button
+        type="button"
+        class="sidebar-item"
+        [class.active]="activeMenu === 'krs'"
+        (click)="setActiveMenu('krs')"
+      >
+        <span class="sidebar-item-inner">
+          <span class="icon card-icon"></span>
+          <span>Kartu KRS</span>
+        </span>
+      </button>
+
+      <!-- LMS -->
+      <button
+        type="button"
+        class="sidebar-item"
+        [class.active]="activeMenu === 'lms'"
+        (click)="setActiveMenu('lms')"
+      >
+        <span class="sidebar-item-inner">
+          <span class="icon lms-icon"></span>
+          <span>LMS</span>
+        </span>
+      </button>
+
+      <!-- Presensi -->
+      <button
+        type="button"
+        class="sidebar-item"
+        [class.active]="activeMenu === 'presensi'"
+        (click)="setActiveMenu('presensi')"
+      >
+        <span class="sidebar-item-inner">
+          <span class="icon presensi-icon"></span>
+          <span>Presensi</span>
+        </span>
+      </button>
+    </aside>
+
+    <!-- KONTEN KANAN -->
+    <main class="kurikulum-main">
+      <!-- PROFIL MAHASISWA -->
+      <div class="profil-wrapper">
+        <div class="profil-icon">
+          <div class="profil-head"></div>
+          <div class="profil-body"></div>
+        </div>
+
+        <div class="info-bar">{{ nama }}</div>
+        <div class="info-bar">{{ nim }}</div>
+        <div class="info-bar">{{ prodi }}</div>
+      </div>
+
+      <!-- KALENDER (hanya saat menu Kalender Akademik) -->
+      <section class="kalender-wrapper" *ngIf="showKalender">
+        <header class="kalender-header">
+          <h2 class="kalender-title">{{ kalender.title }}</h2>
+          <a class="btn-download" [href]="downloadPath" download>Download</a>
+        </header>
+
+        <div class="kalender-preview">
+          <img
+            *ngIf="fileType === 'image'"
+            class="kalender-image"
+            [src]="previewPath"
+            [alt]="kalender.title"
+          />
+
+          <iframe
+            *ngIf="fileType === 'pdf'"
+            class="kalender-iframe"
+            [src]="previewPath"
+          ></iframe>
+
+          <p *ngIf="fileType === 'other'" class="kalender-info-text">
+            File {{ kalender.ext.toUpperCase() }} tidak dapat dippreview, silakan
+            gunakan tombol Download.
+          </p>
+        </div>
+      </section>
+
+      <!-- KRS (tampil saat menu KRS dipilih) -->
+      <section *ngIf="activeMenu === 'krs'" class="krs-wrapper">
+        <!-- header nim + breadcrumb (tanpa icon home) -->
+        <div class="krs-header">
+          <div class="krs-header-top">
+            <span class="krs-nim-nama">{{ nim }}/{{ nama }}</span>
+          </div>
+          <div class="krs-breadcrumb">
+            AKADEMIK / KARTU RENCANA STUDI (KRS)
+          </div>
+        </div>
+
+        <!-- kotak info biru muda -->
+        <div class="krs-info-box">
+          <div class="krs-info-title">
+            {{ krsInfo.judul }}
+          </div>
+          <div class="krs-info-separator"></div>
+          <p class="krs-info-text">
+            {{ krsInfo.pesan }}
+          </p>
+        </div>
+
+        <!-- jika SUDAH ada file KRS, tampilkan preview + download -->
+        <div *ngIf="isKrsUploaded" class="krs-file-wrapper">
+          <div class="krs-file-header">
+            <h3 class="krs-file-title">{{ krsFile.title }}</h3>
+            <a class="btn-download" [href]="krsDownloadPath" download>
+              Download
+            </a>
+          </div>
+
+          <div class="krs-file-preview">
+            <iframe
+              class="krs-iframe"
+              [src]="krsPreviewPath"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- LMS -->
+      <section *ngIf="activeMenu === 'lms'" class="lms-wrapper">
+        <!-- tahap 1: konektor -->
+        <div *ngIf="!lmsConnected" class="lms-connector-box">
+          <div class="lms-header-top">
+            <span>{{ nim }}/{{ nama }}</span>
+          </div>
+          <div class="lms-breadcrumb">
+            AKADEMIK / LMS
+          </div>
+
+          <div class="lms-info-box">
+            <div class="lms-info-title">SIAKAD-LMS Connector</div>
+            <div class="lms-info-separator"></div>
+            <button type="button" class="lms-connect-btn" (click)="connectLms()">
+              Connect to LMS Polinema
+            </button>
+          </div>
+        </div>
+
+        <!-- tahap 2: daftar mata kuliah -->
+        <div *ngIf="lmsConnected && !selectedCourse" class="lms-course-list">
+          <h3 class="lms-section-title">Kuliah daring semester ini</h3>
+
+          <div class="lms-course-grid">
+            <div
+              *ngFor="let course of lmsCourses"
+              class="lms-course-card"
+              (click)="openCourse(course.id)"
+            >
+              <div class="lms-course-thumb">
+                <img [src]="course.gambar" [alt]="course.nama" />
+              </div>
+              <div class="lms-course-name">{{ course.nama }}</div>
+              <div class="lms-course-lecturer">{{ course.dosen }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- tahap 3: detail mata kuliah + tugas -->
+        <div *ngIf="selectedCourse" class="lms-course-detail">
+          <button type="button" class="lms-back-btn" (click)="backToCourseList()">
+            &larr; Kembali ke daftar mata kuliah
+          </button>
+
+          <h3 class="lms-detail-title">{{ selectedCourse.nama }}</h3>
+          <p class="lms-detail-lecturer">Dosen: {{ selectedCourse.dosen }}</p>
+
+          <div class="lms-task-list">
+            <h4>Tugas yang diberikan</h4>
+
+            <div
+              *ngFor="let t of selectedCourse.tugas"
+              class="lms-task-card"
+            >
+              <div class="lms-task-title">{{ t.judul }}</div>
+              <div class="lms-task-deadline">Tenggat: {{ t.tenggat }}</div>
+              <p class="lms-task-desc">{{ t.deskripsi }}</p>
+
+              <!-- Lampiran dari dosen: pdf/word/excel/video/link -->
+              <div class="lms-attachments" *ngIf="t.lampiranDosen?.length">
+                <h5>Lampiran dari dosen</h5>
+                <ul>
+                  <li *ngFor="let a of t.lampiranDosen">
+                    <a [href]="a.url" target="_blank">
+                      {{ a.nama }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Demo upload tugas mahasiswa (pilih file dari perangkat) -->
+              <div class="lms-submit-form">
+                <h5>Kirim sebagai tugas</h5>
+
+                <!-- pilih file dari perangkat (hanya nama file, tidak diupload) -->
+                <input
+                  type="file"
+                  multiple
+                  (change)="onFilesSelected($event)"
+                />
+
+                <button
+                  type="button"
+                  class="btn-download"
+                  (click)="addDummySubmission(t)"
+                >
+                  Simpan sebagai tugas
+                </button>
+                <p class="lms-submit-note">
+                  File hanya disimulasikan, tidak benar-benar diupload ke server.
+                </p>
+
+                <!-- tampilkan nama file yang dipilih -->
+                <ul *ngIf="selectedFiles.length" class="lms-selected-files">
+                  <li *ngFor="let f of selectedFiles">{{ f }}</li>
+                </ul>
+              </div>
+
+              <!-- Daftar submission mahasiswa (demo) -->
+              <div class="lms-submission-list" *ngIf="t.submissions?.length">
+                <h5>Pengumpulan tugas (demo)</h5>
+                <div
+                  *ngFor="let s of t.submissions"
+                  class="lms-submission-item"
+                >
+                  <div class="lms-submission-header">
+                    <span class="lms-submission-name">{{ s.mahasiswa }}</span>
+                    <span class="lms-submission-time">{{ s.waktu }}</span>
+                  </div>
+                  <ul class="lms-submission-attachments">
+                    <li *ngFor="let sa of s.attachments">
+                      <a [href]="sa.url" target="_blank">
+                        {{ sa.nama }}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRESENSI -->
+      <section *ngIf="activeMenu === 'presensi'" class="presensi-wrapper">
+        <div class="presensi-header">
+          <div class="presensi-header-top">
+            <span>{{ nim }}/{{ nama }}</span>
+          </div>
+          <div class="presensi-breadcrumb">
+            AKADEMIK / PRESENSI
+          </div>
+        </div>
+
+        <div class="presensi-box">
+          <div class="presensi-title">
+            Data Presensi Mahasiswa
+          </div>
+          <div class="presensi-separator"></div>
+          <p class="presensi-subtitle">
+            Data Absensi Alpha, Ijin, dan Sakit Mahasiswa
+          </p>
+
+          <div class="presensi-filter-row">
+            <select
+              class="presensi-semester-select"
+              [(ngModel)]="selectedSemesterId"
+            >
+              <option *ngFor="let s of semesterOptions" [value]="s.id">
+                {{ s.label }}
+              </option>
+            </select>
+
+            <button
+              type="button"
+              class="presensi-filter-btn"
+              (click)="filterPresenceBySemester()"
+            >
+              ✔ Filter
+            </button>
+          </div>
+
+          <!-- Tabel presensi: jika ada data -->
+          <div
+            class="presensi-table-wrapper"
+            *ngIf="presenceRows.length > 0; else presensiKosong"
+          >
+            <table class="presensi-table">
+              <thead>
+                <tr>
+                  <th style="width: 60px;">NO</th>
+                  <th>MATA KULIAH</th>
+                  <th style="width: 140px;">PERTEMUAN</th>
+                  <th style="width: 140px;">TANGGAL</th>
+                  <th style="width: 100px;">ALPHA</th>
+                  <th style="width: 100px;">IJIN</th>
+                  <th style="width: 100px;">SAKIT</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let r of presenceRows; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ r.courseName }}</td>
+                  <td>{{ r.meetingLabel }}</td>
+                  <td>{{ r.date | date:'dd MMM yyyy' }}</td>
+                  <td>{{ r.alphaHours }}</td>
+                  <td>{{ r.izinHours }}</td>
+                  <td>{{ r.sakitHours }}</td>
+                </tr>
+
+                <tr class="presensi-total-row">
+                  <td colspan="4" class="text-right">Jumlah</td>
+                  <td>{{ totalAlpha }}</td>
+                  <td>{{ totalIzin }}</td>
+                  <td>{{ totalSakit }}</td>
+                </tr>
+                <tr class="presensi-total-row">
+                  <td colspan="4" class="text-right">Total AJS</td>
+                  <td colspan="3">{{ totalAjs }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Jika data kosong untuk semester yang dipilih -->
+          <ng-template #presensiKosong>
+            <div class="presensi-empty">
+              Belum ada data presensi untuk semester ini.
+            </div>
+          </ng-template>
+        </div>
+      </section>
+    </main>
+  </div>
+</section>

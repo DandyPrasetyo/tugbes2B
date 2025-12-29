@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PerusahaanService } from '@services/perusahaan.service';
 import { Perusahaan } from '@models/perusahaan.model';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser'; // ⬅ ditambahkan
 
 @Component({
   selector: 'app-mitra',
@@ -20,7 +21,8 @@ export class MitraComponent implements OnInit {
 
   constructor(
     private perusahaanService: PerusahaanService,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer // ⬅ ditambahkan
   ) {}
 
   ngOnInit(): void {
@@ -53,5 +55,11 @@ export class MitraComponent implements OnInit {
   encodeAddress(addr: string | undefined): string {
     if (!addr) return '';
     return encodeURIComponent(addr);
+  }
+
+  // 🟢 TAMBAHAN: method aman untuk website
+  getSafeWebsite(url: string | undefined): SafeUrl {
+    if (!url) return '';
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 }

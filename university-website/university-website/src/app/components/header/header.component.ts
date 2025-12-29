@@ -25,19 +25,20 @@ export class HeaderComponent {
     {
       name: 'AKADEMIK',
       children: [
-        { name: 'Mahasiswa Aktif', path: '/mahasiswa-aktif' },
-        { name: 'Dosen & Kehadiran', path: '/dosen-kehadiran' },
-        { name: 'Prodi', path: '/prodi' },
-        { name: 'Kurikulum', path: '/kurikulum' },
-        { name: 'Jadwal Kuliah', path: '/jadwal-kuliah' },
+        { name: 'Mahasiswa Aktif', path: '/akademik/mahasiswa-aktif' },
+        { name: 'Dosen & Kehadiran', path: '/akademik/dosen-kehadiran' },
+        { name: 'Prodi', path: '/akademik/prodi' },
+        { name: 'Kurikulum', path: '/akademik/kurikulum' },
+        { name: 'Jadwal Kuliah', path: '/akademik/jadwal-kuliah' },
       ],
     },
     {
       name: 'KEMAHASISWAAN',
       children: [
-        { name: 'Organisasi Mahasiswa', path: '/organisasi-mahasiswa' },
-        { name: 'Beasiswa', path: '/beasiswa' },
-        { name: 'Alumni', path: '/alumni' },
+        // ✅ disesuaikan ke route kemahasiswaan/organisasi-mahasiswa
+        { name: 'Organisasi Mahasiswa', path: '/kemahasiswaan/organisasi-mahasiswa' },
+        { name: 'Beasiswa', path: '/kemahasiswaan/beasiswa' },
+        { name: 'Alumni', path: '/kemahasiswaan/alumni' },
       ],
     },
     {

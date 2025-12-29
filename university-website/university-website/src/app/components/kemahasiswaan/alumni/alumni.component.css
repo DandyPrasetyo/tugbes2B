@@ -1,0 +1,122 @@
+/* =========================
+   CONTAINER & JUDUL
+========================= */
+.alumni-page {
+  @apply max-w-6xl mx-auto px-4 py-10;
+}
+
+.alumni-title {
+  @apply text-center text-xl md:text-2xl font-semibold mb-6;
+}
+
+/* =========================
+   SEARCH BAR ATAS
+========================= */
+.alumni-filter-row {
+  @apply flex justify-end mb-8;
+}
+
+.search-form {
+  @apply flex flex-wrap items-center gap-2;
+}
+
+.search-input {
+  @apply w-24 md:w-32 px-3 py-2 rounded-full
+    border border-gray-300 bg-white
+    text-xs md:text-sm text-gray-700;
+}
+
+/* Tombol Cari 3D + shadow biru + animasi */
+.btn-search {
+  @apply inline-flex items-center justify-center
+    px-5 py-2 rounded-full text-xs md:text-sm
+    bg-[#164B82] text-white font-semibold
+    border border-[#123a63]
+    border-b-4 border-b-[#0d2945]
+    transition-transform duration-200 ease-out;
+  box-shadow: 0 6px 16px rgba(22, 75, 130, 0.35);
+}
+
+.btn-search:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(22, 75, 130, 0.4);
+}
+
+.btn-search:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(22, 75, 130, 0.3);
+}
+
+/* =========================
+   GRID CARD ALUMNI
+========================= */
+.alumni-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6 mb-8;
+}
+
+/* Card putih 3D, shadow biru tipis blur + hover naik */
+.alumni-card {
+  @apply bg-white px-6 py-6 flex flex-col items-center
+    rounded-2xl border border-gray-100
+    transition-transform duration-200 ease-out;
+  box-shadow: 0 10px 24px rgba(22, 75, 130, 0.25);
+}
+
+.alumni-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(22, 75, 130, 0.3);
+}
+
+/* Foto alumni */
+.alumni-photo {
+  @apply w-28 h-28 object-cover rounded-xl mb-4 bg-gray-200;
+}
+
+/* Teks dalam card: label kiri, nilai kanan */
+.alumni-card-body {
+  @apply w-full space-y-1 text-xs md:text-sm text-gray-900;
+}
+
+.alumni-row {
+  @apply flex justify-between gap-3;
+}
+
+.label {
+  @apply font-semibold text-left;
+}
+
+.value {
+  @apply text-right;
+}
+
+/* =========================
+   PAGINATION BAWAH
+========================= */
+.alumni-pagination {
+  @apply flex justify-end gap-3;
+}
+
+/* Tombol Kembali & Selanjutnya 3D + shadow biru + animasi */
+.btn-nav {
+  @apply inline-flex items-center justify-center
+    px-6 py-2 rounded-full text-xs md:text-sm
+    bg-[#164B82] text-white font-semibold
+    border border-[#123a63]
+    border-b-4 border-b-[#0d2945]
+    transition-transform duration-200 ease-out;
+  box-shadow: 0 6px 16px rgba(22, 75, 130, 0.35);
+}
+
+.btn-nav:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(22, 75, 130, 0.4);
+}
+
+.btn-nav:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(22, 75, 130, 0.3);
+}
+
+.btn-nav:disabled {
+  @apply opacity-40 cursor-not-allowed;
+}

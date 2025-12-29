@@ -44,7 +44,11 @@
           </a>
 
           <!-- MENU DROPDOWN (ADA PANAH) -->
-          <div *ngIf="item.children" class="relative group">
+          <div
+            *ngIf="item.children"
+            class="relative group"
+            tabindex="0"
+          >
             <button
               class="nav-item px-4 py-2 rounded-md text-[14px] tracking-wide flex items-center gap-2"
             >
@@ -54,7 +58,11 @@
 
             <!-- DROPDOWN -->
             <div
-              class="dropdown-menu absolute left-0 top-full mt-2 w-60 bg-white border shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+              class="dropdown-menu absolute left-0 top-full mt-2 w-60 bg-white border shadow-lg
+                     opacity-0 invisible
+                     group-hover:opacity-100 group-hover:visible
+                     group-focus-within:opacity-100 group-focus-within:visible
+                     transition-all duration-200 z-50"
             >
               <a
                 *ngFor="let child of item.children"

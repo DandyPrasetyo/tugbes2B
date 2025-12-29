@@ -1,0 +1,689 @@
+/* Layout utama */
+.kurikulum-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 32px;
+  box-sizing: border-box;
+  background-color: #edf0f4;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.kurikulum-panel {
+  width: 100%;
+  max-width: 1500px;
+  min-height: 600px;
+  background-color: #f4f5f8;
+  border-radius: 32px;
+  padding: 32px 40px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  column-gap: 32px;
+}
+
+/* Sidebar */
+.kurikulum-sidebar {
+  background-color: #f0f2f6;
+  border-radius: 28px;
+  padding: 28px 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar-title {
+  text-align: center;
+  margin: 0 0 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Tombol sidebar */
+.sidebar-item {
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: #dfe3ea;
+  color: #222222;
+  border-radius: 24px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s,
+    transform 0.15s, box-shadow 0.15s;
+}
+
+.sidebar-item-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+/* Hover: semua menu */
+.sidebar-item:hover {
+  background-color: #375b94;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(55, 91, 148, 0.45);
+}
+
+/* Active: menu yang sedang dipilih */
+.sidebar-item.active {
+  background-color: #0c3b73;
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(12, 59, 115, 0.45);
+}
+
+/* Saat tombol aktif di-hover lagi: tetap warna active */
+.sidebar-item.active:hover {
+  background-color: #0c3b73;
+  color: #ffffff;
+}
+
+/* Konten kanan */
+.kurikulum-main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+}
+
+/* Profil */
+.profil-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.profil-icon {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profil-head {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #000000;
+  margin-bottom: 6px;
+}
+
+.profil-body {
+  width: 70px;
+  height: 40px;
+  border-radius: 999px 999px 40px 40px;
+  background-color: #000000;
+}
+
+.info-bar {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 4px;
+  padding: 12px 24px;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Kalender */
+.kalender-wrapper {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 20px 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.kalender-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kalender-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Area preview */
+.kalender-preview {
+  width: 100%;
+  min-height: 500px;
+  border-radius: 16px;
+  border: 1px solid #d8dde6;
+  background-color: #f7f8fb;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.kalender-image,
+.kalender-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Tombol download */
+.btn-download {
+  padding: 8px 22px;
+  border-radius: 999px;
+  background-color: #00b894;
+  color: #ffffff;
+  border: none;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.15s, box-shadow 0.15s;
+}
+
+/* Hover download */
+.btn-download:hover,
+.btn-download:active {
+  background-color: #00a884;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 184, 148, 0.4);
+}
+
+/* Info text */
+.kalender-info-text {
+  margin: auto;
+  text-align: center;
+  color: #6c757d;
+}
+
+/* ====== KRS ====== */
+
+.krs-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* header nim + breadcrumb */
+.krs-header-top {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.krs-breadcrumb {
+  font-size: 14px;
+  color: #555555;
+}
+
+/* kotak info biru muda */
+.krs-info-box {
+  background-color: #dfeeff;
+  border-radius: 4px;
+  padding: 18px 18px 40px 18px;
+  box-sizing: border-box;
+}
+
+.krs-info-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.krs-info-separator {
+  border-bottom: 1px solid #444444;
+  margin-bottom: 24px;
+}
+
+.krs-info-text {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* blok file KRS (preview pdf + download) */
+.krs-file-wrapper {
+  margin-top: 10px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.krs-file-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.krs-file-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.krs-file-preview {
+  width: 100%;
+  min-height: 400px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background-color: #f7f8fb;
+  overflow: hidden;
+}
+
+.krs-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ====== LMS ====== */
+.lms-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* tahap 1: konektor */
+.lms-connector-box {
+  width: 100%;
+}
+
+.lms-header-top {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.lms-breadcrumb {
+  font-size: 14px;
+  color: #555555;
+  margin-bottom: 12px;
+}
+
+.lms-info-box {
+  background-color: #dfeeff;
+  border-radius: 4px;
+  padding: 20px 20px 40px 20px;
+  box-sizing: border-box;
+}
+
+.lms-info-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.lms-info-separator {
+  border-bottom: 1px solid #444444;
+  margin-bottom: 24px;
+}
+
+.lms-connect-btn {
+  padding: 12px 32px;
+  border-radius: 999px;
+  border: none;
+  background-color: #0d6efd;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s, transform 0.15s, box-shadow 0.15s;
+}
+
+.lms-connect-btn:hover {
+  background-color: #0b5ed7;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(13, 110, 253, 0.4);
+}
+
+/* tahap 2: daftar mata kuliah */
+.lms-section-title {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.lms-course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.lms-course-card {
+  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.lms-course-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.lms-course-thumb img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+
+.lms-course-name {
+  padding: 8px 12px 0;
+  font-weight: 600;
+}
+
+.lms-course-lecturer {
+  padding: 0 12px 10px;
+  font-size: 13px;
+  color: #555555;
+}
+
+/* tahap 3: detail course */
+.lms-course-detail {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 16px 20px 20px;
+  box-sizing: border-box;
+}
+
+.lms-back-btn {
+  border: none;
+  background: none;
+  color: #0d6efd;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.lms-detail-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.lms-detail-lecturer {
+  margin: 4px 0 16px;
+  color: #555555;
+}
+
+.lms-task-list h4 {
+  margin: 0 0 10px;
+}
+
+.lms-task-card {
+  border-radius: 6px;
+  border: 1px solid #e0e6ee;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  background-color: #f9fafc;
+}
+
+.lms-task-title {
+  font-weight: 600;
+}
+
+.lms-task-deadline {
+  font-size: 13px;
+  color: #777777;
+  margin-bottom: 4px;
+}
+
+.lms-task-desc {
+  margin: 0;
+}
+
+/* ====== Tambahan: lampiran & submission tugas LMS ====== */
+
+.lms-attachments {
+  margin-top: 8px;
+}
+
+.lms-attachments h5 {
+  margin: 8px 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.lms-attachments ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+.lms-attachments a {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.lms-attachments a:hover {
+  text-decoration: underline;
+}
+
+.lms-submit-form {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed #d0d7e2;
+}
+
+.lms-submit-form h5 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.lms-submit-note {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #777777;
+}
+
+.lms-submission-list {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed #d0d7e2;
+}
+
+.lms-submission-list h5 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.lms-submission-item {
+  padding: 6px 8px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  border: 1px solid #e0e6ee;
+  margin-bottom: 6px;
+}
+
+.lms-submission-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.lms-submission-name {
+  font-weight: 600;
+}
+
+.lms-submission-time {
+  color: #777777;
+}
+
+.lms-submission-attachments {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+}
+
+.lms-submission-attachments a {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.lms-submission-attachments a:hover {
+  text-decoration: underline;
+}
+
+/* daftar nama file yang dipilih (demo upload) */
+.lms-selected-files {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  font-size: 12px;
+  color: #555555;
+}
+
+/* ====== PRESENSI ====== */
+
+.presensi-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.presensi-header-top {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.presensi-breadcrumb {
+  font-size: 14px;
+  color: #555555;
+  margin-bottom: 12px;
+}
+
+.presensi-box {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 16px 20px 20px;
+  box-sizing: border-box;
+}
+
+.presensi-title {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.presensi-separator {
+  border-bottom: 1px solid #444444;
+  margin-bottom: 10px;
+}
+
+.presensi-subtitle {
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+
+.presensi-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.presensi-semester-select {
+  min-width: 260px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  background-color: #ffffff;
+  font-size: 14px;
+}
+
+.presensi-filter-btn {
+  padding: 6px 18px;
+  border-radius: 4px;
+  border: none;
+  background-color: #00b894;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s, transform 0.15s, box-shadow 0.15s;
+}
+
+.presensi-filter-btn:hover {
+  background-color: #00a884;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 184, 148, 0.4);
+}
+
+.presensi-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.presensi-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.presensi-table th,
+.presensi-table td {
+  border: 1px solid #dee2e6;
+  padding: 6px 8px;
+}
+
+.presensi-table th {
+  background-color: #f1f3f5;
+  text-align: left;
+}
+
+.presensi-total-row td {
+  font-weight: 600;
+}
+
+.presensi-total-row .text-right {
+  text-align: right;
+}
+
+.presensi-empty {
+  padding: 16px;
+  border-radius: 4px;
+  border: 1px solid #dde2eb;
+  background-color: #f8f9fb;
+  color: #777777;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .kurikulum-panel {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
+
+  .kurikulum-sidebar {
+    order: 1;
+  }
+
+  .kurikulum-main {
+    order: 2;
+  }
+}

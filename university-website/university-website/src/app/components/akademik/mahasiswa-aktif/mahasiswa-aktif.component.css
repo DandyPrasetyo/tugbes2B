@@ -1,0 +1,193 @@
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+.title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #1d2b36;
+}
+
+.filter-box {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.filter-box input,
+.filter-box select {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid #ccc;
+  min-width: 220px;
+}
+
+.filter-box button {
+  padding: 10px 28px;
+  border-radius: 999px;
+  border: none;
+  background: #fbbc05;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.filter-box button:hover {
+  opacity: 0.9;
+}
+
+/* GRID KARTU */
+.result {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 32px 60px;
+  justify-content: center;
+}
+
+/* KARTU GAYA BARU (SEPERTI CONTOH GAMBAR) */
+.card {
+  background: #8faeea;
+  color: #000;
+  border-radius: 16px;              /* sedikit tumpul */
+  padding: 24px 32px 28px;
+  text-align: left;
+}
+
+.card .icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #666;
+}
+
+/* =====================================
+   TAMBAHAN (TANPA UBAH KODE DI ATAS)
+===================================== */
+
+/* HEADER KARTU */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-foto {
+  width: 90px;
+  height: 110px;          /* sedikit lebih tinggi */
+  object-fit: cover;
+  object-position: center 20%;  /* fokus agak ke bawah, jadi rambut ikut terlihat */
+  border-radius: 4px;
+}
+
+
+.card-logo {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
+
+.card-title-block {
+  text-align: center;
+  flex: 1;
+  margin: 0 24px;
+}
+
+.card-title-block h3 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.card-title-block h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 4px 0 0;
+}
+
+/* GARIS PEMISAH */
+.card-divider {
+  border: none;
+  border-top: 2px solid #000;
+  margin: 16px 0 18px;
+}
+
+/* BODY DATA */
+.card-body .row {
+  display: grid;
+  grid-template-columns: 130px 10px 1fr;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.card-body .label {
+  font-weight: 700;
+}
+
+.card-body .colon {
+  font-weight: 700;
+}
+
+.card-body .value {
+  font-weight: 700;
+}
+
+/* status warna hijau / merah */
+.status-text {
+  font-weight: 700;
+}
+
+.status-aktif {
+  color: #0a8a1f;        /* hijau */
+}
+
+.status-tidak-aktif {
+  color: #c32222;        /* merah */
+}
+
+/* FOTO MAHASISWA (KALAU ADA IMG DI DALAM CARD TANPA KELAS BARU) */
+.card img {
+  display: block;
+}
+
+/* PAGINATION */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.pagination button {
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: none;
+  background: #1d2b36;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #fbbc05;
+  color: #1d2b36;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-weight: bold;
+  color: #1d2b36;
+}

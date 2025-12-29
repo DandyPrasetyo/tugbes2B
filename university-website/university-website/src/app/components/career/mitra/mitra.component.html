@@ -26,42 +26,24 @@
         <h3 class="mitra-title">{{ c.nama_perusahaan || '-' }}</h3>
 
         <ul class="mitra-info">
-          <!-- Telepon (SVG klasik) -->
+          <!-- Telepon -->
           <li>
             <span class="mitra-icon-svg">
-              <svg xmlns="http://www.w3.org/2000/svg"
-                   width="18" height="18"
-                   viewBox="0 0 64 64"
-                   fill="currentColor">
-                <path d="M8 20c0-6 6-12 24-12s24 6 24 12v6a4 4 0 0 1-4 4h-4a4 4 0 0 1-3.6-2.4L41 24H23l-3.4 3.6A4 4 0 0 1 16 30h-4a4 4 0 0 1-4-4z"/>
-                <path d="M14 30h36a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V34a4 4 0 0 1 4-4z"/>
-                <rect x="22" y="36" width="4" height="4"/>
-                <rect x="30" y="36" width="4" height="4"/>
-                <rect x="38" y="36" width="4" height="4"/>
-                <rect x="22" y="44" width="4" height="4"/>
-                <rect x="30" y="44" width="4" height="4"/>
-                <rect x="38" y="44" width="4" height="4"/>
-              </svg>
+              <!-- SVG icon telepon -->
             </span>
-
             <span>{{ c.no_telp || '-' }}</span>
           </li>
 
-          <!-- Website (pakai SVG globe) -->
+          <!-- Website -->
           <li>
             <span class="mitra-icon-svg">
-              <svg xmlns="http://www.w3.org/2000/svg"
-                   width="18" height="18"
-                   fill="currentColor"
-                   viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm6.93 6h-3.46a15.6 15.6 0 0 0-1.14-3.49A8.03 8.03 0 0 1 18.93 8zM12 4c.78 1.1 1.42 2.55 1.86 4H10.1c.44-1.45 1.07-2.9 1.9-4zM4.26 14A7.93 7.93 0 0 1 4 12c0-.7.1-1.38.26-2h3.64a17.6 17.6 0 0 0 0 4H4.26zm1.81 2h3.46c.32 1.27.82 2.63 1.53 3.67A8.03 8.03 0 0 1 6.07 16zm3.46-8H6.07a8.03 8.03 0 0 1 3.19-3.67c-.71 1.04-1.21 2.4-1.53 3.67zm2.47 12c-.78-1.1-1.42-2.55-1.86-4h3.76c-.44 1.45-1.08 2.9-1.9 4zM14.1 14H9.9a15.6 15.6 0 0 1 0-4h4.2c.32 1.27.32 2.73 0 4zm.37 5.67c.71-1.04 1.21-2.4 1.53-3.67h3.46a8.03 8.03 0 0 1-5 3.67zM16.1 12c.11-.66.18-1.32.18-2s-.07-1.34-.18-2h3.64c.16.62.26 1.3.26 2s-.1 1.38-.26 2h-3.64z"/>
-              </svg>
+              <!-- SVG globe -->
             </span>
 
             <a
               *ngIf="c.website"
               class="info-link"
-              [href]="c.website.startsWith('http') ? c.website : 'https://' + c.website"
+              [href]="getSafeWebsite(c.website.startsWith('http') ? c.website : 'https://' + c.website)"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -70,15 +52,10 @@
             <span *ngIf="!c.website">-</span>
           </li>
 
-          <!-- Email (pakai SVG) -->
+          <!-- Email -->
           <li>
             <span class="mitra-icon-svg">
-              <svg xmlns="http://www.w3.org/2000/svg"
-                   width="18" height="18"
-                   fill="currentColor"
-                   viewBox="0 0 24 24">
-                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-              </svg>
+              <!-- SVG icon email -->
             </span>
 
             <a
@@ -91,15 +68,10 @@
             <span *ngIf="!c.email">-</span>
           </li>
 
-          <!-- Alamat (SVG icon lokasi) -->
+          <!-- Alamat -->
           <li>
             <span class="mitra-icon-svg">
-              <svg xmlns="http://www.w3.org/2000/svg"
-                   width="18" height="18"
-                   fill="currentColor"
-                   viewBox="0 0 24 24">
-                <path d="M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-              </svg>
+              <!-- SVG icon lokasi -->
             </span>
 
             <a

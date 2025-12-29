@@ -1,0 +1,124 @@
+<div class="page">
+
+  <!-- JUDUL -->
+  <h1 class="title">JADWAL KULIAH</h1>
+
+  <!-- SEARCH -->
+  <div class="search-box" *ngIf="!selectedProdi">
+    <input
+      type="text"
+      placeholder="Cari Program Studi"
+      [(ngModel)]="search"
+    />
+    <span>🔍</span>
+  </div>
+
+  <!-- CARD PRODI -->
+  <div class="card-grid" *ngIf="!selectedProdi">
+
+    <div
+      class="card jadwal-card"
+      *ngFor="let p of filteredProdi"
+      (click)="pilihProdi(p)"
+    >
+
+      <span class="card-subtitle">Jadwal Perkuliahan</span>
+
+      <p class="card-meta">Tahun Akademik : 2025/2026 Ganjil</p>
+      <p class="card-meta">Kelas : 1,2,3</p>
+
+      <!-- PREVIEW TABLE -->
+      <div class="table-preview">
+        <table>
+          <thead>
+            <tr>
+              <th>NO</th>
+              <th>HARI</th>
+              <th>JAM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let i of [1,2,3,4,5,6,7,8]">
+              <td>{{ i }}</td>
+              <td>
+                {{ ['Senin','Selasa','Rabu','Kamis','Jumat'][i-1] }}
+              </td>
+              <td>
+                {{ ['10:35-12:15','17:10-19:05','07:00-08:40','12:45-16:00','12:45-16:20','12:45-18:00','08:40-10:35','14:25-16:20'][i-1] }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="card-footer new-footer">
+        <div class="prodi-name">
+          {{ p.nama }}
+        </div>
+        <button class="detail-btn">
+          LIHAT DETAIL JADWAL →
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- DETAIL PRODI -->
+  <div *ngIf="selectedProdi" class="detail">
+
+    <h2>Jadwal Kuliah – {{ selectedProdi.nama }}</h2>
+
+    <div class="kelas-list">
+      <button
+        *ngFor="let k of selectedProdi.jadwal"
+        (click)="pilihKelas(k)"
+        [class.active]="selectedKelas?.kelas === k.kelas"
+      >
+        {{ k.kelas }}
+      </button>
+    </div>
+
+    <div class="toolbar">
+      <button (click)="exportExcel()">📊 Export Excel</button>
+      <button class="back" (click)="kembali()">⬅ Kembali</button>
+    </div>
+
+    <!-- TABEL JADWAL -->
+    <div *ngIf="selectedKelas" class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Hari</th>
+            <th *ngFor="let j of jamList">{{ j }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let h of selectedKelas.jadwal">
+            <td class="hari">{{ h.hari }}</td>
+
+            <td *ngFor="let c of h.jam">
+              <strong>{{ c.matkul }}</strong>
+
+              <!-- DOSEN -->
+              <small class="dosen">
+                {{ c.dosen }}
+              </small>
+
+              <!-- TAMBAHAN INFO (AMAN, OPTIONAL) -->
+              <small class="info">
+                {{ c.asal || 'PSDKU' }} •
+                {{ c.ruang || 'Kelas' }} •
+                {{ c.mode || 'Offline' }}
+              </small>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>

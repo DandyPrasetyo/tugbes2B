@@ -1,0 +1,132 @@
+<section class="alumni-page">
+  <h1 class="alumni-title">PROFIL ALUMNI</h1>
+
+  <!-- FORM SEARCH DI ATAS -->
+  <div class="alumni-filter-row">
+    <form
+      class="search-form"
+      (ngSubmit)="onSearch()"
+      autocomplete="off"
+    >
+      <input
+        type="text"
+        class="search-input"
+        [(ngModel)]="filterNama"
+        name="nama"
+        placeholder="Nama"
+        autocomplete="off"
+      />
+      <input
+        type="text"
+        class="search-input"
+        [(ngModel)]="filterNim"
+        name="nim"
+        placeholder="NIM"
+        autocomplete="off"
+      />
+      <input
+        type="text"
+        class="search-input"
+        [(ngModel)]="filterProdi"
+        name="prodi"
+        placeholder="Prodi"
+        autocomplete="off"
+      />
+      <input
+        type="text"
+        class="search-input"
+        [(ngModel)]="filterTahun"
+        name="tahun"
+        placeholder="Tahun lulus"
+        autocomplete="off"
+      />
+
+      <button type="submit" class="btn-search">
+        Cari
+      </button>
+    </form>
+  </div>
+
+  <!-- MODE SEARCH: 1 CARD -->
+  <div *ngIf="searchResult; else gridAlumni" class="alumni-grid">
+    <div class="alumni-card">
+      <img
+        [src]="searchResult.foto"
+        alt="Foto Alumni"
+        class="alumni-photo"
+      />
+
+      <div class="alumni-card-body">
+        <div class="alumni-row">
+          <span class="label">NIM</span>
+          <span class="value">{{ searchResult.nim }}</span>
+        </div>
+        <div class="alumni-row">
+          <span class="label">Nama</span>
+          <span class="value">{{ searchResult.nama }}</span>
+        </div>
+        <div class="alumni-row">
+          <span class="label">Prodi</span>
+          <span class="value">{{ searchResult.prodi }}</span>
+        </div>
+        <div class="alumni-row">
+          <span class="label">Tahun Lulus</span>
+          <span class="value">{{ searchResult.tahunLulus }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRID NORMAL 9 CARD / HALAMAN -->
+  <ng-template #gridAlumni>
+    <div class="alumni-grid">
+      <div *ngFor="let a of pagedAlumni" class="alumni-card">
+        <img
+          [src]="a.foto"
+          alt="Foto Alumni"
+          class="alumni-photo"
+        />
+
+        <div class="alumni-card-body">
+          <div class="alumni-row">
+            <span class="label">NIM</span>
+            <span class="value">{{ a.nim }}</span>
+          </div>
+          <div class="alumni-row">
+            <span class="label">Nama</span>
+            <span class="value">{{ a.nama }}</span>
+          </div>
+          <div class="alumni-row">
+            <span class="label">Prodi</span>
+            <span class="value">{{ a.prodi }}</span>
+          </div>
+          <div class="alumni-row">
+            <span class="label">Tahun Lulus</span>
+            <span class="value">{{ a.tahunLulus }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- PAGINATION: HANYA SAAT TIDAK SEARCH -->
+  <div class="alumni-pagination" *ngIf="!searchResult">
+    <button
+      type="button"
+      class="btn-nav"
+      *ngIf="currentPage > 1"
+      (click)="prevPage()"
+    >
+      Kembali
+    </button>
+
+    <button
+      type="button"
+      class="btn-nav"
+      (click)="nextPage()"
+      [disabled]="currentPage === totalPages"
+    >
+      Selanjutnya
+    </button>
+  </div>
+</section>

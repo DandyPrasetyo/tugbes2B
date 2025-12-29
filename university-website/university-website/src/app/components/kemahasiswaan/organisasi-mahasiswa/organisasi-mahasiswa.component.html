@@ -1,0 +1,55 @@
+<section class="org-page">
+  <!-- Judul besar halaman -->
+  <h1 class="org-page-title">{{ pageTitle }}</h1>
+
+  <!-- SLIDE: 2 organisasi per baris -->
+  <div class="org-grid">
+    <div
+      class="org-card"
+      *ngFor="let org of currentGroup"
+    >
+      <h2 class="org-section-title">
+        {{ org.judulSection }}
+      </h2>
+
+      <div class="org-image-wrapper">
+        <img
+          [src]="org.gambar"
+          [alt]="org.judulSection"
+          class="org-image"
+        />
+      </div>
+
+      <p class="org-description">
+        {{ org.deskripsi }}
+      </p>
+    </div>
+  </div>
+
+  <!-- NAVIGASI SEBELUMNYA / SELANJUTNYA -->
+  <div class="org-nav">
+    <button
+      class="org-btn"
+      [class.org-btn-disabled]="currentGroupIndex === 0"
+      [disabled]="currentGroupIndex === 0"
+      (click)="prev()"
+    >
+      Sebelumnya
+    </button>
+
+    <p class="org-counter">
+      Slide {{ currentGroupIndex + 1 }} / {{ totalGroups }}
+    </p>
+
+    <button
+      class="org-btn"
+      [class.org-btn-disabled]="
+        currentGroupIndex === totalGroups - 1
+      "
+      [disabled]="currentGroupIndex === totalGroups - 1"
+      (click)="next()"
+    >
+      Selanjutnya
+    </button>
+  </div>
+</section>

@@ -56,22 +56,99 @@ import { FormPerusahaanComponent } from './components/career/dashboard-admin/cru
 import { ListAdminComponent } from './components/career/dashboard-admin/crud-admin/list-admin/list-admin.component';
 import { FormAdminComponent } from './components/career/dashboard-admin/crud-admin/form-admin/form-admin.component';
 
+/* ===============================
+   AKADEMIK (BARU)
+================================ */
+import { MahasiswaAktifComponent } from './components/akademik/mahasiswa-aktif/mahasiswa-aktif.component';
+import { DosenKehadiranComponent } from './components/akademik/dosen-kehadiran/dosen-kehadiran.component';
+
+/* ⭐⭐ TAMBAHAN: PRODI */
+import { ProdiComponent } from './components/akademik/prodi/prodi.component';
+
+/* ⭐⭐ TAMBAHAN: KURIKULUM */
+import { KurikulumComponent } from './components/akademik/kurikulum/kurikulum.component';
+
+/* ⭐⭐ TAMBAHAN: JADWAL KULIAH */
+import { JadwalKuliahComponent } from './components/jadwal-kuliah/jadwal-kuliah.component';
+
+/* ⭐⭐ TAMBAHAN: ORGANISASI & UKM (KEMAHASISWAAN) */
+import { OrganisasiMahasiswaComponent } from './components/kemahasiswaan/organisasi-mahasiswa/organisasi-mahasiswa.component';
+
+/* ⭐⭐ TAMBAHAN: BEASISWA (KEMAHASISWAAN) */
+import { BeasiswaComponent } from './components/kemahasiswaan/beasiswa/beasiswa.component';
+import { BeasiswaDetailComponent } from './components/kemahasiswaan/beasiswa/beasiswa-detail/beasiswa-detail.component';
+
+/* ⭐⭐ TAMBAHAN: ALUMNI (KEMAHASISWAAN) */
+import { AlumniComponent } from './components/kemahasiswaan/alumni/alumni.component';
+
 export const routes: Routes = [
   /* ===============================
-       WEBSITE UTAMA
-   ================================ */
+     WEBSITE UTAMA
+  ================================= */
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
 
   /* ===============================
-       BERITA (BARU)
-   ================================ */
+     BERITA (BARU)
+  ================================= */
   { path: 'berita', component: BeritaListComponent },
   { path: 'berita/:id', component: BeritaDetailComponent },
 
   /* ===============================
-       CAREER CENTER
-   ================================ */
+     AKADEMIK (BARU)
+  ================================= */
+  {
+    path: 'akademik/mahasiswa-aktif',
+    component: MahasiswaAktifComponent,
+  },
+  {
+    path: 'akademik/dosen-kehadiran',
+    component: DosenKehadiranComponent,
+  },
+  {
+    path: 'akademik/prodi',          // ✅ route untuk dropdown Prodi
+    component: ProdiComponent,
+  },
+  {
+    path: 'akademik/kurikulum',      // ✅ route baru Kurikulum
+    component: KurikulumComponent,
+  },
+  {
+    path: 'akademik/jadwal-kuliah',  // ✅ route BARU Jadwal Kuliah
+    component: JadwalKuliahComponent,
+  },
+
+  /* ===============================
+     KEMAHASISWAAN – ORGANISASI & UKM
+  ================================= */
+  {
+    path: 'kemahasiswaan/organisasi-mahasiswa',
+    component: OrganisasiMahasiswaComponent,
+  },
+
+  /* ===============================
+     KEMAHASISWAAN – BEASISWA
+  ================================= */
+  {
+    path: 'kemahasiswaan/beasiswa',
+    component: BeasiswaComponent,
+  },
+  {
+    path: 'kemahasiswaan/beasiswa/:id',
+    component: BeasiswaDetailComponent,
+  },
+
+  /* ===============================
+     KEMAHASISWAAN – ALUMNI
+  ================================= */
+  {
+    path: 'kemahasiswaan/alumni',
+    component: AlumniComponent,
+  },
+
+  /* ===============================
+     CAREER CENTER
+  ================================= */
   {
     path: 'career',
     component: CareerLayoutComponent,
@@ -95,14 +172,13 @@ export const routes: Routes = [
       { path: 'mitra', component: MitraComponent },
 
       /* ⭐⭐ TAMBAHAN: DETAIL MITRA */
-      // contoh URL: /career/mitra/3
       { path: 'mitra/:id', component: MitraDetailComponent },
 
       { path: 'login-admin', component: LoginadminComponent },
 
       /* ===============================
-           ADMIN DASHBOARD
-       ================================ */
+         ADMIN DASHBOARD
+       ================================= */
       {
         path: 'admin',
         component: DashboardAdminComponent,
@@ -124,7 +200,7 @@ export const routes: Routes = [
   },
 
   /* ===============================
-       FALLBACK
-   ================================ */
+     FALLBACK
+  ================================= */
   { path: '**', redirectTo: '' },
 ];

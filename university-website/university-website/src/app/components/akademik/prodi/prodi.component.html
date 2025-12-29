@@ -1,0 +1,59 @@
+<section class="prodi-container">
+  <!-- Judul section -->
+  <h1 class="prodi-title">{{ pageTitle }}</h1>
+
+  <!-- ========== GRID PRODI (TAMPILAN PERTAMA) ========== -->
+  <div *ngIf="!selectedProdi" class="prodi-grid-wrapper">
+    <div class="prodi-grid">
+      <div *ngFor="let p of prodiList" class="prodi-card">
+        <img [src]="p.gambar" [alt]="p.nama" class="prodi-image" />
+
+        <h2 class="prodi-name">{{ p.nama }}</h2>
+
+        <p class="prodi-desc">
+          {{ p.deskripsiSingkat }}
+        </p>
+
+        <button class="btn-detail" (click)="lihatDetail(p)">
+          Lihat detail
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== DETAIL PRODI (TAMPILAN KEDUA) ========== -->
+  <div *ngIf="selectedProdi" class="prodi-detail-card">
+    <img
+      [src]="selectedProdi.gambar"
+      [alt]="selectedProdi.nama"
+      class="detail-image"
+    />
+
+    <h2 class="detail-title">{{ selectedProdi.nama }}</h2>
+
+    <div class="detail-content">
+      <p class="detail-text">
+        <strong>Deskripsi :</strong>
+        {{ selectedProdi.deskripsiDetail }}
+      </p>
+
+      <p class="detail-text">
+        <strong>Akreditasi :</strong>
+        {{ selectedProdi.akreditasi }}
+      </p>
+
+      <div class="detail-text">
+        <strong>Prestasi :</strong>
+        <ul class="prestasi-list">
+          <li *ngFor="let item of selectedProdi.prestasi">
+            {{ item }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <button class="btn-kembali" (click)="kembali()">
+      Kembali
+    </button>
+  </div>
+</section>

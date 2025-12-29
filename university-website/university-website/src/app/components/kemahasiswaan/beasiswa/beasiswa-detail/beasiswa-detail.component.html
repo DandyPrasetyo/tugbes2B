@@ -1,0 +1,84 @@
+<!-- beasiswa-detail.component.html -->
+<section class="detail-page" *ngIf="beasiswa">
+  <!-- Judul -->
+  <h1 class="detail-title">
+    {{ beasiswa.nama }}
+  </h1>
+
+  <!-- Badge D4, D3, Polinema -->
+  <div class="detail-label-row">
+    <!-- D4 -->
+    <span class="badge-jenjang badge-d4">
+      D4
+    </span>
+
+    <!-- D3 -->
+    <span class="badge-jenjang badge-d3">
+      D3
+    </span>
+
+    <!-- Polinema: pill outline -->
+    <span class="badge-polinema">
+      {{ beasiswa.kategori }}
+    </span>
+  </div>
+
+  <!-- Status & deadline (biarkan seperti sebelumnya) -->
+  <div class="detail-status-row">
+    <div class="detail-status-col">
+      <p class="detail-status-label">Status</p>
+      <p class="detail-status-value">
+        {{ beasiswa.status }}
+      </p>
+    </div>
+    <div class="detail-status-col">
+      <p class="detail-status-label">Deadline</p>
+      <p class="detail-deadline">
+        {{ beasiswa.deadline }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Blok-blok isi lain tetap sama -->
+  <div class="detail-block">
+    <h2 class="detail-block-title">Deskripsi Beasiswa</h2>
+    <ul class="detail-list">
+      <li *ngFor="let item of beasiswa.deskripsi">
+        {{ item }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="detail-block">
+    <h2 class="detail-block-title">Tujuan Beasiswa</h2>
+    <ul class="detail-list">
+      <li *ngFor="let item of beasiswa.tujuan">
+        {{ item }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="detail-block">
+    <h2 class="detail-block-title">Sasaran Penerima</h2>
+    <ul class="detail-list">
+      <li *ngFor="let item of beasiswa.sasaran">
+        {{ item }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="detail-block">
+    <h2 class="detail-block-title">Fasilitas yang Diterima</h2>
+    <ul class="detail-list">
+      <li *ngFor="let item of beasiswa.fasilitas">
+        {{ item }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="detail-back-row">
+    <a routerLink="/kemahasiswaan/beasiswa" class="btn-kembali">
+      &lt; Kembali
+    </a>
+  </div>
+</section>
