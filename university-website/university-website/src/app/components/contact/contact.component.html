@@ -1,1 +1,67 @@
-<p>contact works!</p>
+<section class="contact-modern">
+  <!-- BACKGROUND SHAPES BAWAH -->
+  <div class="bg-circle-blur"></div>
+  <div class="bg-circle-outline-bottom"></div>
+
+  <div class="contact-box">
+    <!-- LEFT : FORM -->
+    <div class="contact-left">
+      <img
+        src="assets/img/logo.png"
+        alt="Politeknik Negeri Malang"
+        class="contact-logo"
+      />
+
+      <h2>Contact Us</h2>
+      <p class="subtitle">
+        Jangan ragu menghubungi kami jika membutuhkan informasi lebih lanjut.
+      </p>
+
+      <form (ngSubmit)="submitForm()">
+        <label>Nama</label>
+        <input
+          type="text"
+          placeholder="Nama Lengkap"
+          [(ngModel)]="formData.nama"
+          name="nama"
+          required
+        />
+
+        <label>Email</label>
+        <input
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="formData.email"
+          name="email"
+          required
+        />
+
+        <label>Pesan</label>
+        <textarea
+          rows="4"
+          placeholder="Tulis pesan Anda"
+          [(ngModel)]="formData.pesan"
+          name="pesan"
+          required
+        ></textarea>
+
+        <button type="submit">Kirim Pesan</button>
+      </form>
+    </div>
+
+    <!-- RIGHT : INFO -->
+    <div class="contact-right-wrapper">
+      <div class="contact-right-bg"></div>
+
+      <div class="contact-right floating">
+        <h3>Info</h3>
+        <ul>
+          <li>✉ info&#64;polinema.ac.id</li>
+          <li>☎ (0341) 404424</li>
+          <li>📍 PSDKU Lumajang, Jawa Timur</li>
+          <li>⏰ Senin – Jumat (08.00 – 16.00)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
