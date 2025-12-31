@@ -7,7 +7,17 @@ import { HomeComponent } from './components/home/home.component';
 import { ContactComponent } from './components/contact/contact.component';
 
 /* ===============================
+<<<<<<< HEAD
    BERITA
+=======
+   PROFIL (BARU)
+================================ */
+import { ProfilComponent } from './components/profil/profil.component'; // ⭐⭐ TAMBAHAN: PROFIL
+import { VisiMisiComponent } from './components/profil/visi-misi/visi-misi.component'; // ⭐⭐ TAMBAHAN: VISI MISI
+
+/* ===============================
+   BERITA (BARU)
+>>>>>>> b6dee55 (sedikit perubahan)
 ================================ */
 import { BeritaListComponent } from './components/berita/berita-list/berita-list.component';
 import { BeritaDetailComponent } from './components/berita/berita-detail/berita-detail.component';
@@ -76,7 +86,20 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
 
   /* ===============================
+<<<<<<< HEAD
      BERITA
+=======
+     PROFIL (BARU)
+  ================================= */
+  {
+    path: 'profil',                   // ✅ route untuk dropdown Profil
+    component: ProfilComponent,
+  },
+  { path: 'profil/visi-misi', component: VisiMisiComponent }, // ⭐⭐ TAMBAHAN: VISI MISI
+
+  /* ===============================
+     BERITA (BARU)
+>>>>>>> b6dee55 (sedikit perubahan)
   ================================= */
   { path: 'berita', component: BeritaListComponent },
   { path: 'berita/:id', component: BeritaDetailComponent },

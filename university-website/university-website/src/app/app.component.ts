@@ -7,6 +7,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FooterCareerComponent } from './components/career/footer-career/footer-career.component';
 import { filter } from 'rxjs/operators';
 
+// 👉 import TranslateService
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -28,7 +31,14 @@ export class AppComponent {
   // === TAMBAHAN: untuk deteksi beranda career ===
   currentUrl = '';
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private translate: TranslateService,          // 👉 injeksi service
+  ) {
+    // 👉 set bahasa awal
+    this.translate.setDefaultLang('id');
+    this.translate.use('id');
+
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {

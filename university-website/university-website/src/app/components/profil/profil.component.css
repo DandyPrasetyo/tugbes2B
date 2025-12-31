@@ -1,0 +1,380 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.profil-page {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #f8fafc;
+  line-height: 1.6;
+  color: #374151;
+}
+
+/* HERO */
+.hero-section {
+  position: relative;
+  height: 70vh;
+  min-height: 450px;
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.hero-title {
+  position: absolute;
+  top: 32%;
+  left: 8%;
+  text-align: left;
+  max-width: 60%;
+}
+
+.hero-title h1 {
+  font-size: clamp(34px, 5.5vw, 50px);
+  font-weight: 900;
+  color: #f59e0b;
+  margin: 0 0 8px 0;
+  line-height: 1.05;
+  text-shadow: 0 3px 10px rgba(245, 158, 11, 0.7);
+  letter-spacing: -0.015em;
+}
+
+/* DESKRIPSI BAWAH */
+.hero-desc-section {
+  padding: 40px 0;
+  background: white;
+}
+
+.hero-description {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  font-size: 18px;
+  color: #64748b;
+  text-align: center;
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* GEDUNG - TANPA JUDUL - BESAR */
+.gedung-section {
+  padding: 60px 0;
+  background: #f8fafc;
+  text-align: center;
+}
+
+.gedung-image {
+  width: 100%;
+  max-width: 1000px;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  border-radius: 24px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.18);
+  border: 10px solid white;
+}
+
+/* ✅ STATS - TEKS KIRI + GAMBAR KANAN */
+.stats-section {
+  padding: 120px 0;
+  background: #fef7c7;
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 80% 30%, rgba(251, 191, 36, 0.25) 0%, transparent 50%);
+  z-index: 0;
+}
+
+.stats-layout {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.stats-text {
+  max-width: 650px;
+}
+
+.stats-text h2 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #92400e;
+  margin-bottom: 24px;
+  line-height: 1.3;
+  text-shadow: 0 2px 4px rgba(146, 64, 14, 0.1);
+}
+
+.stats-text p {
+  font-size: 18px;
+  color: #92400e;
+  margin-bottom: 50px;
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+.stats-text p span {
+  font-weight: 700;
+  color: #d97706;
+}
+
+/* ANGKA DI BAWAH TEKS */
+.stats-numbers {
+  display: flex;
+  gap: 32px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+/* ✅ KOTAK BIRU SESUAI GAMBAR (STATS) */
+.stat-box {
+  background: #0f4c81;          /* biru tua */
+  min-width: 170px;
+  padding: 18px 22px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 18px 35px rgba(15, 76, 129, 0.45);
+  transition: all 0.25s ease;
+  color: #e5f0ff;
+}
+
+.stat-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 45px rgba(15, 76, 129, 0.55);
+}
+
+.stat-number {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.stat-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #dbeafe;
+  text-transform: none;
+  letter-spacing: 0.2px;
+}
+
+/* GAMBAR KANAN (STATS) */
+.stats-image-container {
+  position: relative;
+}
+
+.yellow-circle-bg {
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.35) 0%, rgba(245, 158, 11, 0.15) 60%, transparent 80%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.mahasiswa-right {
+  width: 300px;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 20px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+  margin-left: auto;
+  display: block;
+}
+
+/* PRESTASI – LAYOUT BARU MIRIP GAMBAR */
+.prestasi-section {
+  padding: 100px 0;
+  background: #f8fafc;
+}
+
+/* Wrapper kiri-kanan */
+.prestasi-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 1.3fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* Foto + lingkaran kuning */
+.prestasi-image-wrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-end;   /* foto nempel ke bawah */
+  padding-left: 40px;      /* geser dari kiri */
+  padding-top: 40px;       /* geser dari atas */
+}
+
+.prestasi-yellow-circle {
+  position: absolute;
+  bottom: 0;        /* ikut ke bawah */
+  left: 40px;       /* sejajar padding kiri */
+  width: 260px;
+  height: 260px;
+  background: #facc15;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.prestasi-image-top {
+  position: relative;
+  z-index: 2;
+  width: 320px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+}
+
+/* Konten + kartu biru */
+.prestasi-content {
+  text-align: left;
+}
+
+.prestasi-content h2 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 32px;
+}
+
+/* GRID kartu biru */
+.prestasi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 24px 32px;
+  max-width: none;
+  margin: 0;
+}
+
+/* Kartu biru prestasi */
+.prestasi-card {
+  background: #0f4c81;
+  border-radius: 16px;
+  padding: 16px 20px;
+  color: #e5f0ff;
+  box-shadow: 0 18px 35px rgba(15, 76, 129, 0.45);
+}
+
+.prestasi-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.prestasi-card-sub {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .stats-layout {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    text-align: center;
+  }
+
+  .stats-numbers {
+    justify-content: center;
+  }
+
+  .mahasiswa-right {
+    margin: 0 auto;
+  }
+
+  .prestasi-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .prestasi-image-wrapper {
+    justify-content: center;
+    padding-left: 0;
+  }
+
+  .prestasi-content {
+    text-align: center;
+  }
+
+  .prestasi-grid {
+    justify-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 60vh;
+  }
+
+  .hero-title {
+    left: 5%;
+    top: 28%;
+  }
+
+  .gedung-image {
+    height: 320px;
+    max-width: 95%;
+  }
+
+  .mahasiswa-right {
+    width: 260px;
+    height: 330px;
+  }
+
+  .yellow-circle-bg {
+    width: 320px;
+    height: 320px;
+  }
+
+  .stat-box {
+    min-width: 140px;
+    padding: 12px 18px;
+  }
+
+  .stat-number {
+    font-size: 20px;
+  }
+
+  .prestasi-image-top {
+    width: 260px;
+  }
+
+  .prestasi-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -2,13 +2,89 @@
   <!-- TOP BLUE BAR -->
   <div class="bg-[#103654] w-full">
     <div class="max-w-7xl mx-auto px-6 py-2 flex justify-end gap-6">
-      <button class="text-white hover:opacity-80">
+      <!-- IKON SEARCH -->
+      <button
+        class="text-white hover:opacity-80"
+        type="button"
+        (click)="toggleSearch()"
+      >
         <img src="assets/img/icons/search.svg" class="w-6 h-6 invert" />
       </button>
 
-      <div class="flex items-center gap-2 cursor-pointer">
-        <img src="assets/img/icons/flag.svg" class="w-6 h-6 rounded-full" />
-        <span class="text-white text-sm font-medium">ID</span>
+      <!-- INPUT SEARCH (MUNCUL KETIKA showSearch = true) -->
+      <div
+        class="flex items-center gap-2"
+        *ngIf="showSearch"
+      >
+        <div class="relative">
+          <input
+            type="text"
+            class="px-2 py-1 rounded text-sm"
+            placeholder="Cari fitur/menu..."
+            [(ngModel)]="searchKeyword"
+            (keyup.enter)="onSearch()"
+          />
+          <!-- HASIL PENCARIAN FITUR -->
+          <ul
+            *ngIf="searchResults.length"
+            class="absolute left-0 mt-1 w-64 bg-white text-xs text-gray-800 shadow-lg rounded z-50 max-h-64 overflow-auto"
+          >
+            <li
+              *ngFor="let f of searchResults"
+            >
+              <button
+                type="button"
+                class="w-full text-left px-3 py-2 hover:bg-gray-100"
+                (click)="goToFeature(f.path)"
+              >
+                {{ f.name }}
+              </button>
+            </li>
+          </ul>
+        </div>
+        <button
+          type="button"
+          class="text-white text-sm font-medium"
+          (click)="onSearch()"
+        >
+          Cari
+        </button>
+      </div>
+
+      <!-- SWITCH BAHASA + DROPDOWN -->
+      <div class="relative">
+        <div
+          class="flex items-center gap-2 cursor-pointer"
+          (click)="toggleLangMenu()"
+        >
+          <!-- ICON BENDERA DINAMIS -->
+          <img
+            [src]="currentFlagSrc"
+            class="w-6 h-6 rounded-full"
+          />
+          <span class="text-white text-sm font-medium">
+            {{ currentLang | uppercase }}
+          </span>
+        </div>
+
+        <!-- MENU PILIHAN BAHASA DUNIA -->
+        <div
+          *ngIf="showLangMenu"
+          class="absolute right-0 mt-2 bg-white text-xs text-gray-800 shadow-lg rounded z-50 w-44 max-h-64 overflow-auto"
+        >
+          <button
+            *ngFor="let lang of allLanguages"
+            type="button"
+            class="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100"
+            (click)="switchLang(lang.code)"
+          >
+            <img
+              [src]="lang.flag"
+              class="w-4 h-4 rounded-full"
+            />
+            <span>{{ lang.label }}</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -22,11 +98,13 @@
       <a routerLink="/" class="flex items-center">
         <img src="assets/img/logo.png" class="w-14" />
         <div class="ml-4 flex items-center gap-6">
-          <div class="leading-tight font-playfair">
-            <div class="text-[18px] font-bold text-[#1d2b36]">
-              POLITEKNIK<br />NEGERI MALANG
-            </div>
-          </div>
+        <div class="leading-tight font-playfair">
+  <div class="header-title text-[18px] font-bold text-[#1d2b36]">
+    {{ 'POLITEKNIK' | translate }}<br />
+    {{ 'NEGERI MALANG' | translate }}
+  </div>
+</div>
+
           <div class="divider-vertical"></div>
         </div>
       </a>
@@ -39,14 +117,14 @@
             [routerLink]="item.path"
             class="nav-item px-4 py-2 rounded-md text-[14px] tracking-wide"
           >
-            {{ item.name }}
+            {{ item.name | translate }}
           </a>
 
           <div *ngIf="item.children" class="relative group">
             <button
               class="nav-item px-4 py-2 rounded-md text-[14px] tracking-wide flex items-center gap-2"
             >
-              {{ item.name }}
+              {{ item.name | translate }}
               <span class="parent-arrow">▾</span>
             </button>
 
@@ -58,7 +136,7 @@
                 [routerLink]="child.path"
                 class="dropdown-item flex items-center justify-between px-5 py-3 text-sm text-gray-700 hover:bg-[#24455e] hover:text-white"
               >
-                {{ child.name }}
+                {{ child.name | translate }}
                 <span class="submenu-arrow">›</span>
               </a>
             </div>

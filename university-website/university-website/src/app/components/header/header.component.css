@@ -64,3 +64,44 @@
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
 }
+
+/* ===== TAMBAHAN UNTUK SEARCH & BAHASA ===== */
+
+/* Box hasil pencarian di bawah input */
+.search-results {
+  max-height: 16rem; /* 256px */
+  overflow-y: auto;
+  border-radius: 0.5rem;
+}
+
+/* Scrollbar halus (opsional, hanya di browser yang mendukung) */
+.search-results::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-results::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.9); /* gray-400 */
+  border-radius: 999px;
+}
+
+/* Tombol di dropdown bahasa */
+.lang-menu-button {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Biar area klik ikon bendera & tulisan rapih */
+.lang-trigger {
+  padding: 2px 4px;
+  border-radius: 999px;
+  transition: background-color 0.15s ease;
+}
+
+.lang-trigger:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ===== TAMBAHAN UNTUK JUDUL HEADER i18n ===== */
+.header-title {
+  line-height: 1.1;
+}

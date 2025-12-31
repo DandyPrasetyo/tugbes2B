@@ -1,0 +1,107 @@
+<div class="profil-page">
+
+  <!-- HERO -->
+  <section class="hero-section hero-cropped">
+    <img src="assets/img/kampus3.jpg" alt="Polinema" class="hero-image">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-title">
+      <h1>POLINEMA BERKONTRIBUSI DALAM</h1>
+      <h1>MENCERDASKAN ANAK BANGSA</h1>
+    </div>
+  </section>
+
+  <!-- DESKRIPSI DI BAWAH -->
+  <section class="hero-desc-section">
+    <div class="container">
+      <p class="hero-description">
+        Polinema bertujuan menjadi pusat pendidikan unggul berkualitas global, yang mempersiapkan mahasiswa sesuai kebutuhan industri dan pemerintahan. Polinema juga aktif dalam penelitian terapan dan pengabdian masyarakat, berkontribusi pada kemajuan ilmu pengetahuan, teknologi, dan kesejahteraan.
+      </p>
+    </div>
+  </section>
+
+  <!-- GEDUNG -->
+  <section class="gedung-section">
+    <div class="container">
+      <img src="assets/img/Politeknik1.jpg" alt="Gedung" class="gedung-image">
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-layout">
+
+        <div class="stats-text">
+          <h2>
+            Menyempurnakan Lulusan Melalui<br>
+            Pendidikan Terapan
+          </h2>
+
+          <p>
+            Polinema mengedepankan pengembangan hard skill dan soft skill melalui metode project-based learning.
+            Hal ini memastikan bahwa lulusan memiliki pengetahuan, keterampilan, dan sikap yang sesuai kebutuhan industri
+            <span class="highlight-box">60% praktik dan 40% teori</span>.
+          </p>
+
+          <div class="stats-numbers">
+            @for (stat of stats; track stat.label) {
+              <div class="stat-box">
+                <div class="stat-number">{{ stat.value }}</div>
+                <div class="stat-text">{{ stat.label }}</div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- GAMBAR + LINGKARAN (MENYATU) -->
+        <div class="stats-image-container">
+          <div class="yellow-circle-bg"></div>
+          <img
+            src="assets/img/mahasiswa2.png"
+            alt="Mahasiswa"
+            class="mahasiswa-right image-merged">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESTASI -->
+  <section class="prestasi-section">
+    <div class="container">
+      <div class="prestasi-layout">
+
+        <!-- FOTO MENYATU DENGAN LINGKARAN -->
+        <div class="prestasi-image-wrapper merged">
+          <div class="prestasi-yellow-circle"></div>
+          <img
+            src="assets/img/mahasiswa1.png"
+            alt="Prestasi"
+            class="prestasi-image-top merged-img">
+        </div>
+
+        <!-- KONTEN -->
+        <div class="prestasi-content">
+          <h2>Prestasi Unggulan Polinema</h2>
+
+          <div class="prestasi-grid">
+            @for (prestasi of prestasiList; track prestasi.title) {
+              <div class="prestasi-card">
+                <div class="prestasi-card-title">
+                  {{ prestasi.title }}
+                </div>
+                <div class="prestasi-card-sub">
+                  {{ prestasi.rank }}
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
