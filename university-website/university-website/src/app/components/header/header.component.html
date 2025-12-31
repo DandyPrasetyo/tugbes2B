@@ -1,4 +1,4 @@
-<header class="sticky top-0 z-50">
+<header class="sticky top-0 z-50 no-print">
   <!-- TOP BLUE BAR -->
   <div class="bg-[#103654] w-full">
     <div class="max-w-7xl mx-auto px-6 py-2 flex justify-end gap-6">
@@ -34,7 +34,6 @@
       <!-- NAVIGATION -->
       <nav class="flex items-center gap-6">
         <ng-container *ngFor="let item of navigation">
-          <!-- MENU BIASA (TANPA PANAH) -->
           <a
             *ngIf="item.path"
             [routerLink]="item.path"
@@ -43,12 +42,7 @@
             {{ item.name }}
           </a>
 
-          <!-- MENU DROPDOWN (ADA PANAH) -->
-          <div
-            *ngIf="item.children"
-            class="relative group"
-            tabindex="0"
-          >
+          <div *ngIf="item.children" class="relative group">
             <button
               class="nav-item px-4 py-2 rounded-md text-[14px] tracking-wide flex items-center gap-2"
             >
@@ -56,13 +50,8 @@
               <span class="parent-arrow">▾</span>
             </button>
 
-            <!-- DROPDOWN -->
             <div
-              class="dropdown-menu absolute left-0 top-full mt-2 w-60 bg-white border shadow-lg
-                     opacity-0 invisible
-                     group-hover:opacity-100 group-hover:visible
-                     group-focus-within:opacity-100 group-focus-within:visible
-                     transition-all duration-200 z-50"
+              class="dropdown-menu absolute left-0 top-full mt-2 w-60 bg-white border shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
             >
               <a
                 *ngFor="let child of item.children"

@@ -1,0 +1,48 @@
+<section class="detail-page" *ngIf="jalur; else notFound">
+  <div class="container">
+    <!-- TOMBOL KEMBALI -->
+    <button class="btn-back" (click)="kembali()">← Kembali</button>
+
+    <h1>{{ jalur.nama }}</h1>
+    <p class="desc">{{ jalur.deskripsi }}</p>
+
+    <!-- INFO UTAMA -->
+    <div class="info-box">
+      <p><strong>Biaya Pendaftaran:</strong> {{ jalur.biaya }}</p>
+      <p><strong>Jadwal Pendaftaran:</strong> {{ jalur.jadwal }}</p>
+    </div>
+
+    <!-- TABEL UKT -->
+    <div class="ukt-box">
+      <h3>Informasi UKT & IPI</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Jenjang</th>
+            <th>UKT / Semester</th>
+            <th>IPI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of jalur.ukt">
+            <td>{{ u.jenjang }}</td>
+            <td>{{ u.ukt }}</td>
+            <td>{{ u.ipi }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="note">{{ jalur.catatan }}</p>
+    </div>
+
+    <!-- CTA -->
+    <a class="btn-primary" [href]="jalur.link" target="_blank" rel="noopener">
+      Daftar Sekarang
+    </a>
+  </div>
+</section>
+
+<ng-template #notFound>
+  <p class="not-found">Data jalur tidak ditemukan</p>
+</ng-template>

@@ -1,0 +1,36 @@
+<section class="pmb-page" *ngIf="pengumuman; else notFound">
+  <div class="container">
+    <div class="page-header">
+      <h1>{{ pengumuman.judul }}</h1>
+      <p class="tanggal">{{ pengumuman.tanggal }}</p>
+    </div>
+
+    <article class="isi">
+      <p class="teks">{{ pengumuman.isi }}</p>
+
+      <div class="section">
+        <h3>Jadwal Seleksi</h3>
+        <ul>
+          <li *ngFor="let j of pengumuman.jadwal">{{ j }}</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>Syarat & Ketentuan</h3>
+        <ul>
+          <li *ngFor="let s of pengumuman.syarat">{{ s }}</li>
+        </ul>
+      </div>
+    </article>
+
+    <div class="actions">
+      <a routerLink="/pmb/pengumuman" class="btn-back"> ← Kembali </a>
+    </div>
+  </div>
+</section>
+
+<ng-template #notFound>
+  <div class="not-found">
+    <h2>Pengumuman tidak ditemukan</h2>
+  </div>
+</ng-template>

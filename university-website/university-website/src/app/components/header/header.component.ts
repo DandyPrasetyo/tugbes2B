@@ -36,7 +36,10 @@ export class HeaderComponent {
       name: 'KEMAHASISWAAN',
       children: [
         // ✅ disesuaikan ke route kemahasiswaan/organisasi-mahasiswa
-        { name: 'Organisasi Mahasiswa', path: '/kemahasiswaan/organisasi-mahasiswa' },
+        {
+          name: 'Organisasi Mahasiswa',
+          path: '/kemahasiswaan/organisasi-mahasiswa',
+        },
         { name: 'Beasiswa', path: '/kemahasiswaan/beasiswa' },
         { name: 'Alumni', path: '/kemahasiswaan/alumni' },
       ],
@@ -45,8 +48,8 @@ export class HeaderComponent {
       name: 'PMB',
       children: [
         { name: 'Pengumuman', path: '/pmb/pengumuman' },
-        { name: 'Jalur Pendaftaran', path: '/pmb/jalur' },
-        { name: 'Hasil Seleksi', path: '/pmb/hasil' },
+        { name: 'Jalur Pendaftaran', path: '/pmb/jalur-pendaftaran' },
+        { name: 'Hasil Seleksi', path: '/pmb/hasil-seleksi' },
       ],
     },
     { name: 'CARRER', path: '/career' },

@@ -1,0 +1,116 @@
+<section class="pmb-page">
+  <div class="container hasil-box">
+    <h1 class="page-title no-print">Hasil Seleksi PMB</h1>
+    <p class="subtitle no-print">
+      Masukkan Nomor Peserta untuk melihat hasil seleksi PMB Polinema
+    </p>
+
+    <!-- FORM CEK -->
+    <form class="cek-form no-print" (ngSubmit)="cekHasil()">
+      <input
+        type="text"
+        placeholder="Contoh: 2025001"
+        [(ngModel)]="noPeserta"
+        name="noPeserta"
+        required
+      />
+      <button type="submit">Cek Hasil</button>
+    </form>
+
+    <!-- HASIL -->
+    <div *ngIf="searched" class="hasil-area">
+      <!-- DATA DITEMUKAN -->
+      <div *ngIf="hasil" class="hasil-card print-area">
+        <!-- WATERMARK -->
+        <div class="watermark-text">RESMI PMB POLINEMA</div>
+        <img src="assets/img/logo.png" alt="Polinema" class="watermark-logo" />
+
+        <!-- KOP SURAT -->
+        <div class="kop">
+          <img src="assets/img/logo.png" alt="Polinema" />
+          <div class="kop-text">
+            <h3>POLITEKNIK NEGERI MALANG</h3>
+            <p>
+              Program Studi di Luar Kampus Utama (PSDKU) Lumajang<br />
+              Jl. Soekarno Hatta No.9, Malang – Jawa Timur 65141<br />
+              Website: https://www.polinema.ac.id
+            </p>
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- JUDUL SURAT -->
+        <h2 class="judul-surat">PENGUMUMAN HASIL SELEKSI PMB</h2>
+
+        <!-- ISI SURAT -->
+        <p class="paragraf">
+          Berdasarkan hasil seleksi Penerimaan Mahasiswa Baru (PMB) Politeknik
+          Negeri Malang Tahun Akademik 2025/2026, dengan ini kami sampaikan
+          bahwa peserta dengan data sebagai berikut:
+        </p>
+
+        <table class="data-table">
+          <tr>
+            <td>Nomor Peserta</td>
+            <td>{{ hasil.no }}</td>
+          </tr>
+          <tr>
+            <td>Nama</td>
+            <td>{{ hasil.nama }}</td>
+          </tr>
+          <tr>
+            <td>Jalur Seleksi</td>
+            <td>{{ hasil.jalur }}</td>
+          </tr>
+          <tr>
+            <td>Program Studi</td>
+            <td>{{ hasil.prodi }}</td>
+          </tr>
+          <tr>
+            <td>Status</td>
+            <td>
+              <strong
+                [class.lulus]="hasil.status === 'LULUS'"
+                [class.tidak]="hasil.status === 'TIDAK LULUS'"
+              >
+                {{ hasil.status }}
+              </strong>
+            </td>
+          </tr>
+        </table>
+
+        <p class="paragraf">
+          Demikian pengumuman ini disampaikan. Bagi peserta yang dinyatakan
+          <strong>LULUS</strong>, harap mengikuti tahapan selanjutnya sesuai
+          ketentuan yang berlaku.
+        </p>
+
+        <p class="note">
+          * Pengumuman ini bersifat sementara dan dapat berubah sesuai ketentuan
+          Politeknik Negeri Malang.
+        </p>
+
+        <!-- TANDA TANGAN -->
+        <div class="ttd">
+          <p>Lumajang, {{ today }}</p>
+          <p>Panitia PMB Politeknik Negeri Malang</p>
+          <br /><br />
+          <strong>Ketua PMB</strong>
+        </div>
+
+        <!-- ACTION -->
+        <div class="action no-print">
+          <button class="btn-outline" (click)="print()">Cetak</button>
+          <button class="btn-primary" (click)="print()">Download PDF</button>
+        </div>
+      </div>
+
+      <!-- DATA TIDAK DITEMUKAN -->
+      <div *ngIf="!hasil" class="hasil-card tidak">
+        <h2>DATA TIDAK DITEMUKAN</h2>
+        <p>Nomor peserta yang Anda masukkan tidak terdaftar.</p>
+      </div>
+    </div>
+  </div>
+</section>

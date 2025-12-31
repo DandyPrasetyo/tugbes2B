@@ -2,3 +2,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* =============================== */
+/* GLOBAL PRINT – SURAT PMB */
+/* =============================== */
+
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: white;
+  }
+}
+
+/* ===============================
+   STICKY FOOTER LAYOUT (GLOBAL)
+================================ */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+app-root,
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Konten fleksibel */
+.app-content {
+  flex: 1;
+}
+
+/* ===============================
+   PRINT MODE (TETAP AMAN)
+================================ */
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  .app-content {
+    flex: none;
+  }
+}

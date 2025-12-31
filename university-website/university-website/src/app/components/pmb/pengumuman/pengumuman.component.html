@@ -1,0 +1,21 @@
+<section class="pmb-page">
+  <div class="container">
+    <h1>Pengumuman PMB</h1>
+    <p class="subtitle">
+      Informasi resmi Penerimaan Mahasiswa Baru Polinema PSDKU Lumajang
+    </p>
+
+    <div class="pengumuman-list">
+      <article
+        class="pengumuman-card"
+        *ngFor="let p of pengumumanList"
+        [routerLink]="['/pmb/pengumuman', p.id]"
+      >
+        <h3>{{ p.judul }}</h3>
+        <span class="date">{{ p.tanggal }}</span>
+        <p>{{ p.ringkas }}</p>
+        <span class="detail">Lihat Detail →</span>
+      </article>
+    </div>
+  </div>
+</section>
