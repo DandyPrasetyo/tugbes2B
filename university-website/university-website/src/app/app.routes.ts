@@ -7,7 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ContactComponent } from './components/contact/contact.component';
 
 /* ===============================
-<<<<<<< HEAD
+
    BERITA
 =======
    PROFIL (BARU)
@@ -86,7 +86,6 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
 
   /* ===============================
-<<<<<<< HEAD
      BERITA
 =======
      PROFIL (BARU)
@@ -99,7 +98,7 @@ export const routes: Routes = [
 
   /* ===============================
      BERITA (BARU)
->>>>>>> b6dee55 (sedikit perubahan)
+
   ================================= */
   { path: 'berita', component: BeritaListComponent },
   { path: 'berita/:id', component: BeritaDetailComponent },
