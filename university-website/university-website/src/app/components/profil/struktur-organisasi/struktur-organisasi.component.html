@@ -1,0 +1,206 @@
+<div class="struktur-organisasi-wrapper">
+
+  <!-- HERO FOTO KAMPUS -->
+ <section class="hero-section">
+  <div
+    class="hero-image-container"
+    [style.backgroundImage]="'url(' + heroImage + ')'"
+  >
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content hero-center">
+      <h1 class="hero-title hero-orange">STRUKTUR ORGANISASI</h1>
+      <p class="hero-subtitle hero-orange">POLITEKNIK NEGERI MALANG</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- KONTEN UTAMA -->
+  <section class="main-content">
+    <div class="container">
+
+      <!-- DESKRIPSI -->
+      <div class="paper-box">
+        <h2>Tentang Struktur Organisasi</h2>
+        <p>
+          Struktur organisasi Politeknik Negeri Malang dirancang untuk memastikan kelancaran operasional
+          dan pencapaian target institusi. Organisasi terdiri dari berbagai unit yang bekerja sama secara
+          sinergis untuk memberikan pelayanan terbaik kepada seluruh pemangku kepentingan.
+        </p>
+      </div>
+
+      <h3 class="section-title">Bagan Struktur Organisasi</h3>
+
+      <!-- BAGAN CARDS -->
+      <div class="org-root">
+
+        <!-- BARIS 1: SENAT / SPI / DEWAN -->
+        <div class="org-row">
+          <div
+            class="org-card small clickable"
+            *ngFor="let card of topCards"
+            (click)="openDetail(card)"
+          >
+            <div class="card-title">{{ card.name }}</div>
+            <div class="card-subtitle" *ngIf="card.subtitle">{{ card.subtitle }}</div>
+          </div>
+        </div>
+
+        <!-- BARIS 2: DIREKTUR -->
+        <div class="org-row center">
+          <div class="org-card director clickable" (click)="openDetail(directorCard)">
+            <div class="card-title">{{ directorCard.name }}</div>
+            <div class="card-subtitle">{{ directorCard.subtitle }}</div>
+          </div>
+        </div>
+
+        <!-- BARIS 3: WAKIL DIREKTUR -->
+        <div class="org-row">
+          <div
+            class="org-card medium clickable"
+            *ngFor="let card of wakilCards"
+            (click)="openDetail(card)"
+          >
+            <div class="card-title">{{ card.name }}</div>
+            <div class="card-subtitle">{{ card.subtitle }}</div>
+          </div>
+        </div>
+
+        <!-- BARIS 4: BAGIAN & P2MPP -->
+        <div class="org-row">
+          <div
+            class="org-column"
+          >
+            <div
+              class="org-card medium clickable"
+              (click)="openDetail(bagianCards[0])"
+            >
+              <div class="card-title">{{ bagianCards[0].name }}</div>
+              <div class="card-subtitle">{{ bagianCards[0].subtitle }}</div>
+            </div>
+            <div
+              class="org-card small clickable"
+              (click)="openDetail(bagianCards[1])"
+            >
+              <div class="card-title">{{ bagianCards[1].name }}</div>
+              <div class="card-subtitle">{{ bagianCards[1].subtitle }}</div>
+            </div>
+          </div>
+
+          <div class="org-column">
+            <div
+              class="org-card medium clickable"
+              (click)="openDetail(bagianCards[2])"
+            >
+              <div class="card-title">{{ bagianCards[2].name }}</div>
+              <div class="card-subtitle">{{ bagianCards[2].subtitle }}</div>
+            </div>
+            <div
+              class="org-card small clickable"
+              (click)="openDetail(bagianCards[3])"
+            >
+              <div class="card-title">{{ bagianCards[3].name }}</div>
+              <div class="card-subtitle">{{ bagianCards[3].subtitle }}</div>
+            </div>
+          </div>
+
+          <div class="org-column">
+            <div
+              class="org-card medium clickable"
+              (click)="openDetail(bagianCards[4])"
+            >
+              <div class="card-title">{{ bagianCards[4].name }}</div>
+              <div class="card-subtitle">{{ bagianCards[4].subtitle }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BARIS 5: JURUSAN & P3M -->
+        <div class="org-row">
+          <div class="org-column jurusan-column">
+            <div class="org-card large clickable" (click)="openDetail(jurusanCard)">
+              <div class="card-title">{{ jurusanCard.name }}</div>
+              <ul class="jurusan-list">
+                <li *ngFor="let j of jurusanList">{{ j }}</li>
+              </ul>
+            </div>
+            <div class="org-card small">
+              <div class="card-title">Sekretaris Jurusan</div>
+            </div>
+            <div class="org-card small">
+              <div class="card-title">Program Studi</div>
+            </div>
+            <div class="org-card small">
+              <div class="card-title">Lab/Bengkel/Studio</div>
+            </div>
+          </div>
+
+          <div class="org-column">
+            <div class="org-card medium clickable" (click)="openDetail(p3mCard)">
+              <div class="card-title">{{ p3mCard.name }}</div>
+              <div class="card-subtitle">{{ p3mCard.subtitle }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BARIS 6: UPA -->
+        <div class="org-row">
+          <div
+            class="org-card small clickable"
+            *ngFor="let card of upaCards"
+            (click)="openDetail(card)"
+          >
+            <div class="card-title">{{ card.name }}</div>
+          </div>
+        </div>
+
+        <!-- BARIS 7: KELOMPOK FUNGSIONAL -->
+        <div class="org-row center">
+          <div class="org-card dashed small clickable" (click)="openDetail(fungsionalCard)">
+            <div class="card-title">{{ fungsionalCard.name }}</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL DETAIL -->
+  <div
+    class="detail-overlay"
+    [class.show]="isDetailVisible"
+    (click)="closeDetail()"
+  ></div>
+
+  <div class="detail-modal" [class.show]="isDetailVisible">
+    <div *ngIf="selectedCard" class="detail-modal-content">
+      <button class="modal-close-btn" (click)="closeDetail()">
+        <span>&times;</span>
+      </button>
+
+      <div class="modal-header">
+        <div class="modal-icon">📋</div>
+        <h2 class="modal-title">{{ selectedCard.name }}</h2>
+      </div>
+
+      <div class="modal-body">
+        <div class="info-row" *ngIf="selectedCard.subtitle">
+          <span class="info-label">Keterangan</span>
+          <span class="info-value">{{ selectedCard.subtitle }}</span>
+        </div>
+
+        <div class="info-row">
+          <span class="info-label">Level Organisasi</span>
+          <span class="info-value">Level {{ selectedCard.level }}</span>
+        </div>
+
+        <div class="modal-footer">
+          <p class="footer-note">
+            Untuk informasi lebih lanjut, silakan hubungi unit terkait melalui sistem informasi akademik.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

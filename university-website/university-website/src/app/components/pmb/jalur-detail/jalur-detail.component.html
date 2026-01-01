@@ -1,48 +1,28 @@
-<section class="detail-page" *ngIf="jalur; else notFound">
+<section class="detail-page">
   <div class="container">
-    <!-- TOMBOL KEMBALI -->
-    <button class="btn-back" (click)="kembali()">← Kembali</button>
+    <div *ngIf="jalur" class="poster-wrapper">
+      <div class="poster-container">
+        <img 
+          [src]="jalur.poster" 
+          [alt]="jalur.nama" 
+          class="poster-image"
+          onerror="this.src='assets/img/placeholder-poster.jpg'"
+        />
+      </div>
 
-    <h1>{{ jalur.nama }}</h1>
-    <p class="desc">{{ jalur.deskripsi }}</p>
+      <div class="action-buttons">
+        <button class="btn-primary" (click)="bukaPortal()">
+          🚀 Daftar Sekarang
+        </button>
+        <p class="cta-text">Jangan lewatkan kesempatan untuk bergabung dengan Polinema!</p>
+      </div>
 
-    <!-- INFO UTAMA -->
-    <div class="info-box">
-      <p><strong>Biaya Pendaftaran:</strong> {{ jalur.biaya }}</p>
-      <p><strong>Jadwal Pendaftaran:</strong> {{ jalur.jadwal }}</p>
+      <button class="btn-back" (click)="kembali()">← Kembali ke Jalur Pendaftaran</button>
     </div>
 
-    <!-- TABEL UKT -->
-    <div class="ukt-box">
-      <h3>Informasi UKT & IPI</h3>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Jenjang</th>
-            <th>UKT / Semester</th>
-            <th>IPI</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let u of jalur.ukt">
-            <td>{{ u.jenjang }}</td>
-            <td>{{ u.ukt }}</td>
-            <td>{{ u.ipi }}</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p class="note">{{ jalur.catatan }}</p>
+    <div *ngIf="!jalur" class="not-found">
+      <p>Data jalur tidak ditemukan</p>
+      <button class="btn-back" (click)="kembali()">Kembali ke Jalur Pendaftaran</button>
     </div>
-
-    <!-- CTA -->
-    <a class="btn-primary" [href]="jalur.link" target="_blank" rel="noopener">
-      Daftar Sekarang
-    </a>
   </div>
 </section>
-
-<ng-template #notFound>
-  <p class="not-found">Data jalur tidak ditemukan</p>
-</ng-template>

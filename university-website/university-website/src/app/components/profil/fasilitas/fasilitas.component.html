@@ -1,0 +1,103 @@
+<div class="fasilitas-wrapper">
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div
+      class="hero-image"
+      [style.backgroundImage]="'url(' + heroImage + ')'"
+    >
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <h1 class="hero-title">FASILITAS POLINEMA</h1>
+        <p class="hero-subtitle">PSDKU LUMAJANG</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section class="main-content">
+    <div class="container">
+
+      <!-- SECTION GEDUNG -->
+      <section class="section-block">
+        <h2 class="section-title">Gedung</h2>
+
+        <div class="cards-row">
+          <article
+            class="facility-card"
+            *ngFor="let g of mainBuildings"
+            [routerLink]="['/profil/fasilitas', g.id]"
+          >
+            <div class="card-image" [style.backgroundImage]="'url(' + g.image + ')'"></div>
+            <div class="card-body">
+              <h3 class="card-title">{{ g.title }}</h3>
+              <p class="card-subtitle" *ngIf="g.subtitle">{{ g.subtitle }}</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="more-wrapper">
+          <button class="btn-more" (click)="toggleMoreBuildings()">
+            {{ showMoreBuildings ? 'Tutup Gedung Lainnya' : 'Selengkapnya' }}
+          </button>
+        </div>
+
+        <div class="cards-row extra-row" *ngIf="showMoreBuildings">
+          <article
+            class="facility-card small"
+            *ngFor="let g of extraBuildings"
+            [routerLink]="['/profil/fasilitas', g.id]"
+          >
+            <div class="card-image" [style.backgroundImage]="'url(' + g.image + ')'"></div>
+            <div class="card-body">
+              <h3 class="card-title">{{ g.title }}</h3>
+              <p class="card-subtitle" *ngIf="g.subtitle">{{ g.subtitle }}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECTION FASILITAS LAINNYA -->
+      <section class="section-block">
+        <h2 class="section-title">Fasilitas Lainnya</h2>
+
+        <div class="cards-row">
+          <article
+            class="facility-card"
+            *ngFor="let f of mainFacilities"
+            [routerLink]="['/profil/fasilitas', f.id]"
+          >
+            <div class="card-image" [style.backgroundImage]="'url(' + f.image + ')'"></div>
+            <div class="card-body">
+              <h3 class="card-title">{{ f.title }}</h3>
+              <p class="card-subtitle" *ngIf="f.subtitle">{{ f.subtitle }}</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="more-wrapper">
+          <button class="btn-more" (click)="toggleMoreFacilities()">
+            {{ showMoreFacilities ? 'Tutup Fasilitas Lain' : 'Selengkapnya' }}
+          </button>
+        </div>
+
+        <div class="cards-row extra-row" *ngIf="showMoreFacilities">
+          <article
+            class="facility-card small"
+            *ngFor="let f of extraFacilities"
+            [routerLink]="['/profil/fasilitas', f.id]"
+          >
+            <div class="card-image" [style.backgroundImage]="'url(' + f.image + ')'"></div>
+            <div class="card-body">
+              <h3 class="card-title">{{ f.title }}</h3>
+              <p class="card-subtitle" *ngIf="f.subtitle">{{ f.subtitle }}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+</div>

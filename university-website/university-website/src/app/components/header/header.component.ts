@@ -13,7 +13,6 @@ import { PLATFORM_ID } from '@angular/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-
   navigation = [
     { name: 'BERANDA', path: '/' },
     {
@@ -22,8 +21,12 @@ export class HeaderComponent {
         { name: 'PROFIL', path: '/profil' },
         { name: 'TENTANG_KAMPUS', path: '/tentang-kampus' },
         { name: 'VISI_MISI', path: '/profil/visi-misi' },
-        { name: 'STRUKTUR_ORGANISASI', path: '/struktur-organisasi' },
-        { name: 'FASILITAS', path: '/fasilitas' },
+
+        // ✅ Struktur organisasi
+        { name: 'STRUKTUR_ORGANISASI', path: '/profil/struktur-organisasi' },
+
+        // ✅ Fasilitas diarahkan ke /profil/fasilitas
+        { name: 'FASILITAS', path: '/profil/fasilitas' },
       ],
     },
     {
@@ -48,8 +51,8 @@ export class HeaderComponent {
       name: 'PMB',
       children: [
         { name: 'PENGUMUMAN_PMB', path: '/pmb/pengumuman' },
-        { name: 'JALUR_PENDAFTARAN', path: '/pmb/jalur' },
-        { name: 'HASIL_SELEKSI', path: '/pmb/hasil' },
+        { name: 'JALUR_PENDAFTARAN', path: '/pmb/jalur-pendaftaran' },
+        { name: 'HASIL_SELEKSI', path: '/pmb/hasil-seleksi' },
       ],
     },
     { name: 'CARRER', path: '/career' },
@@ -66,8 +69,13 @@ export class HeaderComponent {
     { name: 'Profil', path: '/profil' },
     { name: 'Tentang Kampus', path: '/tentang-kampus' },
     { name: 'Visi & Misi', path: '/profil/visi-misi' },
-    { name: 'Struktur Organisasi', path: '/struktur-organisasi' },
-    { name: 'Fasilitas', path: '/fasilitas' },
+
+    // ✅ Struktur organisasi
+    { name: 'Struktur Organisasi', path: '/profil/struktur-organisasi' },
+
+    // ✅ Fasilitas untuk search
+    { name: 'Fasilitas', path: '/profil/fasilitas' },
+
     { name: 'Mahasiswa Aktif', path: '/akademik/mahasiswa-aktif' },
     { name: 'Dosen & Kehadiran', path: '/akademik/dosen-kehadiran' },
     { name: 'Prodi', path: '/akademik/prodi' },
@@ -77,8 +85,8 @@ export class HeaderComponent {
     { name: 'Beasiswa', path: '/kemahasiswaan/beasiswa' },
     { name: 'Alumni', path: '/kemahasiswaan/alumni' },
     { name: 'Pengumuman PMB', path: '/pmb/pengumuman' },
-    { name: 'Jalur Pendaftaran', path: '/pmb/jalur' },
-    { name: 'Hasil Seleksi', path: '/pmb/hasil' },
+    { name: 'Jalur Pendaftaran', path: '/pmb/jalur-pendaftaran' },
+    { name: 'Hasil Seleksi', path: '/pmb/hasil-seleksi' },
     { name: 'Career', path: '/career' },
     { name: 'Contact', path: '/contact' },
   ];
@@ -90,14 +98,6 @@ export class HeaderComponent {
   allLanguages = [
     { code: 'id', label: 'Bahasa Indonesia', flag: 'assets/img/flag/indo.webp' },
     { code: 'en', label: 'English', flag: 'assets/img/flag/eng.jpg' },
-    { code: 'fr', label: 'Français', flag: 'assets/img/flag/fran.jpg' },
-    { code: 'de', label: 'Deutsch', flag: 'assets/img/flag/german.jpg' },
-    { code: 'es', label: 'Español', flag: 'assets/img/flag/espanol.webp' },
-    { code: 'ar', label: 'العربية', flag: 'assets/img/flag/arabia.png' },
-    { code: 'zh', label: '中文 (Chinese)', flag: 'assets/img/flag/cino.jpg' },
-    { code: 'ja', label: '日本語 (Japanese)', flag: 'assets/img/flag/jepang.jpg' },
-    { code: 'ko', label: '한국어 (Korean)', flag: 'assets/img/flag/kr.webp' },
-    { code: 'ru', label: 'Русский (Russian)', flag: 'assets/img/flag/rusia.jpg' },
   ];
 
   get currentFlagSrc(): string {

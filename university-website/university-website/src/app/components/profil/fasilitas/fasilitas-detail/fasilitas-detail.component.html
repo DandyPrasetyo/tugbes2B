@@ -1,0 +1,27 @@
+<div class="facility-detail-page" *ngIf="item">
+  <div class="facility-detail-container">
+
+    <h1 class="facility-title">{{ item.title }}</h1>
+    <p class="facility-subtitle" *ngIf="item.subtitle">{{ item.subtitle }}</p>
+
+    <div class="facility-image-wrapper">
+      <img
+        class="facility-image"
+        [src]="item.image"
+        [alt]="item.title"
+      />
+    </div>
+
+    <p class="facility-description">
+      {{ item.description }}
+    </p>
+
+    <!-- tombol kembali di kiri bawah, bulat & 3D -->
+    <div class="back-btn-wrapper">
+      <a routerLink="/profil/fasilitas" class="back-btn">
+        Kembali ke Fasilitas
+      </a>
+    </div>
+
+  </div>
+</div>

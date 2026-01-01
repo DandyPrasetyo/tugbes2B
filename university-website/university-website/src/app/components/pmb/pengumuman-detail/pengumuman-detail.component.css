@@ -1,93 +1,249 @@
-/* PAGE */
-.pmb-page {
-  background: #f8fafc;
-  padding: 120px 20px;
+/* Latar belakang halaman */
+.detail-page {
   min-height: 100vh;
+  padding: 3.5rem 1rem;
+  background: linear-gradient(180deg, #e0f2fe 0%, #f9fafb 45%, #e5e7eb 100%);
+  display: flex;
+  justify-content: center;
 }
 
-.container {
-  max-width: 900px;
-  margin: auto;
+.detail-wrapper {
+  width: 100%;
+  max-width: 960px;
+}
+
+/* Kartu utama (juga dipakai untuk PDF) */
+.detail-card {
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.16),
+    0 0 0 1px rgba(148, 163, 184, 0.16);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem 2.5rem 2rem;
 }
 
 /* HEADER */
-.page-header {
+.detail-header {
   text-align: center;
-  margin-bottom: 40px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1.2rem;
+  margin-bottom: 1.5rem;
 }
 
-.page-header h1 {
-  font-size: 32px;
+.detail-title {
+  font-size: 1.8rem;
+  line-height: 1.4;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.detail-title span {
+  display: inline-block;
+  margin-top: 0.1rem;
+  font-size: 1.7rem;
+  color: #0369a1;
   font-weight: 700;
-  color: #1d3557;
-  margin-bottom: 6px;
 }
 
-.tanggal {
-  font-size: 14px;
+.detail-date {
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+/* ISI UTAMA */
+.detail-main {
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.detail-body {
+  margin-bottom: 1.4rem;
+  line-height: 1.7;
+}
+
+.detail-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.4rem;
+}
+
+.detail-subtitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+}
+
+.detail-list {
+  list-style: disc;
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+.detail-list li + li {
+  margin-top: 0.15rem;
+}
+
+/* TABEL HASIL */
+.detail-table {
+  margin-top: 1.8rem;
+  background: #f9fafb;
+  border-radius: 18px;
+  padding: 1.3rem 1.5rem 1.2rem;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+}
+
+.detail-table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+  font-size: 0.85rem;
+  color: #1f2933;
+}
+
+.detail-table thead tr {
+  background: #e0f2fe;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
   color: #64748b;
 }
 
-/* ISI */
-.isi {
+.detail-table th,
+.detail-table td {
+  padding: 0.6rem 0.75rem;
+}
+
+.detail-table th:first-child,
+.detail-table td:first-child {
+  border-radius: 10px 0 0 10px;
+}
+
+.detail-table th:last-child,
+.detail-table td:last-child {
+  border-radius: 0 10px 10px 0;
+}
+
+.detail-table tbody tr {
   background: #ffffff;
-  border-radius: 18px;
-  padding: 32px 36px;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.2s ease, transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
-.teks {
-  font-size: 15px;
-  line-height: 1.8;
-  color: #334155;
-  white-space: pre-line;
+.detail-table tbody tr:nth-child(odd) {
+  background: #f8fafc;
 }
 
-/* SECTION */
-.section {
-  margin-top: 28px;
+.detail-table tbody tr:hover {
+  background: #eef2ff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
 }
 
-.section h3 {
-  font-size: 18px;
-  color: #1d3557;
-  margin-bottom: 10px;
+.text-center {
+  text-align: center;
 }
 
-.section ul {
-  padding-left: 20px;
-}
-
-.section li {
-  font-size: 14px;
-  color: #334155;
-  margin-bottom: 6px;
-}
-
-/* ACTION */
-.actions {
-  margin-top: 30px;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.btn-back {
-  display: inline-block;
-  padding: 12px 22px;
-  border-radius: 10px;
-  background: #24455e;
-  color: #ffffff;
+/* Badge status */
+.detail-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
   font-weight: 600;
-  text-decoration: none;
-  transition: background 0.2s ease;
+  background: #ecfdf5;
+  color: #15803d;
+  border: 1px solid rgba(22, 163, 74, 0.25);
+}
+
+/* Catatan bawah tabel */
+.detail-note {
+  margin-top: 0.6rem;
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+/* FOOTER ACTION */
+.detail-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.3rem;
+}
+
+.btn-back,
+.btn-download {
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 1.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, box-shadow 0.2s ease,
+    background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+/* Tombol kembali */
+.btn-back {
+  background: #0f172a;
+  color: #ffffff;
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.55);
 }
 
 .btn-back:hover {
-  background: #1d3557;
+  background: #020617;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.6);
+  transform: translateY(-1px);
 }
 
-/* NOT FOUND */
-.not-found {
-  text-align: center;
-  padding: 100px 20px;
+.btn-back:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.5);
+}
+
+/* Tombol download */
+.btn-download {
+  background: #0284c7;
+  color: #f9fafb;
+  box-shadow: 0 14px 28px rgba(56, 189, 248, 0.45);
+}
+
+.btn-download:hover {
+  background: #0369a1;
+  box-shadow: 0 18px 40px rgba(37, 99, 235, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-download:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.45);
+}
+
+.detail-footer-note {
+  margin-left: auto;
+  font-size: 0.68rem;
+  color: #9ca3af;
+}
+
+/* Responsif */
+@media (min-width: 768px) {
+  .detail-page {
+    padding: 4rem 1.5rem;
+  }
+
+  .detail-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }

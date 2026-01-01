@@ -7,17 +7,17 @@ import { HomeComponent } from './components/home/home.component';
 import { ContactComponent } from './components/contact/contact.component';
 
 /* ===============================
-
-   BERITA
-=======
    PROFIL (BARU)
 ================================ */
-import { ProfilComponent } from './components/profil/profil.component'; // ⭐⭐ TAMBAHAN: PROFIL
-import { VisiMisiComponent } from './components/profil/visi-misi/visi-misi.component'; // ⭐⭐ TAMBAHAN: VISI MISI
+import { ProfilComponent } from './components/profil/profil.component';
+import { VisiMisiComponent } from './components/profil/visi-misi/visi-misi.component';
+import { TentangKampusComponent } from './components/profil/tentang-kampus/tentang-kampus.component';
+import { StrukturOrganisasiComponent } from './components/profil/struktur-organisasi/struktur-organisasi.component';
+import { FasilitasComponent } from './components/profil/fasilitas/fasilitas.component';
+import { FasilitasDetailComponent } from './components/profil/fasilitas/fasilitas-detail/fasilitas-detail.component';
 
 /* ===============================
    BERITA (BARU)
->>>>>>> b6dee55 (sedikit perubahan)
 ================================ */
 import { BeritaListComponent } from './components/berita/berita-list/berita-list.component';
 import { BeritaDetailComponent } from './components/berita/berita-detail/berita-detail.component';
@@ -86,19 +86,18 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
 
   /* ===============================
-     BERITA
-=======
-     PROFIL (BARU)
+     PROFIL
   ================================= */
-  {
-    path: 'profil',                   // ✅ route untuk dropdown Profil
-    component: ProfilComponent,
-  },
-  { path: 'profil/visi-misi', component: VisiMisiComponent }, // ⭐⭐ TAMBAHAN: VISI MISI
+  { path: 'profil', component: ProfilComponent },
+  { path: 'profil/visi-misi', component: VisiMisiComponent },
+  { path: 'profil/struktur-organisasi', component: StrukturOrganisasiComponent },
+  { path: 'tentang-kampus', component: TentangKampusComponent },
+  { path: 'profil/fasilitas', component: FasilitasComponent },
+  // ⬇️ perbaikan: gunakan parameter :id
+  { path: 'profil/fasilitas/:id', component: FasilitasDetailComponent },
 
   /* ===============================
-     BERITA (BARU)
-
+     BERITA
   ================================= */
   { path: 'berita', component: BeritaListComponent },
   { path: 'berita/:id', component: BeritaDetailComponent },
@@ -109,10 +108,7 @@ export const routes: Routes = [
   { path: 'pmb/pengumuman', component: PengumumanComponent },
   { path: 'pmb/pengumuman/:id', component: PengumumanDetailComponent },
   { path: 'pmb/jalur-pendaftaran', component: JalurPendaftaranComponent },
-
-  /* 🔑 DETAIL JALUR (Mandiri Polinema & Konsorsium) */
   { path: 'pmb/jalur/:kode', component: JalurDetailComponent },
-
   { path: 'pmb/hasil-seleksi', component: HasilSeleksiComponent },
 
   /* ===============================
@@ -127,10 +123,7 @@ export const routes: Routes = [
   /* ===============================
      KEMAHASISWAAN
   ================================= */
-  {
-    path: 'kemahasiswaan/organisasi-mahasiswa',
-    component: OrganisasiMahasiswaComponent,
-  },
+  { path: 'kemahasiswaan/organisasi-mahasiswa', component: OrganisasiMahasiswaComponent },
   { path: 'kemahasiswaan/beasiswa', component: BeasiswaComponent },
   { path: 'kemahasiswaan/beasiswa/:id', component: BeasiswaDetailComponent },
   { path: 'kemahasiswaan/alumni', component: AlumniComponent },

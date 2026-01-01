@@ -1,36 +1,102 @@
-<section class="pmb-page" *ngIf="pengumuman; else notFound">
-  <div class="container">
-    <div class="page-header">
-      <h1>{{ pengumuman.judul }}</h1>
-      <p class="tanggal">{{ pengumuman.tanggal }}</p>
+<section class="detail-page">
+  <div class="detail-wrapper">
+    <!-- BAGIAN YANG DIJADIKAN PDF -->
+    <div id="pengumuman-container" class="detail-card">
+      <!-- HEADER -->
+      <header class="detail-header">
+        <h1 class="detail-title">
+          Pengumuman Hasil SPMB
+          <br />
+          <span>{{ pengumuman?.judulJalur }}</span>
+        </h1>
+        <p class="detail-date">
+          Diumumkan pada: {{ pengumuman?.tanggal }}
+        </p>
+      </header>
+
+      <!-- ISI -->
+      <section class="detail-main">
+        <p class="detail-body">
+          {{ pengumuman?.isi }}
+        </p>
+
+        <div class="detail-columns">
+          <div>
+            <h2 class="detail-subtitle">Jadwal Penting</h2>
+            <ul class="detail-list">
+              <li *ngFor="let j of pengumuman?.jadwal">
+                {{ j }}
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="detail-subtitle">Persyaratan</h2>
+            <ul class="detail-list">
+              <li *ngFor="let s of pengumuman?.syarat">
+                {{ s }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- TABEL HASIL -->
+      <section
+        *ngIf="pengumuman?.hasil?.length"
+        class="detail-table"
+      >
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama Mahasiswa</th>
+              <th>No Peserta</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of pengumuman?.hasil">
+              <td class="text-center">{{ row.no }}</td>
+              <td>{{ row.nama }}</td>
+              <td>{{ row.peserta }}</td>
+              <td>
+                <span class="detail-badge">
+                  {{ row.status }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="detail-note">
+          * Jika nama Anda belum tercantum, silakan cek kembali jadwal pengumuman sesuai
+          jalur pendaftaran atau hubungi panitia PMB.
+        </p>
+      </section>
     </div>
 
-    <article class="isi">
-      <p class="teks">{{ pengumuman.isi }}</p>
+    <!-- FOOTER ACTION (TIDAK MASUK PDF) -->
+    <footer class="detail-footer">
+      <button
+        type="button"
+        class="btn-back"
+        (click)="kembali()"
+      >
+        &larr; Kembali ke Pengumuman
+      </button>
 
-      <div class="section">
-        <h3>Jadwal Seleksi</h3>
-        <ul>
-          <li *ngFor="let j of pengumuman.jadwal">{{ j }}</li>
-        </ul>
-      </div>
+      <button
+        type="button"
+        class="btn-download"
+        (click)="downloadPDF()"
+      >
+        ⬇ Download PDF
+      </button>
 
-      <div class="section">
-        <h3>Syarat & Ketentuan</h3>
-        <ul>
-          <li *ngFor="let s of pengumuman.syarat">{{ s }}</li>
-        </ul>
-      </div>
-    </article>
-
-    <div class="actions">
-      <a routerLink="/pmb/pengumuman" class="btn-back"> ← Kembali </a>
-    </div>
+      <p class="detail-footer-note">
+        Dokumen ini bersifat resmi. Simpan atau cetak sebagai arsip pribadi.
+      </p>
+    </footer>
   </div>
 </section>
-
-<ng-template #notFound>
-  <div class="not-found">
-    <h2>Pengumuman tidak ditemukan</h2>
-  </div>
-</ng-template>

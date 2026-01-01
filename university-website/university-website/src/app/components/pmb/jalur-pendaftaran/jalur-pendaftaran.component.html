@@ -1,59 +1,74 @@
 <section class="jalur-page">
-  <div class="container">
-    <h1>Jalur Pendaftaran PMB</h1>
-    <p class="subtitle">
-      Informasi jalur penerimaan mahasiswa baru Politeknik Negeri Malang
-    </p>
+  <div class="jalur-wrapper">
+    <!-- HEADER -->
+    <header class="jalur-header">
+      <h1 class="jalur-h1">Jalur Pendaftaran PMB</h1>
+      <p class="jalur-subtitle">
+        Pilih jalur pendaftaran yang sesuai dengan kualifikasi Anda
+      </p>
+    </header>
 
-    <!-- GRID -->
+    <!-- GRID KARTU -->
     <div class="jalur-grid">
-      <!-- SNBP -->
-      <div class="jalur-card">
-        <h3>SNBP</h3>
-        <p>Seleksi Nasional Berdasarkan Prestasi</p>
+      <article
+        *ngFor="let jalur of jalurList"
+        class="jalur-card"
+        [class]="'jalur-card--' + jalur.warna"
+      >
+        <!-- LOGO -->
+        <div class="jalur-card-header">
+          <img
+            [src]="jalur.logo"
+            [alt]="jalur.nama"
+            class="jalur-logo"
+            onerror="this.src='https://via.placeholder.com/80?text=' + this.alt"
+          />
+        </div>
 
-        <a
-          href="https://snpmb.bppp.kemdikbud.go.id"
-          target="_blank"
-          class="btn-primary"
-        >
-          Buka Portal
-        </a>
-      </div>
+        <!-- JUDUL & DESKRIPSI -->
+        <div class="jalur-card-body">
+          <h2 class="jalur-card-title">{{ jalur.nama }}</h2>
+          <p class="jalur-card-desc">{{ jalur.deskripsi }}</p>
+          <p class="jalur-card-ringkas">{{ jalur.ringkas }}</p>
 
-      <!-- SNBT -->
-      <div class="jalur-card">
-        <h3>SNBT</h3>
-        <p>Seleksi Nasional Berdasarkan Tes (UTBK)</p>
+          <!-- KEUNTUNGAN -->
+          <div class="jalur-keuntungan">
+            <h3 class="jalur-keuntungan-title">Keuntungan:</h3>
+            <ul class="jalur-keuntungan-list">
+              <li *ngFor="let k of jalur.keuntungan">
+                <span class="check-mark">✓</span>
+                {{ k }}
+              </li>
+            </ul>
+          </div>
+        </div>
 
-        <a
-          href="https://snpmb.bppp.kemdikbud.go.id"
-          target="_blank"
-          class="btn-primary"
-        >
-          Buka Portal
-        </a>
-      </div>
+        <!-- FOOTER BUTTON -->
+        <div class="jalur-card-footer">
+          <a
+            *ngIf="jalur.tipe === 'detail'"
+            [routerLink]="['/pmb/jalur', jalur.kode]"
+            class="jalur-btn jalur-btn--primary"
+          >
+            Lihat Detail
+            <span class="arrow">&rsaquo;</span>
+          </a>
 
-      <!-- Mandiri Polinema -->
-      <div class="jalur-card">
-        <h3>Mandiri Polinema</h3>
-        <p>Seleksi mandiri yang diselenggarakan Polinema</p>
+          <a
+            *ngIf="jalur.tipe === 'portal'"
+            [href]="jalur.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="jalur-btn jalur-btn--secondary"
+          >
+            Buka Portal
+            <span class="arrow">⇢</span>
+          </a>
+        </div>
 
-        <a routerLink="/pmb/jalur/mandiri-polinema" class="btn-outline">
-          Lihat Detail
-        </a>
-      </div>
-
-      <!-- Mandiri Konsorsium -->
-      <div class="jalur-card">
-        <h3>Mandiri Konsorsium</h3>
-        <p>Seleksi mandiri bersama Politeknik Negeri se-Indonesia</p>
-
-        <a routerLink="/pmb/jalur/mandiri-konsorsium" class="btn-outline">
-          Lihat Detail
-        </a>
-      </div>
+        <!-- GARIS BAWAH ANIMASI -->
+        <div class="jalur-card-line"></div>
+      </article>
     </div>
   </div>
 </section>

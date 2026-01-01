@@ -20,7 +20,7 @@
           <input
             type="text"
             class="px-2 py-1 rounded text-sm"
-            placeholder="Cari fitur/menu..."
+            [placeholder]="'CARI_FITUR' | translate"
             [(ngModel)]="searchKeyword"
             (keyup.enter)="onSearch()"
           />
@@ -47,7 +47,7 @@
           class="text-white text-sm font-medium"
           (click)="onSearch()"
         >
-          Cari
+          {{ 'CARI' | translate }}
         </button>
       </div>
 
@@ -98,12 +98,12 @@
       <a routerLink="/" class="flex items-center">
         <img src="assets/img/logo.png" class="w-14" />
         <div class="ml-4 flex items-center gap-6">
-        <div class="leading-tight font-playfair">
-  <div class="header-title text-[18px] font-bold text-[#1d2b36]">
-    {{ 'POLITEKNIK' | translate }}<br />
-    {{ 'NEGERI MALANG' | translate }}
-  </div>
-</div>
+          <div class="leading-tight font-playfair">
+            <div class="header-title text-[18px] font-bold text-[#1d2b36]">
+              {{ 'POLITEKNIK' | translate }}<br />
+              {{ 'NEGERI MALANG' | translate }}
+            </div>
+          </div>
 
           <div class="divider-vertical"></div>
         </div>

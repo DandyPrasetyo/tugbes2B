@@ -2,6 +2,17 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+type JalurPengumumanId = 'snbp' | 'snbt' | 'mandiri' | 'umum';
+
+interface PengumumanItem {
+  id: JalurPengumumanId;
+  judul: string;
+  tanggal: string;
+  ringkas: string;
+  label: string;      // label kecil di atas judul, misal "Jalur SNBP"
+  warna: 'sky' | 'emerald' | 'amber'; // untuk beda warna kartu di template
+}
+
 @Component({
   selector: 'app-pengumuman',
   standalone: true,
@@ -10,34 +21,42 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./pengumuman.component.css'],
 })
 export class PengumumanComponent {
-  pengumumanList = [
+  pengumumanList: PengumumanItem[] = [
     {
-      id: 1,
+      id: 'snbp',
+      judul: 'Hasil Seleksi Penerimaan Mahasiswa Baru Jalur SNBP',
+      tanggal: '20 Maret 2025',
+      ringkas:
+        'Daftar peserta yang dinyatakan lulus seleksi penerimaan mahasiswa baru melalui jalur SNBP.',
+      label: 'Jalur SNBP',
+      warna: 'sky',
+    },
+    {
+      id: 'snbt',
+      judul: 'Hasil Seleksi Penerimaan Mahasiswa Baru Jalur SNBT',
+      tanggal: '10 Mei 2025',
+      ringkas:
+        'Pengumuman kelulusan peserta UTBK-SNBT untuk penerimaan mahasiswa baru Polinema PSDKU Lumajang.',
+      label: 'Jalur SNBT',
+      warna: 'emerald',
+    },
+    {
+      id: 'mandiri',
+      judul: 'Hasil Seleksi Penerimaan Mahasiswa Baru Jalur Mandiri',
+      tanggal: '30 Juli 2025',
+      ringkas:
+        'Informasi resmi kelulusan seleksi Jalur Mandiri Polinema beserta ketentuan daftar ulang.',
+      label: 'Jalur Mandiri',
+      warna: 'amber',
+    },
+    {
+      id: 'umum',
       judul: 'Pengumuman Pembukaan PMB Tahun Akademik 2025/2026',
       tanggal: '5 Januari 2025',
       ringkas:
-        'Politeknik Negeri Malang PSDKU Lumajang resmi membuka penerimaan mahasiswa baru.',
-    },
-    {
-      id: 2,
-      judul: 'Jadwal dan Ketentuan Seleksi Jalur SNBP',
-      tanggal: '10 Februari 2025',
-      ringkas:
-        'Informasi lengkap jadwal, kuota, dan syarat pendaftaran jalur SNBP.',
-    },
-    {
-      id: 3,
-      judul: 'Pengumuman Seleksi Jalur SNBT',
-      tanggal: '20 April 2025',
-      ringkas:
-        'Peserta diharapkan memperhatikan ketentuan pelaksanaan UTBK-SNBT.',
-    },
-    {
-      id: 4,
-      judul: 'Pendaftaran Jalur Mandiri Polinema',
-      tanggal: '15 Juni 2025',
-      ringkas:
-        'Jalur mandiri dibuka bagi lulusan SMA/SMK/MA dengan seleksi internal.',
+        'Politeknik Negeri Malang PSDKU Lumajang resmi membuka penerimaan mahasiswa baru tahun akademik 2025/2026.',
+      label: 'Informasi Umum',
+      warna: 'sky',
     },
   ];
 }
